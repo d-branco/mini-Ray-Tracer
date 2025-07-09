@@ -6,6 +6,7 @@ log/
 *ignoreme*
 *ignoreme*.*
 *ignoreme*/
+*.mp4
 *.wav
 *.txt
 
