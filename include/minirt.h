@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 13:30:10 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/10 14:07:29 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@
 # define TRUE				1
 # define FALSE				0
 
+typedef struct s_rt
+{
+	int	file_fd;
+}		t_rt;
+
+//src/init/finalize.c
+void		finalize(t_rt *rt);
 //src/init/input_validation.c
-int			input_validation(int argc, char **argv);
+int			input_validation(int argc, char **argv, t_rt *rt);
 //src/utils
 void		debug_write(char *str);
 void		ft_free_n_null(void **ptr);

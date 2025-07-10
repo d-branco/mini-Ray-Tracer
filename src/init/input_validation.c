@@ -6,16 +6,16 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:28:53 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 13:31:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/10 14:11:34 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	validate_file_type(char **argv);
-static int	validate_file_fd(char *file_name);
+static int	validate_file_type(char **argv, t_rt *rt);
+static int	validate_file_fd(char *file_name, t_rt *rt);
 
-int	input_validation(int argc, char **argv)
+int	input_validation(int argc, char **argv, t_rt *rt)
 {
 	(void) argv;
 	if (argc != 2)
@@ -27,10 +27,10 @@ int	input_validation(int argc, char **argv)
 		return (write(STDOUT_FILENO, "usage:\n./miniRT scene.rt\n", 25), 1);
 	}
 	else
-		return (validate_file_type(argv));
+		return (validate_file_type(argv, rt));
 }
 
-static int	validate_file_type(char **argv)
+static int	validate_file_type(char **argv, t_rt *rt)
 {
 	int	len;
 
@@ -40,10 +40,10 @@ static int	validate_file_type(char **argv)
 		return (write(STDOUT_FILENO, "INVALID INPUT: file type\n", 25),
 			write(STDOUT_FILENO, "usage:\n./miniRT scene.rt\n", 25), 1);
 	else
-		return (validate_file_fd(argv[1]));
+		return (validate_file_fd(argv[1], rt));
 }
 
-static int	validate_file_fd(char *file_name)
+static int	validate_file_fd(char *file_name, t_rt *rt)
 {
 	char	*line;
 	int		file_fd;
@@ -57,11 +57,12 @@ static int	validate_file_fd(char *file_name)
 			close(file_fd), 1);
 	while (line)
 	{
-		debug_write(line);
+		debug_write("INPUT FILE: ");
+		ft_putstr_fd(line, 1);
 		free(line);
 		line = get_next_line(file_fd);
 	}
 	free(line);
-	close(file_fd);
+	rt->file_fd = file_fd;
 	return (0);
 }
