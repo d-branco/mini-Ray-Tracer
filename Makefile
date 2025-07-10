@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/10 11:02:34 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/10 12:11:20 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,7 +132,7 @@ test:
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
 	\
-		./miniRT														;	\
+		./miniRT test.rt												;	\
 	\
 	echo "\
 	$(COR)$(GRAY)========================================== $(NAME) END\n\
@@ -141,7 +141,7 @@ test:
 		norminette src/ include/											\
 		| grep -v OK 														\
 		| grep -v 'Setting locale to en_US'								;	\
-	echo -n "Error count: "												;	\
+	echo -n "Norminette error count: "												;	\
 		norminette src/ include/ 											\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
@@ -157,4 +157,11 @@ valgrind: $(NAME)
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
 	\
-		./miniRT
+		./miniRT test.rt												;	\
+	\
+	echo -n "Norminette error count: "												;	\
+		norminette src/ include/ 											\
+			| grep -v OK 													\
+			| grep -v 'Setting locale to en_US'								\
+			| grep -v Error!												\
+		| wc -l
