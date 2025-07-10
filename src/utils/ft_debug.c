@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_debug.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 13:30:18 by abessa-m         ###   ########.fr       */
+/*   Created: 2025/07/10 13:25:32 by abessa-m          #+#    #+#             */
+/*   Updated: 2025/07/10 13:34:15 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+void	debug_write(char *str)
 {
-	debug_write("Hello, friend\n");
-	if (input_validation(argc, argv) != 0)
-		return (debug_write("Goodbye, friend\n"), 2);
-	return (debug_write("Goodbye, friend\n"), 0);
+	size_t	len;
+
+	if (!DEBUG || !str || !str[0])
+		return ;
+	write(STDOUT_FILENO, "==DEBUG== ", 10);
+	len = ft_strlen(str);
+	write(STDOUT_FILENO, str, len);
 }

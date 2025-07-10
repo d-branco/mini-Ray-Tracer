@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/10 12:59:42 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/10 13:30:57 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ BUILD_DIR	:= build
 SRCS		:=	\
 	src/minirt.c															\
 																			\
+	src/init/input_validation.c												\
+																			\
+	src/utils/ft_debug.c													\
 	src/utils/ft_free.c														\
 	src/utils/ft_isspace.c													\
 	src/utils/ft_malloc.c													\
