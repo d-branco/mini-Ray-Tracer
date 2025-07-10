@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/09 18:17:20 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/10 11:02:34 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,11 @@ LIBFT_DIR	:= libft
 CC			= cc
 CFLAGS		+= -Wall -Wextra
 CFLAGS		+= -Werror
+CFLAGS		+= $(MLXFLAGS)
+MLXFLAGS	:= \
+	-Lmlx_linux -L/usr/lib -lXext -lX11 -lm -lz
+CFLAGS		+= -g
+CFLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM			:= rm -f
 AR			:= ar rcs
@@ -52,7 +57,9 @@ $(NAME): libft mlx $(OBJS)
 $(LIBFT):
 	@\
 	make --silent --no-print-directory -C $(LIBFT_DIR)					&&	\
-	echo "$(GRAY)Library built:$(COR)	$(LIBFT)"
+	echo "$(GRAY)Library built:$(COR)	$(LIBFT)"						;	\
+	make --silent --no-print-directory -C $(MINILIBX_DIR)				&&	\
+	echo "$(GRAY)Library built:$(COR)	$(MINILIBX)"						;	\
 
 libft : $(LIBFT)
 
@@ -61,17 +68,12 @@ bonus: $(NAME-BONUS)
 $(NAME-BONUS): $(LIBFT) $(OBJS-BONUS)
 	@\
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
-	$(CC) $(CFLAGS) $(OBJS-BONUS) $(LIBFT) -o $(NAME-BONUS)
-
-debug:
-	@\
-	$(MAKE) --silent fclean												;	\
-	$(MAKE) --silent all CFLAGS=\ -Wall\ -Wextra\ -D\ DEBUG=1			&&	\
-	$(MAKE) --silent clean
+	$(CC) $(CFLAGS) $(OBJS-BONUS) $(LIBFT) $(MINILIBX)-o $(NAME-BONUS)
 
 clean:
 	@\
 	make --silent --no-print-directory -C $(LIBFT_DIR) clean			;	\
+	make --silent --no-print-directory -C $(MINILIBX_DIR) clean			;	\
 	$(RM) $(OBJS) $(OBJS-BONUS)											;	\
 	rm -fr *.o *.gch *.exe 				 								;	\
 	echo "$(GRAY)Files cleaned.$(COR)"
@@ -88,11 +90,10 @@ re: fclean all
 
 .PHONY: all clean fclean re
 #################################################################### mini libX #
+MINILIBX	:= $(MINILIBX_DIR)/libmlx_Linux.a
 MINILIBX_DIR := minilibx-linux
-
 MINILIBX_URL := \
 	https://cdn.intra.42.fr/document/document/36087/minilibx-linux.tgz
-
 MINILIBX_ARCHIVE := minilibx-linux.tgz
 
 mlx:
@@ -117,7 +118,7 @@ YELLOW	:= \033[1;93m# yellow
 test:
 	@\
 	$(MAKE) --silent fclean												;	\
-	$(MAKE) --silent all CFLAGS+=-D\ DEBUG=1\ -Wall\ -Wextra			&&	\
+	$(MAKE) --silent all												&&	\
 	$(MAKE) --silent clean												&&	\
 	\
 	echo "\
@@ -147,7 +148,7 @@ test:
 			| grep -v Error!												\
 		| wc -l
 
-valgrind:
+valgrind: $(NAME)
 	@\
 	valgrind																\
 		--track-fds=yes														\

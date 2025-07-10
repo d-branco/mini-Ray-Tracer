@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/08 21:37:32 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/10 09:58:32 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include <math.h>
+# include <fcntl.h>
 
 # ifndef DEBUG
 #  define DEBUG FALSE
