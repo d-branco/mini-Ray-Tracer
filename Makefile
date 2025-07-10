@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/10 12:11:20 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/10 12:59:42 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ RM			:= rm -f
 AR			:= ar rcs
 ########################################################## Objects and Headers #
 INCLUDES	:= -I./include
-
+BUILD_DIR	:= build
 SRCS		:=	\
 	src/minirt.c															\
 																			\
@@ -37,10 +37,10 @@ SRCS		:=	\
 	src/utils/ft_malloc.c													\
 	src/utils/ft_strcmp.c													\
 
-OBJS		:= $(SRCS:.c=.o)
+OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 SRCS-BONUS	:=	\
 
-OBJS-BONUS	:= $(SRCS-BONUS:.c=.o)
+OBJS-BONUS	:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
 ###################################################################### Targets #
 all: $(NAME)
 
@@ -49,7 +49,8 @@ $(NAME): libft mlx $(OBJS)
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	@\
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@								&&	\
 	echo "$(GRAY)File compiled:$(COR)	$<"
@@ -74,7 +75,7 @@ clean:
 	@\
 	make --silent --no-print-directory -C $(LIBFT_DIR) clean			;	\
 	make --silent --no-print-directory -C $(MINILIBX_DIR) clean			;	\
-	$(RM) $(OBJS) $(OBJS-BONUS)											;	\
+	$(RM) -r $(BUILD_DIR)												;	\
 	rm -fr *.o *.gch *.exe 				 								;	\
 	echo "$(GRAY)Files cleaned.$(COR)"
 
