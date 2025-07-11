@@ -10,17 +10,19 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= miniRT
-NAME-BONUS	:= miniRT_bonus
-LIBFT		:= libft/libft.a
-LIBFT_DIR	:= libft
+NAME			:= miniRT
+NAME-BONUS		:= miniRT_bonus
+LIBFT			:= libft/libft.a
+LIBFT_DIR		:= libft
+MINILIBX		:= minilibx-linux/libmlx_Linux.a
+MINILIBX_DIR	:= minilibx-linux
 ##################################################################### Compiler #
 CC			= cc
 CFLAGS		+= -Wall -Wextra
 CFLAGS		+= -Werror
-CFLAGS		+= $(MLXFLAGS)
+#CFLAGS		+= $(MLXFLAGS)
 MLXFLAGS	:= \
-	-Lmlx_linux -L/usr/lib -lXext -lX11 -lm -lz
+	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lmlx -lXext -lX11 -lm -lz
 CFLAGS		+= -g
 CFLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
@@ -48,10 +50,10 @@ OBJS-BONUS	:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
 ###################################################################### Targets #
 all: $(NAME)
 
-$(NAME): libft mlx $(OBJS)
+$(NAME): libft  $(OBJS)
 	@\
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) -o $(NAME)
 
 $(BUILD_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
@@ -66,7 +68,7 @@ $(LIBFT):
 	make --silent --no-print-directory -C $(MINILIBX_DIR)				&&	\
 	echo "$(GRAY)Library built:$(COR)	$(MINILIBX)"						;	\
 
-libft : $(LIBFT)
+libft : mlx $(LIBFT)
 
 bonus: $(NAME-BONUS)
 
@@ -95,13 +97,13 @@ re: fclean all
 
 .PHONY: all clean fclean re
 #################################################################### mini libX #
-MINILIBX	:= $(MINILIBX_DIR)/libmlx_Linux.a
-MINILIBX_DIR := minilibx-linux
 MINILIBX_URL := \
 	https://cdn.intra.42.fr/document/document/36087/minilibx-linux.tgz
 MINILIBX_ARCHIVE := minilibx-linux.tgz
 
-mlx:
+mlx: $(MINILIBX)
+
+$(MINILIBX):
 	@\
 	if [ ! -d "$(MINILIBX_DIR)" ]; then \
 		echo "$(GRAY)MlX for Linux: $(COR) $@ directory not found."		;	\
@@ -145,7 +147,7 @@ test:
 		norminette src/ include/											\
 		| grep -v OK 														\
 		| grep -v 'Setting locale to en_US'								;	\
-	echo -n "Norminette error count: "												;	\
+	echo -n "Norminette error count: "									;	\
 		norminette src/ include/ 											\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
