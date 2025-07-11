@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 14:07:29 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:14:09 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,41 @@
 
 typedef struct s_rt
 {
-	int	file_fd;
-}		t_rt;
+	int						file_fd;
+	struct s_scene			*scene;
+}							t_rt;
+
+//subject to change
+typedef struct s_scene
+{
+	float					amb_ratio;
+	int						amb_rgb_range[3];
+	float					cam_coord[3];
+	float					cam_orientation[3];
+	int						cam_fov;
+	float					light_coord[3];
+	float					light_brightness_ration;
+	int						light_rgb_range[3];
+	struct s_lst_obj		*lst_obj;
+}							t_scene;
+
+enum	e_obj
+{
+	e_SPHERE,
+	e_PLANE,
+	e_TRIANGLE
+};
+
+typedef struct s_lst_obj
+{
+	int						identifier;
+	float					center[3];
+	float					diameter;
+	int						rgb_range[3];
+	float					vec_uni[3];
+	float					height;
+	struct s_lst_obj		*next;
+}							t_lst_obj;
 
 //src/init/finalize.c
 void		finalize(t_rt *rt);

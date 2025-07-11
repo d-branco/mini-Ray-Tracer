@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/10 14:02:49 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/10 16:17:06 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,6 @@ test:
 	@\
 	$(MAKE) --silent fclean												;	\
 	$(MAKE) --silent all												&&	\
-	$(MAKE) --silent clean												&&	\
 	\
 	echo "\
 	$(COR)$(GRAY)========================================== $(NAME) START\

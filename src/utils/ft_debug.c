@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:32 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 13:34:15 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:20:55 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	debug_write(char *str)
 
 	if (!DEBUG || !str || !str[0])
 		return ;
-	write(STDOUT_FILENO, "==DEBUG== ", 10);
+	write(STDOUT_FILENO, "||DEBUG|| ", 10);
 	len = ft_strlen(str);
 	write(STDOUT_FILENO, str, len);
 }
