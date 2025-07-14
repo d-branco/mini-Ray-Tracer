@@ -6,16 +6,16 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:28:53 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 14:11:34 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:59:49 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	validate_file_type(char **argv, t_rt *rt);
-static int	validate_file_fd(char *file_name, t_rt *rt);
+static int	validate_file_type(char **argv, t_scene *rt);
+static int	validate_file_fd(char *file_name, t_scene *rt);
 
-int	input_validation(int argc, char **argv, t_rt *rt)
+int	input_validation(int argc, char **argv, t_scene *rt)
 {
 	(void) argv;
 	if (argc != 2)
@@ -30,7 +30,7 @@ int	input_validation(int argc, char **argv, t_rt *rt)
 		return (validate_file_type(argv, rt));
 }
 
-static int	validate_file_type(char **argv, t_rt *rt)
+static int	validate_file_type(char **argv, t_scene *rt)
 {
 	int	len;
 
@@ -43,7 +43,7 @@ static int	validate_file_type(char **argv, t_rt *rt)
 		return (validate_file_fd(argv[1], rt));
 }
 
-static int	validate_file_fd(char *file_name, t_rt *rt)
+static int	validate_file_fd(char *file_name, t_scene *rt)
 {
 	char	*line;
 	int		file_fd;

@@ -6,13 +6,13 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:01:30 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 14:01:41 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:59:49 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	finalize(t_rt *rt)
+void	finalize(t_scene *rt)
 {
 	close(rt->file_fd);
 }

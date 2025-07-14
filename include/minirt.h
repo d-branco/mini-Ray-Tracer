@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/10 16:14:09 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:59:10 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,9 @@
 # define TRUE				1
 # define FALSE				0
 
-typedef struct s_rt
-{
-	int						file_fd;
-	struct s_scene			*scene;
-}							t_rt;
-
-//subject to change
 typedef struct s_scene
 {
+	int						file_fd;
 	float					amb_ratio;
 	int						amb_rgb_range[3];
 	float					cam_coord[3];
@@ -64,9 +58,9 @@ typedef struct s_lst_obj
 }							t_lst_obj;
 
 //src/init/finalize.c
-void		finalize(t_rt *rt);
+void		finalize(t_scene *rt);
 //src/init/input_validation.c
-int			input_validation(int argc, char **argv, t_rt *rt);
+int			input_validation(int argc, char **argv, t_scene *rt);
 //src/utils
 void		debug_write(char *str);
 void		ft_free_n_null(void **ptr);
