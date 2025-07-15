@@ -6,17 +6,14 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 19:13:11 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:29:44 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parse_line(char *line, t_scene **rt);
-static int	parse_lights_and_camera(char *line, t_scene **rt);
 static int	parse_objects(char *line, t_scene **rt);
-
-static int	parse_ambient_light(char *line, t_scene **rt);
 
 int	parse_input(t_scene *rt, char **argv)
 {
@@ -75,57 +72,27 @@ static int	parse_line(char *line, t_scene **rt)
 	return (EXIT_SUCCESS);
 }
 
-static int	parse_lights_and_camera(char *line, t_scene **rt)
-{
-	int	ret;
-
-	ret = EXIT_SUCCESS;
-	if ((line[0] == 'A') && ((*rt)->amb_ratio == -1))
-		ret += parse_ambient_light(line, rt);
-	else if (line[0] == 'A')
-		return (ft_putstr_fd("ERROR: Ambient light can only be declared once\n",
-				STDERR_FILENO), EXIT_FAILURE);
-	else if (line[0] == 'C')
-		debug_write("identified: Capital letter \'C\'!\n");
-	else if (line[0] == 'L')
-		debug_write("identified: Capital letter \'L\'!\n");
-	debug_write("TODO: Check if only one and validate\n");
-	return (ret);
-}
-
-static int	parse_ambient_light(char *line, t_scene **rt)
-{
-	debug_write("identified: Capital letter \'A\'!\n");
-	line = skip_to_next_word(line);
-	if (!(*line))
-		return ((*rt)->amb_ratio = -2,
-			ft_putstr_fd("ERROR: Ambient light ratio missing\n", 2),
-			EXIT_FAILURE);
-	if (!ft_isfloat(line))
-		return ((*rt)->amb_ratio = -2,
-			ft_putstr_fd("ERROR: Ambient light ratio must be a float\n", 2),
-			EXIT_FAILURE);
-	(*rt)->amb_ratio = ft_atof(line);
-	line = skip_to_next_word(line);
-	if (!(*line))
-		return ((*rt)->amb_ratio = -2,
-			ft_putstr_fd("ERROR: Ambient light RGB range missing\n", 2),
-			EXIT_FAILURE);
-	if (!ft_is_int_triplet(line))
-		return ((*rt)->amb_ratio = -2,
-			ft_putstr_fd("ERROR: Ambient light RGB must be int,int,int\n", 2),
-			EXIT_FAILURE);
-	(*rt)->amb_ratio = ft_atoti(line);
-	return (EXIT_SUCCESS);
-}
-
 char	*skip_to_next_word(char *line)
 {
-	while (!ft_isspace(*line))
-		line++;
-	while (ft_isspace(*line))
-		line++;
-	return (line);
+	int	i;
+
+	i = 0;
+	while (!ft_isspace(line[i]))
+		i++;
+	while (ft_isspace(line[i]))
+		i++;
+	return (&line[i]);
+}
+
+char	*skip_to_after_comma(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != ',')
+		i++;
+	i++;
+	return (&line[i]);
 }
 
 static int	parse_objects(char *line, t_scene **rt)

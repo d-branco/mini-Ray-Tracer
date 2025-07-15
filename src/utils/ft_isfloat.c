@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 18:35:32 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 18:59:46 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:34:06 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_isfloat(const char *str)
 			digits++;
 		else if (str[i] == '.' && !dot)
 			dot++;
+		else if (!str[i] || ft_isspace(str[i]))
+			break ;
 		else
 			return (0);
 		i++;

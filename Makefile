@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/15 18:44:07 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/15 19:37:01 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS		:=	\
 	src/init/finalize.c														\
 	src/init/initialize.c													\
 	src/init/input_validation.c												\
+	src/init/parse_light_cam.c												\
 	src/init/parse.c														\
 																			\
 	src/utils/ft_atof.c														\
