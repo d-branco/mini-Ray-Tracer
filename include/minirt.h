@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/14 15:59:10 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 10:54:02 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ typedef struct s_lst_obj
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
+//src/init/initialize.c
+void		initialize(t_scene *rt);
 //src/init/finalize.c
 void		finalize(t_scene *rt);
+//src/init/parse.c
+void		parse_input(t_scene *rt);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv, t_scene *rt);
 //src/utils

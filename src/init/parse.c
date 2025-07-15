@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 13:25:32 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 10:39:42 by abessa-m         ###   ########.fr       */
+/*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
+/*   Updated: 2025/07/15 10:57:32 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	debug_write(char *str)
+void	parse_input(t_scene *rt)
 {
-	size_t	len;
-
-	if (!DEBUG || !str || !str[0])
-		return ;
-	write(STDOUT_FILENO, "==DEBUG== ", 10);
-	len = ft_strlen(str);
-	write(STDOUT_FILENO, str, len);
+	(void) rt;
+	debug_write("Parsing the input file\n");
+	return ;
 }

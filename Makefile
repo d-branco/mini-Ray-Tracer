@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/10 16:17:06 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/15 10:55:19 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ SRCS		:=	\
 	src/minirt.c															\
 																			\
 	src/init/finalize.c														\
+	src/init/initialize.c													\
 	src/init/input_validation.c												\
+	src/init/parse.c														\
 																			\
 	src/utils/ft_debug.c													\
 	src/utils/ft_free.c														\
