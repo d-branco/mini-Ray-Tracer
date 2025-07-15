@@ -6,16 +6,13 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 20:30:49 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:37:30 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parse_ambient_light(char *line, t_scene **rt);
-
-int			is_float_triplet(char *str);
-static int	skip_to_digit(const char *str);
 
 int	parse_lights_and_camera(char *line, t_scene **rt)
 {
@@ -57,50 +54,4 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: "
 				"invalid Ambient light\n", 2), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-}
-
-int	is_float_triplet(char *str)
-{
-	int	i;
-	int	dot;
-	int	digit;
-	int	comma;
-
-	debug_write("Is it a float_triplet: ");
-	ft_putstr_fd(str, 1);
-	dot = 0;
-	digit = 0;
-	comma = 0;
-	i = skip_to_digit(str);
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			digit++;
-		else if (str[i] == '.' && !dot)
-			dot++;
-		else if ((!str[i] || ft_isspace(str[i])) && (comma == 2) && (digit > 0))
-			break ;
-		else if (str[i] == ',' && (digit > 0))
-		{
-			comma++;
-			digit = 0;
-			dot = 0;
-		}
-		else
-			return (debug_write("It is NOT a float_triplet!\n"), 0);
-		i++;
-	}
-	return (debug_write("It is a float_triplet!\n"), TRUE);
-}
-
-static int	skip_to_digit(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	return (i);
 }

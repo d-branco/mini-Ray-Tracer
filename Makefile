@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/15 19:37:01 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/15 20:38:19 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS		:=	\
 	src/utils/ft_isspace.c													\
 	src/utils/ft_malloc.c													\
 	src/utils/ft_strcmp.c													\
+	src/utils/is_float_triplet.c											\
 
 OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 SRCS-BONUS	:=	\
