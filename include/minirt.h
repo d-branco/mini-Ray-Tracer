@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 18:43:41 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:13:44 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		initialize(t_scene *rt, char **argv);
 void		finalize(t_scene *rt);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
+char		*skip_to_next_word(char *line);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/utils
