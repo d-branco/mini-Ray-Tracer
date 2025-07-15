@@ -6,13 +6,14 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 20:37:30 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 21:24:15 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parse_ambient_light(char *line, t_scene **rt);
+static int	validate_value_range(t_scene **rt);
 
 int	parse_lights_and_camera(char *line, t_scene **rt)
 {
@@ -29,6 +30,7 @@ int	parse_lights_and_camera(char *line, t_scene **rt)
 	else if (line[0] == 'L')
 		debug_write("identified: Capital letter \'L\'!\n");
 	debug_write("TODO: Check if only one and validate\n");
+	validate_value_range(rt);
 	return (ret);
 }
 
@@ -42,8 +44,8 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 	(*rt)->amb_ratio = ft_atof(line);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
-		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: "
-				"invalid Ambient light RGB (int,int,int)\n", 2), EXIT_FAILURE);
+		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: invalid "
+				"Ambient light RGB (float,float,float)\n", 2), EXIT_FAILURE);
 	(*rt)->amb_rgb_range[0] = ft_atof(line);
 	line = skip_to_after_comma(line);
 	(*rt)->amb_rgb_range[1] = ft_atof(line);
@@ -53,5 +55,16 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 	if (line && ft_isprint(*line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: "
 				"invalid Ambient light\n", 2), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	validate_value_range(t_scene **rt)
+{
+	if (((*rt)->amb_ratio < 0.0) || ((*rt)->amb_ratio > 1.0)
+		|| ((*rt)->amb_rgb_range[0] < 0.0) || ((*rt)->amb_rgb_range[0] > 255.0)
+		|| ((*rt)->amb_rgb_range[1] < 0.0) || ((*rt)->amb_rgb_range[1] > 255.0)
+		|| ((*rt)->amb_rgb_range[2] < 0.0) || ((*rt)->amb_rgb_range[2] > 255.0))
+		return (ft_putstr_fd("ERROR: Invalid Ambient lighing value range\n",
+				STDERR_FILENO), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
