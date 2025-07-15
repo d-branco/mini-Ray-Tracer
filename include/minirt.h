@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 11:30:46 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:57:48 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			parse_input(t_scene *rt, char **argv);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/utils
+float		ft_atof(const char *str);
 void		debug_write(char *str);
 void		ft_free_n_null(void **ptr);
 int			ft_isspace(char chr);
