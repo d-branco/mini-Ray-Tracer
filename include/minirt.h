@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 17:57:48 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:43:41 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			input_validation(int argc, char **argv);
 float		ft_atof(const char *str);
 void		debug_write(char *str);
 void		ft_free_n_null(void **ptr);
+int			ft_isfloat(const char *str);
 int			ft_isspace(char chr);
 void		*ft_malloc(int total_size);
 int			ft_strcmp(const char *s1, const char *s2);

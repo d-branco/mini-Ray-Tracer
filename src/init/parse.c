@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/15 18:17:12 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:02:24 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static int	parse_lights_and_camera(char *line, t_scene **rt)
 	int	ret;
 
 	ret = EXIT_SUCCESS;
-	debug_write("identified: Capital letter!\n");
 	if ((line[0] == 'A') && ((*rt)->amb_ratio == -1))
 		ret += parse_ambient_light(line, rt);
 	else if (line[0] == 'A')
@@ -101,9 +100,13 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 		line++;
 	while (ft_isspace(*line))
 		line++;
-	if (!ft_isdigit(*line))
+	if (!(*line))
 		return ((*rt)->amb_ratio = -2,
-			ft_putstr_fd("ERROR: Ambient light ratio must be a number\n", 2),
+			ft_putstr_fd("ERROR: Ambient light ratio missing\n", 2),
+			EXIT_FAILURE);
+	if (!ft_isfloat(line))
+		return ((*rt)->amb_ratio = -2,
+			ft_putstr_fd("ERROR: Ambient light ratio must be a float\n", 2),
 			EXIT_FAILURE);
 	(*rt)->amb_ratio = ft_atof(line);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/15 17:56:46 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/15 18:44:07 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS		:=	\
 	src/utils/ft_atof.c														\
 	src/utils/ft_debug.c													\
 	src/utils/ft_free.c														\
+	src/utils/ft_isfloat.c													\
 	src/utils/ft_isspace.c													\
 	src/utils/ft_malloc.c													\
 	src/utils/ft_strcmp.c													\
