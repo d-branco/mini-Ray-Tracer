@@ -6,14 +6,13 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 07:16:26 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:15:55 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parse_line(char *line, t_scene **rt);
-static int	parse_objects(char *line, t_scene **rt);
 
 int	parse_input(t_scene *rt, char **argv)
 {
@@ -32,7 +31,7 @@ int	parse_input(t_scene *rt, char **argv)
 	{
 		debug_write("parsing line: ");
 		if (DEBUG)
-			ft_putstr_fd(line, 1);
+			ft_putstr_fd(line, STDOUT_FILENO);
 		if (parse_line(line, &rt) != EXIT_SUCCESS)
 			exit_code = EXIT_FAILURE;
 		free(line);
@@ -95,11 +94,11 @@ char	*skip_to_after_comma(char *line)
 	return (&line[i]);
 }
 
-static int	parse_objects(char *line, t_scene **rt)
+void	parse_float_triplet(char *line, float array[3])
 {
-	(void) line;
-	(void) rt;
-	debug_write("identified: object!\n");
-	debug_write("TODO: Validate, check if repeated and add to linked list\n");
-	return (EXIT_SUCCESS);
+	array[0] = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array[1] = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array[2] = ft_atof(line);
 }

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 09:12:02 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:17:46 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ static void	debug_print_s_scene(t_scene *rt)
 		ft_printf("s_scene: amb_ratio: %i.%i\n", (int) rt->amb_ratio,
 			(((int)(rt->amb_ratio * 100)) % 100));
 		debug_write("");
-		ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->amb_rgb_range[0],
-			(int) rt->amb_rgb_range[1], (int) rt->amb_rgb_range[2]);
-		debug_write("");
-		ft_printf("s_scene: cam_fov %i\n", (int)rt->cam_fov);
+		ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->amb_rgb_rng[0],
+			(int) rt->amb_rgb_rng[1], (int) rt->amb_rgb_rng[2]);
 		debug_write("");
 		ft_printf("s_scene: cam_coord: %i,%i,%i\n", (int) rt->cam_coord[0],
 			(int) rt->cam_coord[1], (int) rt->cam_coord[2]);
 		debug_write("");
 		ft_printf("s_scene: cam_orient: %i,%i,%i\n", (int) rt->cam_orient[0],
 			(int) rt->cam_orient[1], (int) rt->cam_orient[2]);
+		debug_write("");
+		ft_printf("s_scene: cam_fov %i\n", (int)rt->cam_fov);
 		debug_write("");
 		ft_printf("s_scene: lig_b_rat: %i\n", (int)rt->light_brightness_ratio);
 	}

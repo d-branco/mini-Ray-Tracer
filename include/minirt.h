@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 07:48:29 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:16:25 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_scene
 {
 	int						file_fd;
 	float					amb_ratio;
-	float					amb_rgb_range[3];
+	float					amb_rgb_rng[3];
 	float					cam_coord[3];
 	float					cam_orient[3];
 	float					cam_fov;
@@ -65,8 +65,11 @@ void		finalize(t_scene *rt);
 int			parse_input(t_scene *rt, char **argv);
 char		*skip_to_next_word(char *line);
 char		*skip_to_after_comma(char *line);
+void		parse_float_triplet(char *line, float array[3]);
 //src/init/parse_light_cam.c
 int			parse_lights_and_camera(char *line, t_scene **rt);
+//src/init/parse_objects.c
+int			parse_objects(char *line, t_scene **rt);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/utils

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 09:13:59 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:14:27 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,12 @@ static int	parse_camera(char *line, t_scene **rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: invalid Camera "
 				"coordinates (float,float,float)\n", 2), EXIT_FAILURE);
-	(*rt)->cam_coord[0] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	(*rt)->cam_coord[1] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	(*rt)->cam_coord[2] = ft_atof(line);
+	parse_float_triplet(line, (*rt)->cam_coord);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->cam_fov = -2, ft_putstr_fd("ERROR: invalid Camera "
 				"orientation (float,float,float)\n", 2), EXIT_FAILURE);
-	(*rt)->cam_orient[0] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	(*rt)->cam_orient[1] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	(*rt)->cam_orient[2] = ft_atof(line);
+	parse_float_triplet(line, (*rt)->cam_orient);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return ((*rt)->cam_fov = -2, ft_putstr_fd("ERROR: invalid Camera "
@@ -84,11 +76,11 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: invalid "
 				"Ambient light RGB (float,float,float)\n", 2), EXIT_FAILURE);
-	(*rt)->amb_rgb_range[0] = ft_atof(line);
+	(*rt)->amb_rgb_rng[0] = ft_atof(line);
 	line = skip_to_after_comma(line);
-	(*rt)->amb_rgb_range[1] = ft_atof(line);
+	(*rt)->amb_rgb_rng[1] = ft_atof(line);
 	line = skip_to_after_comma(line);
-	(*rt)->amb_rgb_range[2] = ft_atof(line);
+	(*rt)->amb_rgb_rng[2] = ft_atof(line);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("ERROR: "
@@ -98,11 +90,21 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 
 static int	validate_value_range(t_scene **rt)
 {
-	if (((*rt)->amb_ratio < 0.0) || ((*rt)->amb_ratio > 1.0)
-		|| ((*rt)->amb_rgb_range[0] < 0.0) || ((*rt)->amb_rgb_range[0] > 255.0)
-		|| ((*rt)->amb_rgb_range[1] < 0.0) || ((*rt)->amb_rgb_range[1] > 255.0)
-		|| ((*rt)->amb_rgb_range[2] < 0.0) || ((*rt)->amb_rgb_range[2] > 255.0))
+	if (((*rt)->amb_ratio != -1)
+		&& (((*rt)->amb_ratio < 0.0) || ((*rt)->amb_ratio > 1.0)
+			|| ((*rt)->amb_rgb_rng[0] < 0.0) || ((*rt)->amb_rgb_rng[0] > 255.0)
+			|| ((*rt)->amb_rgb_rng[1] < 0.0) || ((*rt)->amb_rgb_rng[1] > 255.0)
+			|| ((*rt)->amb_rgb_rng[2] < 0.0) || ((*rt)->amb_rgb_rng[2] > 255.0)
+		))
 		return (ft_putstr_fd("ERROR: Invalid Ambient lighing value range\n",
+				STDERR_FILENO), EXIT_FAILURE);
+	debug_write("TODO: Check if Camara orientation vector is normalized!\n");
+	if (((*rt)->cam_fov != -1)
+		&& (((*rt)->cam_fov < 0.0) || ((*rt)->cam_fov > 180.0)
+			|| ((*rt)->cam_orient[0] < 0.0) || ((*rt)->cam_orient[0] > 1.0)
+			|| ((*rt)->cam_orient[1] < 0.0) || ((*rt)->cam_orient[1] > 1.0)
+			|| ((*rt)->cam_orient[2] < 0.0) || ((*rt)->cam_orient[2] > 1.0)))
+		return (ft_putstr_fd("ERROR: Invalid Camera value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
