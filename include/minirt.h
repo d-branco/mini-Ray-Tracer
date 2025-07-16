@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 10:16:25 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:08:15 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_scene
 	float					cam_orient[3];
 	float					cam_fov;
 	float					light_coord[3];
-	float					light_brightness_ratio;
+	float					light_brightness;
 	float					light_rgb_range[3];
 	struct s_lst_obj		*lst_obj;
 }							t_scene;

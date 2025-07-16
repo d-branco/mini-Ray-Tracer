@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 10:14:27 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:16:05 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	parse_camera(char *line, t_scene **rt);
 static int	parse_ambient_light(char *line, t_scene **rt);
 static int	validate_value_range(t_scene **rt);
+static int	parse_light(char *line, t_scene **rt);
 
 int	parse_lights_and_camera(char *line, t_scene **rt)
 {
@@ -31,16 +32,47 @@ int	parse_lights_and_camera(char *line, t_scene **rt)
 	else if (line[0] == 'C')
 		return (ft_putstr_fd("ERROR: Camera can only be declared once\n",
 				STDERR_FILENO), EXIT_FAILURE);
+	else if ((line[0] == 'L') && ((*rt)->light_brightness == -1))
+		ret += parse_light(line, rt);
 	else if (line[0] == 'L')
-		debug_write("identified: Capital letter \'L\'!\n");
+		return (ft_putstr_fd("ERROR: Light can only be declared once\n",
+				STDERR_FILENO), EXIT_FAILURE);
 	debug_write("TODO: Check if only one and validate\n");
 	ret += validate_value_range(rt);
 	return (ret);
 }
 
+static int	parse_light(char *line, t_scene **rt)
+{
+	debug_write("identified: Capital letter \'L\'!\n");
+	line = skip_to_next_word(line);
+	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
+		return ((*rt)->light_brightness = -2, ft_putstr_fd("ERROR: invali"
+				"d Light coordinates (float,float,float)\n", 2), EXIT_FAILURE);
+	parse_float_triplet(line, (*rt)->light_coord);
+	line = skip_to_next_word(line);
+	if (!line || !ft_isfloat(line))
+		return ((*rt)->light_brightness = -2, ft_putstr_fd("ERROR: invali"
+				"d Light ratio range (float)\n", 2), EXIT_FAILURE);
+	(*rt)->light_brightness = ft_atof(line);
+	line = skip_to_next_word(line);
+	parse_float_triplet("-1,-1,-1", (*rt)->light_rgb_range);
+	if (line && ft_isprint(*line))
+	{
+		if (!is_float_triplet(line))
+			return ((*rt)->light_brightness = -2, ft_putstr_fd("ERROR: "
+					"invalid Light\n", 2), EXIT_FAILURE);
+		parse_float_triplet(line, (*rt)->light_rgb_range);
+		line = skip_to_next_word(line);
+	}
+	if (line && ft_isprint(*line))
+		return ((*rt)->light_brightness = -2, ft_putstr_fd("ERROR: "
+				"invalid Light\n", 2), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 static int	parse_camera(char *line, t_scene **rt)
 {
-	(void) rt;
 	debug_write("identified: Capital letter \'C\'!\n");
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
@@ -105,6 +137,11 @@ static int	validate_value_range(t_scene **rt)
 			|| ((*rt)->cam_orient[1] < 0.0) || ((*rt)->cam_orient[1] > 1.0)
 			|| ((*rt)->cam_orient[2] < 0.0) || ((*rt)->cam_orient[2] > 1.0)))
 		return (ft_putstr_fd("ERROR: Invalid Camera value range\n",
+				STDERR_FILENO), EXIT_FAILURE);
+	debug_write("TODO: Check RGB range if Bonus!\n");
+	if (((*rt)->light_brightness != -1)
+		&& (((*rt)->light_brightness < 0.0) || ((*rt)->light_brightness > 1.0)))
+		return (ft_putstr_fd("ERROR: Invalid Light value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
