@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/15 20:38:19 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/16 09:44:49 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ MINILIBX_DIR	:= minilibx-linux
 CC			= cc
 CFLAGS		+= -Wall -Wextra
 CFLAGS		+= -Werror
-#CFLAGS		+= $(MLXFLAGS)
-MLXFLAGS	:= \
-	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lmlx -lXext -lX11 -lm -lz
-CFLAGS		+= -g
-CFLAGS		+= -D DEBUG=1
+CFLAGS		+= $(MLX_FLAGS)
+MLX_FLAGS	:=  -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+#	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lmlx -lXext -lX11 -lm -lz
+DEBUG_FLAGS	+= -g
+DEBUG_FLAGS	+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM			:= rm -f
 AR			:= ar rcs
@@ -128,11 +128,9 @@ PURPLE	:= \033[1;35m# purple
 GRAY	:= \033[1;90m# gray
 YELLOW	:= \033[1;93m# yellow
 ######################################################################### Test #
-test:
+test: CFLAGS += $(DEBUG_FLAGS)
+test: fclean $(NAME)
 	@\
-	$(MAKE) --silent fclean												;	\
-	$(MAKE) --silent all												&&	\
-	\
 	echo "\
 	$(COR)$(GRAY)========================================== $(NAME) START\
 	$(COR)" && \
@@ -171,9 +169,16 @@ valgrind: $(NAME)
 	\
 		./miniRT test.rt												;	\
 	\
-	echo -n "Norminette error count: "												;	\
+		norminette src/ include/											\
+		| grep -v OK 														\
+		| grep -v 'Setting locale to en_US'								;	\
+	echo -n "Norminette error count: "									;	\
 		norminette src/ include/ 											\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
 		| wc -l
+
+run: fclean $(NAME)
+	@\
+	./miniRT test.rt
