@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 10:15:55 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:29:55 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	parse_input(t_scene *rt, char **argv)
 	debug_write("Parsing the input file\n");
 	rt->file_fd = open(argv[1], O_RDONLY, 0644);
 	if (rt->file_fd == -1)
-		return (write(STDOUT_FILENO, "ERROR: could not open file\n", 27), 1);
+		return (write(STDOUT_FILENO, "Error\ncould not open file\n", 26), 1);
 	line = get_next_line(rt->file_fd);
 	if (!line)
-		return (write(STDOUT_FILENO, "ERROR: could not read file\n", 28), 1);
+		return (write(STDOUT_FILENO, "Error\ncould not read file\n", 26), 1);
 	while (line)
 	{
 		debug_write("parsing line: ");
