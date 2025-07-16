@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 15:29:55 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:31:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,14 @@ static int	parse_line(char *line, t_scene **rt)
 			ft_putchar_fd(line[d++], 1);
 		ft_putchar_fd('\n', 1);
 	}
-	if ((*line == 'A' || *line == 'C' || *line == 'L')
-		&& (ft_isspace(line[1])))
+	if ((*line == 'A' || *line == 'C' || *line == 'L') && (ft_isspace(line[1])))
 		return (parse_lights_and_camera(line, rt));
-	else if (((line[0]) && (line[1]))
-		&& ((line[0] == 's' && line[1] == 'p')
+	else if (((line[0]) && (line[1])) && ((line[0] == 's' && line[1] == 'p')
 			|| (line[0] == 'p' && line[1] == 'l')
-			|| (line[0] == 'c' && line[1] == 'y'))
-		&& (ft_isspace(line[2])))
+			|| (line[0] == 'c' && line[1] == 'y')) && (ft_isspace(line[2])))
 		return (parse_objects(line, rt));
+	else
+		return (ft_printf("Error\nInvalid line: %s", line), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,13 +6,14 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 18:10:56 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 20:22:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static void	debug_print_s_scene(t_scene *rt);
+static void	print_obj_list(t_lst_obj **head);
 
 void	initialize(t_scene *rt, char **argv)
 {
@@ -20,6 +21,7 @@ void	initialize(t_scene *rt, char **argv)
 	rt->amb_ratio = -1;
 	rt->cam_fov = -1;
 	rt->light_brightness = -1;
+	rt->lst_obj = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return ;
 	debug_print_s_scene(rt);
@@ -54,4 +56,26 @@ static void	debug_print_s_scene(t_scene *rt)
 	debug_write("");
 	ft_printf("s_scene: lig_brit: %i.%i\n", (int)rt->light_brightness,
 		(((int)(rt->light_brightness * 100)) % 100));
+	print_obj_list(&(rt->lst_obj));
+}
+
+static void	print_obj_list(t_lst_obj **head)
+{
+	t_lst_obj	*obj;
+
+	obj = *head;
+	if (!obj)
+		return ;
+	while (obj->next)
+	{
+		debug_write("list object: ");
+		ft_printf("identifier: %i    ", (int) obj->identifier);
+		ft_printf("center: %i,%i,%i\n", (int) obj->center[0],
+			(int) obj->center[1], (int) obj->center[2]);
+		obj = obj->next;
+	}
+	debug_write("list object: ");
+	ft_printf("identifier: %i    ", (int) obj->identifier);
+	ft_printf("center: %i,%i,%i\n", (int) obj->center[0],
+		(int) obj->center[1], (int) obj->center[2]);
 }

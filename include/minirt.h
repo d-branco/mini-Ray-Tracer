@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 15:08:15 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 19:29:10 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_lst_obj
 	int						identifier;
 	float					center[3];
 	float					diameter;
-	int						rgb_range[3];
+	float					rgb_range[3];
 	float					vec_uni[3];
 	float					height;
 	struct s_lst_obj		*next;
