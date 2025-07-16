@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 15:28:06 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 16:16:54 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	parse_lights_and_camera(char *line, t_scene **rt)
 	else if (line[0] == 'L')
 		return (ft_putstr_fd("Error\nLight can only be declared once\n",
 				STDERR_FILENO), EXIT_FAILURE);
-	debug_write("TODO: Check if only one and validate\n");
 	ret += validate_value_range(rt);
 	return (ret);
 }
