@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:15:22 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 09:07:09 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:02:43 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	parse_cylinder(char *line, t_scene **rt)
 		return (ft_printf("Error\nInvalid cy diameter!\n"), free(obj), 1);
 	(*obj).diameter = ft_atof(line);
 	line = skip_to_next_word(line);
-
 	return (rest_of_the_friendly_cylinder(line, rt, obj));
 }
 
@@ -73,7 +72,7 @@ static int	rest_of_the_friendly_cylinder(
 		return (ft_printf("Error\nInvalid cylinder!\n"), free(obj), 1);
 	(*obj).next = NULL;
 	rt_lstadd_back(&(*rt)->lst_obj, obj);
-	return (EXIT_SUCCESS);
+	return (validate_object_parsing(obj));
 }
 
 static int	parse_plane(char *line, t_scene **rt)
@@ -100,7 +99,7 @@ static int	parse_plane(char *line, t_scene **rt)
 		return (ft_printf("Error\nInvalid plane!\n"), free(obj), 1);
 	(*obj).next = NULL;
 	rt_lstadd_back(&(*rt)->lst_obj, obj);
-	return (EXIT_SUCCESS);
+	return (validate_object_parsing(obj));
 }
 
 static int	parse_sphere(char *line, t_scene **rt)
@@ -127,5 +126,5 @@ static int	parse_sphere(char *line, t_scene **rt)
 		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);
 	(*obj).next = NULL;
 	rt_lstadd_back(&(*rt)->lst_obj, obj);
-	return (EXIT_SUCCESS);
+	return (validate_object_parsing(obj));
 }

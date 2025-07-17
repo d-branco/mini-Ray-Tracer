@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 08:53:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 09:59:57 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,15 @@ void		initialize(t_scene *rt, char **argv);
 void		finalize(t_scene *rt);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
-char		*skip_to_next_word(char *line);
-char		*skip_to_after_comma(char *line);
-void		parse_float_triplet(char *line, float array[3]);
 //src/init/parse_light_cam.c
 int			parse_lights_and_camera(char *line, t_scene **rt);
 //src/init/parse_objects.c
 int			parse_objects(char *line, t_scene **rt);
+//src/init/parse_utils.c
+int			validate_object_parsing(t_lst_obj *obj);
+char		*skip_to_next_word(char *line);
+char		*skip_to_after_comma(char *line);
+void		parse_float_triplet(char *line, float array[3]);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/utils

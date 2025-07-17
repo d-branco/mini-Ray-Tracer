@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 08:44:46 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:01:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,36 +68,4 @@ static int	parse_line(char *line, t_scene **rt)
 	else
 		return (ft_printf("Error\nInvalid line: %s", line), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-}
-
-char	*skip_to_next_word(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (!ft_isspace(line[i]))
-		i++;
-	while (ft_isspace(line[i]))
-		i++;
-	return (&line[i]);
-}
-
-char	*skip_to_after_comma(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != ',')
-		i++;
-	i++;
-	return (&line[i]);
-}
-
-void	parse_float_triplet(char *line, float array[3])
-{
-	array[0] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	array[1] = ft_atof(line);
-	line = skip_to_after_comma(line);
-	array[2] = ft_atof(line);
 }

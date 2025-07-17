@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 09:01:56 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 09:29:54 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,14 @@ static void	debug_print_s_scene(t_scene *rt)
 static void	print_obj_list(t_lst_obj **head)
 {
 	t_lst_obj	*o;
-	const char	*obj_str[] = {"sphere (  )", "plane /   /", "cylinder(\\ )\\"};
+	const char	*obj_str[] = {"sphere (   )", "plane //////", "cylindr(\\ )\\"};
 
 	o = *head;
 	if (!o || !DEBUG)
 		return ;
 	while (o)
 	{
-		ft_printf("==DEBUG== obj_lst ======= object at %p\n", o);
-		ft_printf("==DEBUG== obj_lst id: %s\n", obj_str[o->id]);
+		ft_printf("==DEBUG== obj_lst id: %s at adress %p\n", obj_str[o->id], o);
 		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst center: %i,%i,%i\n",
 				(int)o->center[0], (int)o->center[1], (int)o->center[2]);
@@ -82,7 +81,9 @@ static void	print_obj_list(t_lst_obj **head)
 		if ((o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst vec_uni: %i,%i,%i\n",
 				(int)o->vec_uni[0], (int)o->vec_uni[1], (int)o->vec_uni[2]);
-		ft_printf("==DEBUG== obj_lst next obj address: %p\n", o->next);
+		if ((o->id == e_CYlINDER))
+			ft_printf("==DEBUG== obj_lst height: %i\n", (int)o->height);
+		ft_printf("==DEBUG== obj_lst ======== next obj address: %p\n", o->next);
 		o = o->next;
 	}
 }
