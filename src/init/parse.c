@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:23 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 18:31:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 08:44:46 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	parse_line(char *line, t_scene **rt)
 		line++;
 	if (DEBUG)
 	{
-		debug_write("identifier: ");
+		debug_write("id: ");
 		d = 0;
 		while (ft_isalpha(line[d]))
 			ft_putchar_fd(line[d++], 1);

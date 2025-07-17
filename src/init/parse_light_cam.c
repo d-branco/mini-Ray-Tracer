@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 16:16:54 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 08:45:19 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int	parse_light(char *line, t_scene **rt)
 				"d Light ratio range (float)\n", 2), EXIT_FAILURE);
 	(*rt)->light_brightness = ft_atof(line);
 	line = skip_to_next_word(line);
-	parse_float_triplet("-1,-1,-1", (*rt)->light_rgb_range);
+	parse_float_triplet("-1,-1,-1", (*rt)->light_rgb_rng);
 	if (line && ft_isprint(*line))
 	{
 		if (!is_float_triplet(line))
 			return ((*rt)->light_brightness = -2, ft_putstr_fd("Error\n"
 					"invalid Light\n", 2), EXIT_FAILURE);
-		parse_float_triplet(line, (*rt)->light_rgb_range);
+		parse_float_triplet(line, (*rt)->light_rgb_rng);
 		line = skip_to_next_word(line);
 	}
 	if (line && ft_isprint(*line))

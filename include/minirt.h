@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 07:38:13 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 08:45:19 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_scene
 	float					cam_fov;
 	float					light_coord[3];
 	float					light_brightness;
-	float					light_rgb_range[3];
+	float					light_rgb_rng[3];
 	struct s_lst_obj		*lst_obj;
 }							t_scene;
 
@@ -48,10 +48,10 @@ enum	e_obj
 
 typedef struct s_lst_obj
 {
-	int						identifier;
+	int						id;
 	float					center[3];
 	float					diameter;
-	float					rgb_range[3];
+	float					rgb_rng[3];
 	float					vec_uni[3];
 	float					height;
 	struct s_lst_obj		*next;

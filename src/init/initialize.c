@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 07:51:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 08:47:43 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	initialize(t_scene *rt, char **argv)
 	return ;
 }
 
-//		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->light_rgb_range[0],
-//			(int) rt->light_rgb_range[1], (int) rt->light_rgb_range[2]);
+//		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->light_rgb_rng[0],
+//			(int) rt->light_rgb_rng[1], (int) rt->light_rgb_rng[2]);
 static void	debug_print_s_scene(t_scene *rt)
 {
 	if (!DEBUG)
@@ -61,28 +61,28 @@ static void	debug_print_s_scene(t_scene *rt)
 
 static void	print_obj_list(t_lst_obj **head)
 {
-	t_lst_obj	*obj;
-	const char	*token_string[] = {"sphere", "plane", "cylinder"};
+	t_lst_obj	*o;
+	const char	*obj_str[] = {"sphere (  )", "plane /   /", "cylinder(  )\\"};
 
-	obj = *head;
-	if (!obj || !DEBUG)
+	o = *head;
+	if (!o || !DEBUG)
 		return ;
-	while (obj)
+	while (o)
 	{
-		ft_printf("==DEBUG== obj_lst ======== token at %p\n", obj);
-		ft_printf("==DEBUG== obj_lst id: %s\n", token_string[obj->identifier]);
-		if ((obj->identifier == e_SPHERE) || (obj->identifier == e_PLANE)
-			|| (obj->identifier == e_CYlINDER))
+		ft_printf("==DEBUG== obj_lst ======= object at %p\n", o);
+		ft_printf("==DEBUG== obj_lst id: %s\n", obj_str[o->id]);
+		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst center: %i,%i,%i\n",
-				(int)obj->center[0], (int)obj->center[1], (int)obj->center[2]);
-		if ((obj->identifier == e_SPHERE) || (obj->identifier == e_CYlINDER))
-			ft_printf("==DEBUG== obj_lst diameter: %i\n", (int)obj->diameter);
-		if ((obj->identifier == e_SPHERE) || (obj->identifier == e_PLANE)
-			|| (obj->identifier == e_CYlINDER))
+				(int)o->center[0], (int)o->center[1], (int)o->center[2]);
+		if ((o->id == e_SPHERE) || (o->id == e_CYlINDER))
+			ft_printf("==DEBUG== obj_lst diameter: %i\n", (int)o->diameter);
+		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst rgb range: %i,%i,%i\n",
-				(int)obj->rgb_range[0], (int)obj->rgb_range[1],
-				(int)obj->rgb_range[2]);
-		ft_printf("==DEBUG== obj_lst next tkn address: %p\n", obj->next);
-		obj = obj->next;
+				(int)o->rgb_rng[0], (int)o->rgb_rng[1], (int)o->rgb_rng[2]);
+		if ((o->id == e_PLANE) || (o->id == e_CYlINDER))
+			ft_printf("==DEBUG== obj_lst vec_uni: %i,%i,%i\n",
+				(int)o->vec_uni[0], (int)o->vec_uni[1], (int)o->vec_uni[2]);
+		ft_printf("==DEBUG== obj_lst next obj address: %p\n", o->next);
+		o = o->next;
 	}
 }

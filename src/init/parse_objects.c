@@ -6,13 +6,14 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:15:22 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 20:16:14 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 08:45:19 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parse_sphere(char *line, t_scene **rt);
+static int	parse_plane(char *line, t_scene **rt);
 
 void		rt_lstadd_back(t_lst_obj **lst, t_lst_obj *new);
 
@@ -27,18 +28,45 @@ int	parse_objects(char *line, t_scene **rt)
 	debug_write("TODO: Validate, check if repeated and add to linked list\n");
 	if ((line[0] == 's') && (line[1] == 'p'))
 		ret += parse_sphere(line, rt);
+	else if ((line[0] == 'p') && (line[1] == 'l'))
+		ret += parse_plane(line, rt);
 	return (ret);
+}
+
+static int	parse_plane(char *line, t_scene **rt)
+{
+	t_lst_obj	*obj;
+
+	obj = (t_lst_obj *)ft_malloc(sizeof(t_lst_obj) * 1);
+	debug_write("identified: object: PLane!\n");
+	(*obj).id = e_PLANE;
+	line = skip_to_next_word(line);
+	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
+		return (ft_printf("Error\nInvalid pl coord!\n"), free(obj), 1);
+	parse_float_triplet(line, (*obj).center);
+	line = skip_to_next_word(line);
+	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
+		return (ft_printf("Error\nInvalid pl vector!\n"), free(obj), 1);
+	parse_float_triplet(line, (*obj).vec_uni);
+	line = skip_to_next_word(line);
+	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
+		return (ft_printf("Error\nInvalid pl rgb range!\n"), free(obj), 1);
+	parse_float_triplet(line, (*obj).rgb_rng);
+	line = skip_to_next_word(line);
+	if (line && ft_isprint(*line))
+		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);
+	(*obj).next = NULL;
+	rt_lstadd_back(&(*rt)->lst_obj, obj);
+	return (EXIT_SUCCESS);
 }
 
 static int	parse_sphere(char *line, t_scene **rt)
 {
 	t_lst_obj	*obj;
 
-	obj = (t_lst_obj *) malloc(sizeof(t_lst_obj) * 1);
-	if (obj == NULL)
-		return (ft_printf("ERROR: Malloc actually failed!\n"), free(obj), 1);
+	obj = (t_lst_obj *)ft_malloc(sizeof(t_lst_obj) * 1);
 	debug_write("identified: object: SPhere!\n");
-	(*obj).identifier = e_SPHERE;
+	(*obj).id = e_SPHERE;
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid sp center!\n"), free(obj), 1);
@@ -50,7 +78,7 @@ static int	parse_sphere(char *line, t_scene **rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid sp rgb range!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).rgb_range);
+	parse_float_triplet(line, (*obj).rgb_rng);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);
