@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 08:47:43 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 09:01:56 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	debug_print_s_scene(t_scene *rt)
 static void	print_obj_list(t_lst_obj **head)
 {
 	t_lst_obj	*o;
-	const char	*obj_str[] = {"sphere (  )", "plane /   /", "cylinder(  )\\"};
+	const char	*obj_str[] = {"sphere (  )", "plane /   /", "cylinder(\\ )\\"};
 
 	o = *head;
 	if (!o || !DEBUG)
