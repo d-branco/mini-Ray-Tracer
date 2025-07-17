@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/16 19:29:10 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/17 07:38:13 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ enum	e_obj
 {
 	e_SPHERE,
 	e_PLANE,
-	e_TRIANGLE
+	e_CYlINDER
 };
 
 typedef struct s_lst_obj
