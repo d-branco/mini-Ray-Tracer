@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 08:26:58 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:48:39 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_scene
 	float					light_brightness;
 	float					light_rgb_rng[3];
 	struct s_lst_obj		*lst_obj;
+	void					*mlx;
 }							t_scene;
 
 enum	e_obj

@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/18 09:18:51 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/18 11:59:17 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,21 +17,19 @@ LIBFT_DIR		:= libft
 MINILIBX		:= minilibx-linux/libmlx_Linux.a
 MINILIBX_DIR	:= minilibx-linux
 ##################################################################### Compiler #
-CC			= cc
-CFLAGS		+= -Wall -Wextra
-CFLAGS		+= -Werror
-CFLAGS		+= $(MLX_FLAGS)
-MLX_FLAGS	:=  -L/usr/lib -Imlx_linux -L -lmlx -lXext -lX11 -lm -lz
-#	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lmlx -lXext -lX11 -lm -lz
-DEBUG_FLAGS	+= -g
-DEBUG_FLAGS	+= -D DEBUG=1
+CC				:= cc
+CFLAGS			+= -Wall -Wextra
+CFLAGS			+= -Werror
+MLX_FLAGS		:= -L./minilibx-linux -lmlx -lXext -lX11 -lm -lz
+DEBUG_FLAGS		+= -g
+DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
-RM			:= rm -f
-AR			:= ar rcs
+RM				:= rm -f
+AR				:= ar rcs
 ########################################################## Objects and Headers #
-INCLUDES	:= -I./include
-BUILD_DIR	:= build
-SRCS		:=	\
+INCLUDES		:= -I./include
+BUILD_DIR		:= build
+SRCS			:=	\
 	src/minirt.c															\
 																			\
 	src/init/finalize.c														\
@@ -52,22 +50,22 @@ SRCS		:=	\
 	src/utils/is_float_triplet.c											\
 	src/utils/obj_lst.c														\
 
-OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
-SRCS-BONUS	:=	\
+OBJS			:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
+SRCS-BONUS		:=	\
 
-OBJS-BONUS	:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
+OBJS-BONUS		:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
 ###################################################################### Targets #
 all: $(NAME)
 
 $(NAME): libft  $(OBJS)
 	@\
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) -o $(NAME)
+	$(CC) $(OBJS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
 	@\
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@								&&	\
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@								&&	\
 	echo "$(GRAY)File compiled:$(COR)	$<"
 
 $(LIBFT):
@@ -75,7 +73,7 @@ $(LIBFT):
 	make --silent --no-print-directory -C $(LIBFT_DIR)					&&	\
 	echo "$(GRAY)Library built:$(COR)	$(LIBFT)"						;	\
 	make --silent --no-print-directory -C $(MINILIBX_DIR)				&&	\
-	echo "$(GRAY)Library built:$(COR)	$(MINILIBX)"						;	\
+	echo "$(GRAY)Library built:$(COR)	$(MINILIBX)"					;	\
 
 libft : mlx $(LIBFT)
 
@@ -84,7 +82,7 @@ bonus: $(NAME-BONUS)
 $(NAME-BONUS): $(LIBFT) $(OBJS-BONUS)
 	@\
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
-	$(CC) $(CFLAGS) $(OBJS-BONUS) $(LIBFT) $(MINILIBX)-o $(NAME-BONUS)
+	$(CC) $(OBJS-BONUS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) -o $(NAME-BONUS)
 
 clean:
 	@\
@@ -183,5 +181,9 @@ valgrind: $(NAME)
 		| wc -l
 
 run: fclean $(NAME)
+	@\
+	./miniRT test.rt
+
+exe: $(NAME)
 	@\
 	./miniRT test.rt

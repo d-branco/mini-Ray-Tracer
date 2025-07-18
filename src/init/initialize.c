@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 10:30:14 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:49:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	initialize(t_scene *rt, char **argv)
 	rt->cam_fov = -1;
 	rt->light_brightness = -1;
 	rt->lst_obj = NULL;
+	rt->mlx = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return ;
 	debug_print_s_scene(rt);
