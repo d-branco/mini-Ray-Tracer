@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/18 11:59:17 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/18 15:51:32 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ SRCS			:=	\
 	src/init/parse_objects.c												\
 	src/init/parse_utils.c													\
 	src/init/parse.c														\
+																			\
+	src/mlx/hooks.c															\
 																			\
 	src/utils/ft_atof.c														\
 	src/utils/ft_debug.c													\

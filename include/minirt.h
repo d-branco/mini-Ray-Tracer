@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 11:48:39 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:36:34 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_scene
 	float					light_rgb_rng[3];
 	struct s_lst_obj		*lst_obj;
 	void					*mlx;
+	void					*mlx_win;
 }							t_scene;
 
 enum	e_obj
@@ -58,12 +59,12 @@ typedef struct s_lst_obj
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
-//src/init/initialize.c
-void		initialize(t_scene *rt, char **argv);
 //src/init/finalize.c
 void		finalize(t_scene *rt);
-//src/init/parse.c
-int			parse_input(t_scene *rt, char **argv);
+//src/init/initialize.c
+void		initialize_scene(t_scene *rt, char **argv);
+//src/init/input_validation.c
+int			input_validation(int argc, char **argv);
 //src/init/parse_light_cam.c
 int			parse_lights_and_camera(char *line, t_scene **rt);
 //src/init/parse_objects.c
@@ -73,8 +74,13 @@ int			validate_object_parsing(t_lst_obj *obj);
 char		*skip_to_next_word(char *line);
 char		*skip_to_after_comma(char *line);
 void		parse_float_triplet(char *line, float array[3]);
-//src/init/input_validation.c
-int			input_validation(int argc, char **argv);
+//src/init/parse.c
+int			parse_input(t_scene *rt, char **argv);
+
+//src/mlx/hooks.c
+int			close_win_button(t_scene *rt);
+int			key_hook(int keycode, t_scene *rt);
+
 //src/utils
 float		ft_atof(const char *str);
 int			debug_write(char *str);
