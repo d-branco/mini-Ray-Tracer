@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/17 10:00:23 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/18 09:18:51 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CC			= cc
 CFLAGS		+= -Wall -Wextra
 CFLAGS		+= -Werror
 CFLAGS		+= $(MLX_FLAGS)
-MLX_FLAGS	:=  -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS	:=  -L/usr/lib -Imlx_linux -L -lmlx -lXext -lX11 -lm -lz
 #	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lmlx -lXext -lX11 -lm -lz
 DEBUG_FLAGS	+= -g
 DEBUG_FLAGS	+= -D DEBUG=1

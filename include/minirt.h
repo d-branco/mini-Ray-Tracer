@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 09:59:57 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 08:26:58 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		parse_float_triplet(char *line, float array[3]);
 int			input_validation(int argc, char **argv);
 //src/utils
 float		ft_atof(const char *str);
-void		debug_write(char *str);
+int			debug_write(char *str);
 void		ft_free_n_null(void **ptr);
 int			ft_isfloat(const char *str);
 int			ft_isspace(char chr);
