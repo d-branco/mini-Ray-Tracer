@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:01:30 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 16:41:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:44:45 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ static void	rt_lstclear(t_lst_obj **lst);
 void	finalize(t_scene *rt)
 {
 	debug_write("Finalizing\n");
+	debug_write("Closing fd\n");
+	close(rt->file_fd);
 	debug_write("Destroying and freeing mlx pointers\n");
-	mlx_destroy_window(rt->mlx, rt->mlx_win);
-	mlx_destroy_display(rt->mlx);
+	if (rt->mlx_win)
+		mlx_destroy_window(rt->mlx, rt->mlx_win);
+	if (rt->mlx)
+		mlx_destroy_display(rt->mlx);
 	ft_free_n_null(&(rt->mlx));
 	debug_write("Freeing object list\n");
 	rt_lstclear(&(rt->lst_obj));
