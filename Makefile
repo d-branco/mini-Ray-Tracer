@@ -144,6 +144,7 @@ test: fclean $(NAME)
 		--leak-check=full													\
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
+		--suppressions=.cluster.supp										\
 	\
 		./miniRT test.rt												;	\
 	\
@@ -169,6 +170,7 @@ valgrind: $(NAME)
 		--leak-check=full													\
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
+		--suppressions=.cluster.supp										\
 	\
 		./miniRT test.rt												;	\
 	\

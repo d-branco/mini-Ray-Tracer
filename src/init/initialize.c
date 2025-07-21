@@ -85,7 +85,7 @@ static void	print_obj_list(t_lst_obj **head)
 		if ((o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst vec_uni: %i,%i,%i\n",
 				(int)o->vec_uni[0], (int)o->vec_uni[1], (int)o->vec_uni[2]);
-		if ((o->id == e_CYlINDER))
+		if (o->id == e_CYlINDER)
 			ft_printf("==DEBUG== obj_lst height: %i\n", (int)o->height);
 		ft_printf("==DEBUG== obj_lst ======== next obj at: %p\n", o->next);
 		o = o->next;
