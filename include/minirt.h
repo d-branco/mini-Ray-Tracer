@@ -88,6 +88,7 @@ int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);
 
 //src/utils
+char		*append_chr(char *str, char c);
 float		ft_atof(const char *str);
 int			debug_write(char *str);
 void		ft_free_n_null(void **ptr);

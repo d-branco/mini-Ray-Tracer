@@ -17,9 +17,9 @@ static int	parse_line(char *line, t_scene **rt);
 int	parse_input(t_scene *rt, char **argv)
 {
 	char	*line;
-	int		exit_code;
+	int		ret;
 
-	exit_code = EXIT_SUCCESS;
+	ret = EXIT_SUCCESS;
 	debug_write("Parsing the input file\n");
 	rt->file_fd = open(argv[1], O_RDONLY, 0644);
 	if (rt->file_fd == -1)
@@ -29,17 +29,18 @@ int	parse_input(t_scene *rt, char **argv)
 		return (write(STDOUT_FILENO, "Error\ncould not read file\n", 26), 1);
 	while (line)
 	{
+		if (line[ft_strlen(line) - 1] != '\n')
+			line = append_chr(line, '\n');
 		debug_write("parsing line: ");
 		if (DEBUG)
 			ft_putstr_fd(line, STDOUT_FILENO);
 		if (parse_line(line, &rt) != EXIT_SUCCESS)
-			exit_code = EXIT_FAILURE;
+			ret = EXIT_FAILURE;
 		free(line);
 		line = get_next_line(rt->file_fd);
 	}
 	free(line);
-	debug_write("TODO: Check if Ambient_light, Camara and Light exist\n");
-	return (exit_code);
+	return (debug_write("TODO: Check if A, C and L exist\n"), ret);
 }
 
 static int	parse_line(char *line, t_scene **rt)

@@ -42,6 +42,7 @@ SRCS			:=	\
 																			\
 	src/mlx/hooks.c															\
 																			\
+	src/utils/ft_append_chr.c												\
 	src/utils/ft_atof.c														\
 	src/utils/ft_debug.c													\
 	src/utils/ft_free.c														\
