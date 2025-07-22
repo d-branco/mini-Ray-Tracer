@@ -45,6 +45,10 @@ typedef struct s_scene
 	void					*mlx;
 	void					*mlx_win;
 	void					*mlx_img;
+	void					*mlx_addr;
+	int						bits_per_pixel;
+	int						line_length;
+	int						endian;
 }							t_scene;
 
 enum	e_obj

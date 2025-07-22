@@ -25,6 +25,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx = NULL;
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
+	rt->mlx_addr = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (debug_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
