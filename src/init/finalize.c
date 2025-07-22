@@ -21,6 +21,8 @@ void	finalize(t_scene *rt)
 	close(rt->file_fd);
 	debug_write("Destroying and freeing mlx pointers\n");
 	if (rt->mlx_win)
+		mlx_destroy_image(rt->mlx, rt->mlx_img);
+	if (rt->mlx_win)
 		mlx_destroy_window(rt->mlx, rt->mlx_win);
 	if (rt->mlx)
 		mlx_destroy_display(rt->mlx);

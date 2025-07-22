@@ -22,6 +22,11 @@
 #  define DEBUG FALSE
 # endif
 
+//# define WIDTH (1920 / 2)
+//# define HEIGHT (1080 - 40)
+# define WIDTH 960
+# define HEIGHT 1040
+
 # define TRUE				1
 # define FALSE				0
 
@@ -39,6 +44,7 @@ typedef struct s_scene
 	struct s_lst_obj		*lst_obj;
 	void					*mlx;
 	void					*mlx_win;
+	void					*mlx_img;
 }							t_scene;
 
 enum	e_obj
