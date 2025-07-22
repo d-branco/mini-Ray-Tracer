@@ -1,6 +1,6 @@
 # Project
 build/
-test.rt
+test*.rt
 minilibx-linux/
 miniRT
 miniRT_tester/

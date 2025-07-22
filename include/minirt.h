@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 16:36:34 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:28:57 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_lst_obj
 //src/init/finalize.c
 void		finalize(t_scene *rt);
 //src/init/initialize.c
-void		initialize_scene(t_scene *rt, char **argv);
+int			initialize_scene(t_scene *rt, char **argv);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/init/parse_light_cam.c

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 16:36:34 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:44:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	debug_print_s_scene(t_scene *rt);
 static void	print_obj_list(t_lst_obj **head);
 
-void	initialize_scene(t_scene *rt, char **argv)
+int	initialize_scene(t_scene *rt, char **argv)
 {
 	debug_write("Initializing the struct scene\n");
 	rt->amb_ratio = -1;
@@ -25,11 +25,9 @@ void	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx = NULL;
 	rt->mlx_win = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
-		return ;
+		return (debug_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
-	debug_write("Closing fd\n");
-	close(rt->file_fd);
-	return ;
+	return (EXIT_SUCCESS);
 }
 
 //		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->light_rgb_rng[0],

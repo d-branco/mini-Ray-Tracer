@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/18 15:51:32 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/21 14:37:18 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,10 +184,12 @@ valgrind: $(NAME)
 			| grep -v Error!												\
 		| wc -l
 
-run: fclean $(NAME)
+exe: fclean $(NAME)
 	@\
-	./miniRT test.rt
+	./miniRT test.rt													||	\
+	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
 
-exe: $(NAME)
+run: $(NAME)
 	@\
-	./miniRT test.rt
+	./miniRT test.rt													||	\
+	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
