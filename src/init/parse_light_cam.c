@@ -132,9 +132,9 @@ static int	validate_value_range(t_scene **rt)
 	debug_write("TODO: Check if Camara orientation vector is normalized!\n");
 	if (((*rt)->cam_fov != -1)
 		&& (((*rt)->cam_fov < 0.0) || ((*rt)->cam_fov > 180.0)
-			|| ((*rt)->cam_orient[0] < 0.0) || ((*rt)->cam_orient[0] > 1.0)
-			|| ((*rt)->cam_orient[1] < 0.0) || ((*rt)->cam_orient[1] > 1.0)
-			|| ((*rt)->cam_orient[2] < 0.0) || ((*rt)->cam_orient[2] > 1.0)))
+			|| ((*rt)->cam_orient[0] < -1.0) || ((*rt)->cam_orient[0] > 1.0)
+			|| ((*rt)->cam_orient[1] < -1.0) || ((*rt)->cam_orient[1] > 1.0)
+			|| ((*rt)->cam_orient[2] < -1.0) || ((*rt)->cam_orient[2] > 1.0)))
 		return (ft_putstr_fd("Error\nInvalid Camera value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
 	debug_write("TODO: Check RGB range if Bonus!\n");

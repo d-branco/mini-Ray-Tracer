@@ -55,5 +55,4 @@ static void	mlx_playground(t_scene *rt)
 	color_screen(rt, encode_rgb(0, 0, 0));
 	debug_write("Painting a white dot at (0, 0)\n");
 	pixel_put(rt, 0, 0, encode_rgb(255, 255, 255));
-
 }
