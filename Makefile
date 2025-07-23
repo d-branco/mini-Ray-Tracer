@@ -132,6 +132,7 @@ COR		:= \033[0m# COlor Remove
 PURPLE	:= \033[1;35m# purple
 GRAY	:= \033[1;90m# gray
 YELLOW	:= \033[1;93m# yellow
+BLUE	:= \033[1;96m# blue
 ######################################################################### Test #
 test: CFLAGS += $(DEBUG_FLAGS)
 test: fclean $(NAME)

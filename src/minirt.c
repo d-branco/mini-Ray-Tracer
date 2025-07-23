@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int	mlx_initialize(t_scene *rt);
+int			mlx_initialize(t_scene *rt);
 
 static void	mlx_playground(t_scene *rt);
 
@@ -32,10 +32,8 @@ int	main(int argc, char **argv)
 		return (debug_write("Goodbye, friend\n"), 4);
 	mlx_hook(rt.mlx_win, 17, 0, close_win_button, &rt);
 	mlx_hook(rt.mlx_win, 2, 1L << 0, key_hook, &rt);
-
 	mlx_playground(&rt);
 	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.mlx_img, 0, 0);
-
 	mlx_loop(rt.mlx);
 	return (debug_write("ERROR: return from main()\n"), EXIT_FAILURE);
 }
@@ -53,5 +51,9 @@ int	mlx_initialize(t_scene *rt)
 
 static void	mlx_playground(t_scene *rt)
 {
+	debug_write("Setting the screen black\n");
 	color_screen(rt, encode_rgb(0, 0, 0));
+	debug_write("Painting a white dot at (0, 0)\n");
+	pixel_put(rt, 0, 0, encode_rgb(255, 255, 255));
+
 }
