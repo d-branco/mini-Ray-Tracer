@@ -24,8 +24,9 @@
 
 //# define WIDTH (1920 / 2)
 //# define HEIGHT (1080 - 40)
+//# define HEIGHT (1080 - 40 - 30)
 # define WIDTH 960
-# define HEIGHT 1040
+# define HEIGHT 1010
 
 # define TRUE				1
 # define FALSE				0
@@ -87,6 +88,11 @@ void		parse_float_triplet(char *line, float array[3]);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
+//src/mlx/colors.c
+void		pixel_put(t_scene *rt, int x, int y, int color);
+int			encode_rgb(
+				unsigned char red, unsigned char green, unsigned char blue);
+void		color_screen(t_scene *rt, int color);
 //src/mlx/hooks.c
 int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);

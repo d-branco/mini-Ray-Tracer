@@ -40,6 +40,7 @@ SRCS			:=	\
 	src/init/parse_utils.c													\
 	src/init/parse.c														\
 																			\
+	src/mlx/colors.c														\
 	src/mlx/hooks.c															\
 																			\
 	src/utils/ft_append_chr.c												\
