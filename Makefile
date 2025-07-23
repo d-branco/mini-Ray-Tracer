@@ -20,7 +20,7 @@ MINILIBX_DIR	:= minilibx-linux
 CC				:= cc
 CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
-MLX_FLAGS		:= -L./minilibx-linux -lmlx -lXext -lX11 -lm -lz
+MLX_FLAGS		:= -L./minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 DEBUG_FLAGS		+= -g
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #

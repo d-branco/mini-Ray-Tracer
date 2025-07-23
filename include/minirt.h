@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 
@@ -25,11 +26,14 @@
 //# define WIDTH (1920 / 2)
 //# define HEIGHT (1080 - 40)
 //# define HEIGHT (1080 - 40 - 30)
-# define WIDTH 960
-# define HEIGHT 1010
+# define WIDTH				960
+# define HEIGHT				1010
 
 # define TRUE				1
 # define FALSE				0
+
+# define PI					3.14159265358979323846264338328
+# define TAU				6.28318530717958647692528676656
 
 typedef struct s_scene
 {
@@ -69,6 +73,26 @@ typedef struct s_lst_obj
 	float					height;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
+
+typedef struct s_point
+{
+	float					x;
+	float					y;
+	float					z;
+}							t_point;
+
+typedef struct s_vector
+{
+	float					x;
+	float					y;
+	float					z;
+}							t_vector;
+
+typedef struct s_canvas
+{
+	float					x;
+	float					y;
+}							t_canvas;
 
 //src/init/finalize.c
 void		finalize(t_scene *rt);
