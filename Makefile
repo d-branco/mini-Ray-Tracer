@@ -6,21 +6,22 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/28 15:02:55 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/28 19:01:34 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:= miniRT
 NAME-BONUS		:= miniRT_bonus
-LIBFT			:= libft/libft.a
-LIBFT_DIR		:= libft
-MINILIBX		:= minilibx-linux/libmlx_Linux.a
-MINILIBX_DIR	:= minilibx-linux
+LIBFT			:= include/libft/libft.a
+LIBFT_DIR		:= include/libft
+MINILIBX		:= include/minilibx-linux/libmlx_Linux.a
+MINILIBX_DIR	:= include/minilibx-linux
 ##################################################################### Compiler #
 CC				:= cc
 CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
-MLX_FLAGS		:= -L./minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
+MLX_FLAGS		:= \
+	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 DEBUG_FLAGS		+= -g
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
@@ -68,7 +69,8 @@ all: $(NAME)
 
 $(NAME): libft  $(OBJS)
 	@\
-	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
+	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(INCLUDES) $(CFLAGS)"	;	\
+	echo "$(GRAY)Linking flags:$(COR)	$(INCLUDES) $(LIBFT) $(MLX_FLAGS)";	\
 	$(CC) $(OBJS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o: src/%.c
@@ -123,11 +125,13 @@ $(MINILIBX):
 	@\
 	if [ ! -d "$(MINILIBX_DIR)" ]; then \
 		echo "$(GRAY)MlX for Linux: $(COR) $@ directory not found."		;	\
+		cd include														&&	\
 		echo -n "$(GRAY)MlX for Linux: $(COR) $@ downloading..."		;	\
 		curl -s -L -o $(MINILIBX_ARCHIVE) $(MINILIBX_URL)				&&	\
 		echo " done."													;	\
 		tar -xzf $(MINILIBX_ARCHIVE)									&&	\
 		rm -f $(MINILIBX_ARCHIVE)										&&	\
+		cd ..															&&	\
 		echo "$(GRAY)MlX for Linux: $(COR) $@ extracted."				;	\
 	else																	\
 		echo "$(GRAY)MlX for Linux: $(COR) $(MINILIBX_DIR)/"			;	\
@@ -159,11 +163,11 @@ test: fclean $(NAME)
 	$(COR)$(GRAY)========================================== $(NAME) END\n\
 	$(COR)RETURN VALUE: $$?"											&&	\
 	\
-		norminette src/ include/											\
+		norminette src/ include/minirt.h									\
 		| grep -v OK 														\
 		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
-		norminette src/ include/ 											\
+		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
@@ -180,11 +184,11 @@ valgrind: $(NAME)
 	\
 		./miniRT test.rt												;	\
 	\
-		norminette src/ include/											\
+		norminette src/ include/minirt.h									\
 		| grep -v OK 														\
 		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
-		norminette src/ include/ 											\
+		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 18:19:53 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:34:05 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int			mlx_initialize(t_scene *rt);
 
 static void	mlx_playground(t_scene *rt);
+static void	mlx_playground1(t_scene *rt);
 
 int	main(int argc, char **argv)
 {
@@ -33,7 +34,10 @@ int	main(int argc, char **argv)
 	mlx_hook(rt.mlx_win, 17, 0, close_win_button, &rt);
 	mlx_hook(rt.mlx_win, 2, 1L << 0, key_hook, &rt);
 	mlx_playground(&rt);
+	mlx_playground1(&rt);
 	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.mlx_img, 0, 0);
+	if (DEBUG)
+		finalize(&rt);
 	mlx_loop(rt.mlx);
 	return (debug_write("ERROR: return from main()\n"), EXIT_FAILURE);
 }
@@ -60,9 +64,10 @@ static void	mlx_playground(t_scene *rt)
 	direction = (t_vector){rt->c_orient[0], rt->c_orient[1], rt->c_orient[2]};
 	if (fl_equal(cosf(TAU), 1.0))
 		debug_write("We have radians\n");
+	
 }
 
-/*static void	mlx_playground(t_scene *rt)
+static void	mlx_playground1(t_scene *rt)
 {
 	t_canvas	c;
 	float		j;
@@ -109,4 +114,4 @@ static void	mlx_playground(t_scene *rt)
 	}
 	if (DEBUG)
 		write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
-}*/
+}
