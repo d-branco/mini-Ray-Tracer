@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 15:29:20 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:12:34 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ typedef struct s_scene
 	int						file_fd;
 	float					amb_ratio;
 	float					amb_rgb_rng[3];
-	float					cam_coord[3];
-	float					cam_orient[3];
-	float					cam_fov;
+	float					c_coord[3];
+	float					c_orient[3];
+	float					c_fov;
 	float					light_coord[3];
 	float					light_brightness;
 	float					light_rgb_rng[3];

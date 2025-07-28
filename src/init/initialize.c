@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/21 14:44:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:24:45 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 {
 	debug_write("Initializing the struct scene\n");
 	rt->amb_ratio = -1;
-	rt->cam_fov = -1;
+	rt->c_fov = -1;
 	rt->light_brightness = -1;
 	rt->lst_obj = NULL;
 	rt->mlx = NULL;
@@ -29,6 +29,11 @@ int	initialize_scene(t_scene *rt, char **argv)
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (debug_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
+	debug_write("Correcting degrees to radians\n");
+	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
+	if (debug_write(""))
+		ft_printf("s_scene: c_fov %i,%i\n",
+			(int)(rt->c_fov), (((int)(rt->c_fov * 100)) % 100));
 	return (EXIT_SUCCESS);
 }
 
@@ -47,13 +52,13 @@ static void	debug_print_s_scene(t_scene *rt)
 	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->amb_rgb_rng[0],
 		(int) rt->amb_rgb_rng[1], (int) rt->amb_rgb_rng[2]);
 	debug_write("");
-	ft_printf("s_scene: cam_coord: %i,%i,%i\n", (int) rt->cam_coord[0],
-		(int) rt->cam_coord[1], (int) rt->cam_coord[2]);
+	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord[0],
+		(int) rt->c_coord[1], (int) rt->c_coord[2]);
 	debug_write("");
-	ft_printf("s_scene: cam_orient: %i,%i,%i\n", (int) rt->cam_orient[0],
-		(int) rt->cam_orient[1], (int) rt->cam_orient[2]);
+	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_orient[0],
+		(int) rt->c_orient[1], (int) rt->c_orient[2]);
 	debug_write("");
-	ft_printf("s_scene: cam_fov %i\n", (int)rt->cam_fov);
+	ft_printf("s_scene: c_fov %i\n", (int)rt->c_fov);
 	debug_write("");
 	ft_printf("s_scene: light_coord: %i,%i,%i\n", (int) rt->light_coord[0],
 		(int) rt->light_coord[1], (int) rt->light_coord[2]);
