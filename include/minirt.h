@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 13:46:19 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:29:20 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define PI					3.14159265358979323846264338328
 # define TAU				6.28318530717958647692528676656
 
+// Margin Of Error
 # define MOE				0.000042
 
 typedef struct s_scene
@@ -113,6 +114,20 @@ char		*skip_to_after_comma(char *line);
 void		parse_float_triplet(char *line, float array[3]);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
+
+//src/math/addiction.c
+t_vector	vec_addiction(t_vector a, t_vector b);
+t_vector	vec_subtraction(t_vector a, t_vector b);
+//src/math/comparisson.c
+int			fl_equal(float a, float b);
+//src/math/scalar_multiplication.c
+t_vector	vec_negation(t_vector v);
+t_vector	vec_scalar_multiplication(float s, t_vector v);
+//src/math/vector_math.c
+float		vec_magnitude(t_vector v);
+t_vector	vec_normalization(t_vector v);
+float		vec_inner_product(t_vector a, t_vector b);
+t_vector	vec_cross_product(t_vector a, t_vector b);
 
 //src/mlx/colors.c
 void		pixel_put(t_scene *rt, int x, int y, int color);

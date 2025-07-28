@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 13:18:08 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 14:04:05 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:17:07 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int	main(void)
 		write(1, "          NOT EQUAL\n", 20);
 	return (EXIT_SUCCESS);
 }*/
-
