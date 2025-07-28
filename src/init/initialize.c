@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 18:24:45 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:52:08 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	debug_print_s_scene(t_scene *rt);
 static void	print_obj_list(t_lst_obj **head);
+static void	initialize_map(int map[WIDTH][HEIGHT]);
 
 int	initialize_scene(t_scene *rt, char **argv)
 {
@@ -26,13 +27,14 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
+	initialize_map(rt->map);
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (debug_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
 	debug_write("Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
 	if (debug_write(""))
-		ft_printf("s_scene: c_fov %i,%i\n",
+		ft_printf("s_scene: c_fov %i,%i rad\n",
 			(int)(rt->c_fov), (((int)(rt->c_fov * 100)) % 100));
 	return (EXIT_SUCCESS);
 }
@@ -58,7 +60,7 @@ static void	debug_print_s_scene(t_scene *rt)
 	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_orient[0],
 		(int) rt->c_orient[1], (int) rt->c_orient[2]);
 	debug_write("");
-	ft_printf("s_scene: c_fov %i\n", (int)rt->c_fov);
+	ft_printf("s_scene: c_fov %i degrees\n", (int)rt->c_fov);
 	debug_write("");
 	ft_printf("s_scene: light_coord: %i,%i,%i\n", (int) rt->light_coord[0],
 		(int) rt->light_coord[1], (int) rt->light_coord[2]);
@@ -94,5 +96,23 @@ static void	print_obj_list(t_lst_obj **head)
 			ft_printf("==DEBUG== obj_lst height: %i\n", (int)o->height);
 		ft_printf("==DEBUG== obj_lst ======== next obj at: %p\n", o->next);
 		o = o->next;
+	}
+}
+
+static void	initialize_map(int map[WIDTH][HEIGHT])
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			map[x][y] = -1;
+			y++;
+		}
+		x++;
 	}
 }

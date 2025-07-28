@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/28 19:01:34 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/07/28 19:10:35 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,9 @@ all: $(NAME)
 
 $(NAME): libft  $(OBJS)
 	@\
-	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(INCLUDES) $(CFLAGS)"	;	\
-	echo "$(GRAY)Linking flags:$(COR)	$(INCLUDES) $(LIBFT) $(MLX_FLAGS)";	\
+	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
+	echo "$(GRAY)Linking flags:$(COR)	$(INCLUDES) $(LIBFT)"			;	\
+	echo "$(GRAY)Linking flags:$(COR)	$(MLX_FLAGS)"					;	\
 	$(CC) $(OBJS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o: src/%.c

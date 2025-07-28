@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 18:36:43 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:42:21 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 //# define WIDTH (1920 / 2)
 //# define HEIGHT (1080 - 40)
 //# define HEIGHT (1080 - 40 - 30)
-# define WIDTH				960
-# define HEIGHT				1010
+//# define WIDTH				960
+//# define HEIGHT				1010
+# define WIDTH 960
+# define HEIGHT 1040
 
 # define TRUE				1
 # define FALSE				0
@@ -57,6 +59,7 @@ typedef struct s_scene
 	int						bits_per_pixel;
 	int						line_length;
 	int						endian;
+	int						map[WIDTH][HEIGHT];
 }							t_scene;
 
 enum	e_obj
