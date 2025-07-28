@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 18:12:34 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:43:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ static int	parse_ambient_light(char *line, t_scene **rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("Error\ninvalid "
 				"Ambient light RGB (float,float,float)\n", 2), EXIT_FAILURE);
-	(*rt)->amb_rgb_rng[0] = ft_atof(line);
+	(*rt)->a_rgb[0] = ft_atof(line);
 	line = skip_to_after_comma(line);
-	(*rt)->amb_rgb_rng[1] = ft_atof(line);
+	(*rt)->a_rgb[1] = ft_atof(line);
 	line = skip_to_after_comma(line);
-	(*rt)->amb_rgb_rng[2] = ft_atof(line);
+	(*rt)->a_rgb[2] = ft_atof(line);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return ((*rt)->amb_ratio = -2, ft_putstr_fd("Error\n"
@@ -123,9 +123,9 @@ static int	validate_value_range(t_scene **rt)
 {
 	if (((*rt)->amb_ratio != -1)
 		&& (((*rt)->amb_ratio < 0.0) || ((*rt)->amb_ratio > 1.0)
-			|| ((*rt)->amb_rgb_rng[0] < 0.0) || ((*rt)->amb_rgb_rng[0] > 255.0)
-			|| ((*rt)->amb_rgb_rng[1] < 0.0) || ((*rt)->amb_rgb_rng[1] > 255.0)
-			|| ((*rt)->amb_rgb_rng[2] < 0.0) || ((*rt)->amb_rgb_rng[2] > 255.0)
+			|| ((*rt)->a_rgb[0] < 0.0) || ((*rt)->a_rgb[0] > 255.0)
+			|| ((*rt)->a_rgb[1] < 0.0) || ((*rt)->a_rgb[1] > 255.0)
+			|| ((*rt)->a_rgb[2] < 0.0) || ((*rt)->a_rgb[2] > 255.0)
 		))
 		return (ft_putstr_fd("Error\nInvalid Ambient lighing value range\n",
 				STDERR_FILENO), EXIT_FAILURE);

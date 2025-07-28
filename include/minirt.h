@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 19:42:21 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:43:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 //# define WIDTH				960
 //# define HEIGHT				1010
 # define WIDTH 960
-# define HEIGHT 1040
+# define HEIGHT 1010
 
 # define TRUE				1
 # define FALSE				0
@@ -44,7 +44,7 @@ typedef struct s_scene
 {
 	int						file_fd;
 	float					amb_ratio;
-	float					amb_rgb_rng[3];
+	float					a_rgb[3];
 	float					c_coord[3];
 	float					c_orient[3];
 	float					c_fov;

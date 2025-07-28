@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 19:52:08 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:43:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	debug_print_s_scene(t_scene *rt)
 	ft_printf("s_scene: amb_ratio: %i.%i\n", (int) rt->amb_ratio,
 		(((int)(rt->amb_ratio * 100)) % 100));
 	debug_write("");
-	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->amb_rgb_rng[0],
-		(int) rt->amb_rgb_rng[1], (int) rt->amb_rgb_rng[2]);
+	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->a_rgb[0],
+		(int) rt->a_rgb[1], (int) rt->a_rgb[2]);
 	debug_write("");
 	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord[0],
 		(int) rt->c_coord[1], (int) rt->c_coord[2]);
