@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 21:44:34 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:07:49 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	mlx_playground(t_scene *rt)
 	pixel_edge = HEIGHT;
 	if (WIDTH > HEIGHT)
 		pixel_edge = WIDTH;
-	debug_write("Drawing a the map.. ");
+	debug_write("Drawing a the map... ");
 	color_screen(rt, encode_rgb(rt->a_rgb[0], rt->a_rgb[1], rt->a_rgb[2]));
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 	while (pixel_edge >= 1)
@@ -73,9 +73,13 @@ static void	mlx_playground(t_scene *rt)
 			{
 				if (rt->map[x][y] == -1)
 				{
-					if (((powf(x - 420, 2) + powf(y - 225, 2))) < pow(225, 2))
+					if ((((powf(x - 420, 2) + powf(y - 420, 2))) < pow(225, 2))
+						|| (((powf(x - 0, 2) + powf(y - 0, 2))) < pow(225, 2)))
 					{
-						rt->map[x][y] = encode_rgb(255, 255, 0);
+						if (((powf(x - 0, 2) + powf(y - 0, 2))) < pow(225, 2))
+							rt->map[x][y] = encode_rgb(255, 42, 42);
+						else
+							rt->map[x][y] = encode_rgb(255, 255, 42);
 						pixel_put(rt, (x), (y), rt->map[x][y]);
 						i = 0;
 						while (i < pixel_edge)
