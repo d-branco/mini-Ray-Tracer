@@ -22,7 +22,7 @@ CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-DEBUG_FLAGS		+= -g
+#DEBUG_FLAGS		+= -g -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM				:= rm -f
@@ -72,7 +72,7 @@ $(NAME): libft  $(OBJS)
 	echo "$(GRAY)Compile flags:$(COR)	$(CC) $(CFLAGS)"				;	\
 	echo "$(GRAY)Linking flags:$(COR)	$(INCLUDES) $(LIBFT)"			;	\
 	echo "$(GRAY)Linking flags:$(COR)	$(MLX_FLAGS)"					;	\
-	$(CC) $(OBJS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(INCLUDES) $(LIBFT) $(MLX_FLAGS) $(CFLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
@@ -157,6 +157,7 @@ test: fclean $(NAME)
 		--leak-check=full													\
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
+		--max-stackframe=4200000											\
 	\
 		./miniRT test.rt												;	\
 	\
@@ -182,6 +183,7 @@ valgrind: $(NAME)
 		--leak-check=full													\
 		--show-leak-kinds=all												\
 		--track-origins=yes													\
+		--max-stackframe=4200000											\
 	\
 		./miniRT test.rt												;	\
 	\

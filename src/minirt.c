@@ -56,10 +56,31 @@ static void	mlx_playground(t_scene *rt)
 	int			pixel_edge;
 	int			i;
 	int			j;
+	float		distance;
+	t_vector	uni;
+	t_vector	ori;
 
 	pixel_edge = HEIGHT;
 	if (WIDTH > HEIGHT)
 		pixel_edge = WIDTH;
+	
+	debug_write("First pixel orientation calculation\n");
+	if (debug_write(""))
+		ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_orient[0],
+			(int) rt->c_orient[1], (int) rt->c_orient[2]);
+	debug_write("Distance to camera plane \n");
+	distance = (float)((WIDTH / 2) / sinf(rt->c_fov / 2));
+
+	if (debug_write(""))
+		ft_printf("distance to canvas plane: %i.%i pixeis\n",
+			(int) distance, (((int)(distance * 10000)) % 10000));
+	
+	ori = (t_vector){rt->c_orient[0], rt->c_orient[1], rt->c_orient[2]};
+	uni = vec_scalar_multiplication(distance, ori);
+	if (debug_write(""))
+		ft_printf("vector distance: %i,%i,%i\n", (int) uni.x,
+			(int) uni.y, (int) uni.z);
+
 	debug_write("Drawing a the map... ");
 	color_screen(rt, encode_rgb(rt->a_rgb[0], rt->a_rgb[1], rt->a_rgb[2]));
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
