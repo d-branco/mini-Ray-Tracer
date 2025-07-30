@@ -6,22 +6,22 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 21:43:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:00:13 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	debug_print_s_scene(t_scene *rt);
+static void	debug_print_s_scene(t_scene rt);
 static void	print_obj_list(t_lst_obj **head);
 static void	initialize_map(int map[WIDTH][HEIGHT]);
 
 int	initialize_scene(t_scene *rt, char **argv)
 {
 	debug_write("Initializing the struct scene\n");
-	rt->amb_ratio = -1;
+	rt->a_ratio = -1;
 	rt->c_fov = -1;
-	rt->light_brightness = -1;
+	rt->l_bri = -1;
 	rt->lst_obj = NULL;
 	rt->mlx = NULL;
 	rt->mlx_win = NULL;
@@ -30,7 +30,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 	initialize_map(rt->map);
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (debug_write("ERROR: Parsing input\n"), 1);
-	debug_print_s_scene(rt);
+	debug_print_s_scene(*rt);
 	debug_write("Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
 	if (debug_write(""))
@@ -39,35 +39,35 @@ int	initialize_scene(t_scene *rt, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-//		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->light_rgb_rng[0],
-//			(int) rt->light_rgb_rng[1], (int) rt->light_rgb_rng[2]);
-static void	debug_print_s_scene(t_scene *rt)
+//		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->l_rgb[0],
+//			(int) rt->l_rgb[1], (int) rt->l_rgb[2]);
+static void	debug_print_s_scene(t_scene rt)
 {
 	if (!DEBUG)
 		return ;
 	debug_write("");
-	ft_printf("s_scene: file_fd: %i\n", rt->file_fd);
+	ft_printf("s_scene: file_fd: %i\n", rt.file_fd);
 	debug_write("");
-	ft_printf("s_scene: amb_ratio: %i.%i\n", (int) rt->amb_ratio,
-		(((int)(rt->amb_ratio * 100)) % 100));
+	ft_printf("s_scene: a_ratio: %i.%i\n", (int) rt.a_ratio,
+		(((int)(rt.a_ratio * 100)) % 100));
 	debug_write("");
-	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->a_rgb[0],
-		(int) rt->a_rgb[1], (int) rt->a_rgb[2]);
+	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt.a_rgb.r,
+		(int) rt.a_rgb.g, (int) rt.a_rgb.b);
 	debug_write("");
-	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord[0],
-		(int) rt->c_coord[1], (int) rt->c_coord[2]);
+	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt.c_coord.x,
+		(int) rt.c_coord.y, (int) rt.c_coord.z);
 	debug_write("");
-	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_orient[0],
-		(int) rt->c_orient[1], (int) rt->c_orient[2]);
+	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt.c_ori.x,
+		(int) rt.c_ori.y, (int) rt.c_ori.z);
 	debug_write("");
-	ft_printf("s_scene: c_fov %i degrees\n", (int)rt->c_fov);
+	ft_printf("s_scene: c_fov %i degrees\n", (int)rt.c_fov);
 	debug_write("");
-	ft_printf("s_scene: light_coord: %i,%i,%i\n", (int) rt->light_coord[0],
-		(int) rt->light_coord[1], (int) rt->light_coord[2]);
+	ft_printf("s_scene: l_coo: %i,%i,%i\n", (int) rt.l_coo.x,
+		(int) rt.l_coo.y, (int) rt.l_coo.z);
 	debug_write("");
-	ft_printf("s_scene: lig_brit: %i.%i\n", (int)rt->light_brightness,
-		(((int)(rt->light_brightness * 100)) % 100));
-	print_obj_list(&(rt->lst_obj));
+	ft_printf("s_scene: lig_brit: %i.%i\n", (int)rt.l_bri,
+		(((int)(rt.l_bri * 100)) % 100));
+	print_obj_list(&(rt.lst_obj));
 }
 
 static void	print_obj_list(t_lst_obj **head)

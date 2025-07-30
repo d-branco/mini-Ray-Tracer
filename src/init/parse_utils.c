@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 09:58:29 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/17 10:04:31 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 11:54:00 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ char	*skip_to_after_comma(char *line)
 	return (&line[i]);
 }
 
-void	parse_float_triplet(char *line, float array[3])
+void	parse_float_triplet(char *line, t_vector array)
 {
-	array[0] = ft_atof(line);
+	array.x = ft_atof(line);
 	line = skip_to_after_comma(line);
-	array[1] = ft_atof(line);
+	array.y = ft_atof(line);
 	line = skip_to_after_comma(line);
-	array[2] = ft_atof(line);
+	array.x = ft_atof(line);
 }
 
 int	validate_object_parsing(t_lst_obj *o)

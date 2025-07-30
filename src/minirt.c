@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/29 11:07:49 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 11:50:14 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,26 @@ static void	mlx_playground(t_scene *rt)
 	pixel_edge = HEIGHT;
 	if (WIDTH > HEIGHT)
 		pixel_edge = WIDTH;
-	
+
 	debug_write("First pixel orientation calculation\n");
 	if (debug_write(""))
-		ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_orient[0],
-			(int) rt->c_orient[1], (int) rt->c_orient[2]);
+		ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_ori.x,
+			(int) rt->c_ori.y, (int) rt->c_ori.z);
 	debug_write("Distance to camera plane \n");
 	distance = (float)((WIDTH / 2) / sinf(rt->c_fov / 2));
 
 	if (debug_write(""))
 		ft_printf("distance to canvas plane: %i.%i pixeis\n",
 			(int) distance, (((int)(distance * 10000)) % 10000));
-	
-	ori = (t_vector){rt->c_orient[0], rt->c_orient[1], rt->c_orient[2]};
+
+	ori = (t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z};
 	uni = vec_scalar_multiplication(distance, ori);
 	if (debug_write(""))
 		ft_printf("vector distance: %i,%i,%i\n", (int) uni.x,
 			(int) uni.y, (int) uni.z);
 
 	debug_write("Drawing a the map... ");
-	color_screen(rt, encode_rgb(rt->a_rgb[0], rt->a_rgb[1], rt->a_rgb[2]));
+	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 	while (pixel_edge >= 1)
 	{
@@ -119,8 +119,8 @@ static void	mlx_playground(t_scene *rt)
 					}
 					else
 					{
-						rt->map[x][y] = encode_rgb(rt->a_rgb[0],
-								rt->a_rgb[1], rt->a_rgb[2]);
+						rt->map[x][y] = encode_rgb(rt->a_rgb.r,
+								rt->a_rgb.g, rt->a_rgb.b);
 						pixel_put(rt, (x), (y), rt->map[x][y]);
 						i = 0;
 						while (i < pixel_edge)

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 21:43:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 11:59:08 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,38 @@
 // Margin Of Error
 # define MOE				0.000042
 
+typedef struct s_rgb
+{
+	float					r;
+	float					g;
+	float					b;
+}							t_rgb;
+
+typedef struct s_vector
+{
+	float					x;
+	float					y;
+	float					z;
+}							t_vector;
+
+typedef struct s_point
+{
+	float					x;
+	float					y;
+	float					z;
+}							t_point;
+
 typedef struct s_scene
 {
 	int						file_fd;
-	float					amb_ratio;
-	float					a_rgb[3];
-	float					c_coord[3];
-	float					c_orient[3];
+	float					a_ratio;
+	struct s_rgb			a_rgb;
+	struct s_point			c_coord;
+	struct s_vector			c_ori;
 	float					c_fov;
-	float					light_coord[3];
-	float					light_brightness;
-	float					light_rgb_rng[3];
+	struct s_point			l_coo;
+	float					l_bri;
+	struct s_rgb			l_rgb;
 	struct s_lst_obj		*lst_obj;
 	void					*mlx;
 	void					*mlx_win;
@@ -80,20 +101,6 @@ typedef struct s_lst_obj
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
-typedef struct s_point
-{
-	float					x;
-	float					y;
-	float					z;
-}							t_point;
-
-typedef struct s_vector
-{
-	float					x;
-	float					y;
-	float					z;
-}							t_vector;
-
 typedef struct s_canvas
 {
 	float					x;
@@ -114,7 +121,7 @@ int			parse_objects(char *line, t_scene **rt);
 int			validate_object_parsing(t_lst_obj *obj);
 char		*skip_to_next_word(char *line);
 char		*skip_to_after_comma(char *line);
-void		parse_float_triplet(char *line, float array[3]);
+void		parse_float_triplet(char *line, t_vector array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
