@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static int	parse_line(char *line, t_scene **rt);
+static int	parse_line(char *line, t_scene *rt);
 
 int	parse_input(t_scene *rt, char **argv)
 {
@@ -34,7 +34,7 @@ int	parse_input(t_scene *rt, char **argv)
 		debug_write("parsing line: ");
 		if (DEBUG)
 			ft_putstr_fd(line, STDOUT_FILENO);
-		if (parse_line(line, &rt) != EXIT_SUCCESS)
+		if (parse_line(line, rt) != EXIT_SUCCESS)
 			ret = EXIT_FAILURE;
 		free(line);
 		line = get_next_line(rt->file_fd);
@@ -43,7 +43,7 @@ int	parse_input(t_scene *rt, char **argv)
 	return (debug_write("TODO: Check if A, C and L exist\n"), ret);
 }
 
-static int	parse_line(char *line, t_scene **rt)
+static int	parse_line(char *line, t_scene *rt)
 {
 	int	d;
 

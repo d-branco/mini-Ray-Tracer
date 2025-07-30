@@ -114,9 +114,9 @@ int			initialize_scene(t_scene *rt, char **argv);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/init/parse_light_cam.c
-int			parse_lights_and_camera(char *line, t_scene **rt);
+int			parse_lights_and_camera(char *line, t_scene *rt);
 //src/init/parse_objects.c
-int			parse_objects(char *line, t_scene **rt);
+int			parse_objects(char *line, t_scene *rt);
 //src/init/parse_utils.c
 int			validate_object_parsing(t_lst_obj *obj);
 char		*skip_to_next_word(char *line);

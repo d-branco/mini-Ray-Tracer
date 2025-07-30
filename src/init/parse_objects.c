@@ -12,13 +12,13 @@
 
 #include "minirt.h"
 
-static int	parse_sphere(char *line, t_scene **rt);
-static int	parse_plane(char *line, t_scene **rt);
-static int	parse_cylinder(char *line, t_scene **rt);
+static int	parse_sphere(char *line, t_scene *rt);
+static int	parse_plane(char *line, t_scene *rt);
+static int	parse_cylinder(char *line, t_scene *rt);
 static int	rest_of_the_friendly_cylinder(
-				char *line, t_scene **rt, t_lst_obj *obj);
+				char *line, t_scene *rt, t_lst_obj *obj);
 
-int	parse_objects(char *line, t_scene **rt)
+int	parse_objects(char *line, t_scene *rt)
 {
 	int	ret;
 
@@ -34,7 +34,7 @@ int	parse_objects(char *line, t_scene **rt)
 	return (ret);
 }
 
-static int	parse_cylinder(char *line, t_scene **rt)
+static int	parse_cylinder(char *line, t_scene *rt)
 {
 	t_lst_obj	*obj;
 
@@ -58,7 +58,7 @@ static int	parse_cylinder(char *line, t_scene **rt)
 }
 
 static int	rest_of_the_friendly_cylinder(
-				char *line, t_scene **rt, t_lst_obj *obj)
+				char *line, t_scene *rt, t_lst_obj *obj)
 {
 	if (!line || !ft_isfloat(line))
 		return (ft_printf("Error\nInvalid cy height!\n"), free(obj), 1);
@@ -71,11 +71,11 @@ static int	rest_of_the_friendly_cylinder(
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid cylinder!\n"), free(obj), 1);
 	(*obj).next = NULL;
-	rt_lstadd_back(&(*rt)->lst_obj, obj);
+	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));
 }
 
-static int	parse_plane(char *line, t_scene **rt)
+static int	parse_plane(char *line, t_scene *rt)
 {
 	t_lst_obj	*obj;
 
@@ -98,11 +98,11 @@ static int	parse_plane(char *line, t_scene **rt)
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid plane!\n"), free(obj), 1);
 	(*obj).next = NULL;
-	rt_lstadd_back(&(*rt)->lst_obj, obj);
+	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));
 }
 
-static int	parse_sphere(char *line, t_scene **rt)
+static int	parse_sphere(char *line, t_scene *rt)
 {
 	t_lst_obj	*obj;
 
@@ -125,6 +125,6 @@ static int	parse_sphere(char *line, t_scene **rt)
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);
 	(*obj).next = NULL;
-	rt_lstadd_back(&(*rt)->lst_obj, obj);
+	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));
 }
