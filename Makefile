@@ -145,7 +145,7 @@ YELLOW	:= \033[1;93m# yellow
 BLUE	:= \033[1;96m# blue
 ######################################################################### Test #
 test: CFLAGS += $(DEBUG_FLAGS)
-test: clean $(NAME)
+test: fclean $(NAME)
 	@\
 	echo "\
 	$(COR)$(GRAY)========================================== $(NAME) START\

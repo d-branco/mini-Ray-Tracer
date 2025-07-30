@@ -44,11 +44,11 @@ static int	parse_cylinder(char *line, t_scene **rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid cy coord!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).center);
+	parse_float_point(line, (*obj).center);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid cy vector!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).vec_uni);
+	parse_float_vector(line, (*obj).vec_uni);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return (ft_printf("Error\nInvalid cy diameter!\n"), free(obj), 1);
@@ -66,7 +66,7 @@ static int	rest_of_the_friendly_cylinder(
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid cy rgb range!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).rgb_rng);
+	parse_float_rgb(line, (*obj).rgb_rng);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid cylinder!\n"), free(obj), 1);
@@ -85,15 +85,15 @@ static int	parse_plane(char *line, t_scene **rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid pl coord!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).center);
+	parse_float_point(line, (*obj).center);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid pl vector!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).vec_uni);
+	parse_float_vector(line, (*obj).vec_uni);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid pl rgb range!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).rgb_rng);
+	parse_float_rgb(line, (*obj).rgb_rng);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid plane!\n"), free(obj), 1);
@@ -112,7 +112,7 @@ static int	parse_sphere(char *line, t_scene **rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid sp center!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).center);
+	parse_float_point(line, (*obj).center);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return (ft_printf("Error\nInvalid sp diameter!\n"), free(obj), 1);
@@ -120,7 +120,7 @@ static int	parse_sphere(char *line, t_scene **rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid sp rgb range!\n"), free(obj), 1);
-	parse_float_triplet(line, (*obj).rgb_rng);
+	parse_float_rgb(line, (*obj).rgb_rng);
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);

@@ -83,15 +83,15 @@ static void	print_obj_list(t_lst_obj **head)
 		ft_printf("==DEBUG== obj_lst id: %s at: %p\n", str[o->id], o);
 		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst center: %i,%i,%i\n",
-				(int)o->center[0], (int)o->center[1], (int)o->center[2]);
+				(int)o->center.x, (int)o->center.y, (int)o->center.z);
 		if ((o->id == e_SPHERE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst diameter: %i\n", (int)o->diameter);
 		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst rgb range: %i,%i,%i\n",
-				(int)o->rgb_rng[0], (int)o->rgb_rng[1], (int)o->rgb_rng[2]);
+				(int)o->rgb_rng.r, (int)o->rgb_rng.g, (int)o->rgb_rng.b);
 		if ((o->id == e_PLANE) || (o->id == e_CYlINDER))
 			ft_printf("==DEBUG== obj_lst vec_uni: %i,%i,%i\n",
-				(int)o->vec_uni[0], (int)o->vec_uni[1], (int)o->vec_uni[2]);
+				(int)o->vec_uni.x, (int)o->vec_uni.y, (int)o->vec_uni.z);
 		if (o->id == e_CYlINDER)
 			ft_printf("==DEBUG== obj_lst height: %i\n", (int)o->height);
 		ft_printf("==DEBUG== obj_lst ======== next obj at: %p\n", o->next);

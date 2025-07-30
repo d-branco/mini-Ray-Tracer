@@ -12,6 +12,16 @@
 
 #include "minirt.h"
 
+void	parse_float_rgb(char *line, t_rgb array)
+{
+	(void) array;
+	array.r = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array.g = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array.b = ft_atof(line);
+}
+
 // from fdf
 void	pixel_put(t_scene *rt, int x, int y, int color)
 {

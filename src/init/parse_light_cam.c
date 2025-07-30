@@ -48,20 +48,20 @@ static int	parse_light(char *line, t_scene **rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->l_bri = -2, ft_putstr_fd("Error\ninvali"
 				"d Light coordinates (float,float,float)\n", 2), EXIT_FAILURE);
-	parse_float_triplet(line, (t_vector)((*rt)->l_coo));
+	parse_float_point(line, ((*rt)->l_coo));
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return ((*rt)->l_bri = -2, ft_putstr_fd("Error\ninvali"
 				"d Light ratio range (float)\n", 2), EXIT_FAILURE);
 	(*rt)->l_bri = ft_atof(line);
 	line = skip_to_next_word(line);
-	parse_float_triplet("-1,-1,-1", (*rt)->l_rgb);
+	parse_float_rgb("-1,-1,-1", (*rt)->l_rgb);
 	if (line && ft_isprint(*line))
 	{
 		if (!is_float_triplet(line))
 			return ((*rt)->l_bri = -2, ft_putstr_fd("Error\n"
 					"invalid Light\n", 2), EXIT_FAILURE);
-		parse_float_triplet(line, (*rt)->l_rgb);
+		parse_float_rgb(line, (*rt)->l_rgb);
 		line = skip_to_next_word(line);
 	}
 	if (line && ft_isprint(*line))
@@ -77,12 +77,12 @@ static int	parse_camera(char *line, t_scene **rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->a_ratio = -2, ft_putstr_fd("Error\ninvalid Camera "
 				"coordinates (float,float,float)\n", 2), EXIT_FAILURE);
-	parse_float_triplet(line, (*rt)->c_coord);
+	parse_float_point(line, (*rt)->c_coord);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return ((*rt)->c_fov = -2, ft_putstr_fd("Error\ninvalid Camera "
 				"orientation (float,float,float)\n", 2), EXIT_FAILURE);
-	parse_float_triplet(line, (*rt)->c_ori);
+	parse_float_vector(line, (*rt)->c_ori);
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return ((*rt)->c_fov = -2, ft_putstr_fd("Error\ninvalid Camera "

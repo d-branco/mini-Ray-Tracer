@@ -35,8 +35,19 @@ char	*skip_to_after_comma(char *line)
 	return (&line[i]);
 }
 
-void	parse_float_triplet(char *line, t_vector array)
+void	parse_float_vector(char *line, t_vector array)
 {
+	(void) array;
+	array.x = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array.y = ft_atof(line);
+	line = skip_to_after_comma(line);
+	array.x = ft_atof(line);
+}
+
+void	parse_float_point(char *line, t_point array)
+{
+	(void) array;
 	array.x = ft_atof(line);
 	line = skip_to_after_comma(line);
 	array.y = ft_atof(line);
@@ -49,14 +60,14 @@ int	validate_object_parsing(t_lst_obj *o)
 	if (((o->id == e_SPHERE) || (o->id == e_CYlINDER)) && (o->diameter <= 0))
 		return (ft_printf("Error\nInvalid diameter value\n"), EXIT_FAILURE);
 	if (((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
-		&& ((o->rgb_rng[0] < 0.0) || (o->rgb_rng[0] > 255.0)
-			|| (o->rgb_rng[1] < 0.0) || (o->rgb_rng[1] > 255.0)
-			|| (o->rgb_rng[2] < 0.0) || (o->rgb_rng[2] > 255.0)))
+		&& ((o->rgb_rng.r < 0.0) || (o->rgb_rng.r > 255.0)
+			|| (o->rgb_rng.g < 0.0) || (o->rgb_rng.g > 255.0)
+			|| (o->rgb_rng.b < 0.0) || (o->rgb_rng.b > 255.0)))
 		return (ft_printf("Error\nInvalid rgb range value\n"), EXIT_FAILURE);
 	if (((o->id == e_PLANE) || (o->id == e_CYlINDER))
-		&& ((o->vec_uni[0] < 0.0) || (o->vec_uni[0] > 1.0)
-			|| (o->vec_uni[1] < 0.0) || (o->vec_uni[1] > 1.0)
-			|| (o->vec_uni[2] < 0.0) || (o->vec_uni[2] > 1.0)))
+		&& ((o->vec_uni.x < 0.0) || (o->vec_uni.x > 1.0)
+			|| (o->vec_uni.y < 0.0) || (o->vec_uni.y > 1.0)
+			|| (o->vec_uni.z < 0.0) || (o->vec_uni.z > 1.0)))
 		return (ft_printf("Error\nInvalid vector unit value\n"), EXIT_FAILURE);
 	if ((o->id == e_CYlINDER) && (o->height <= 0))
 		return (ft_printf("Error\nInvalid height value\n"), EXIT_FAILURE);

@@ -93,10 +93,10 @@ enum	e_obj
 typedef struct s_lst_obj
 {
 	int						id;
-	float					center[3];
+	struct s_point			center;
 	float					diameter;
-	float					rgb_rng[3];
-	float					vec_uni[3];
+	struct s_rgb			rgb_rng;
+	struct s_vector			vec_uni;
 	float					height;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
@@ -121,7 +121,8 @@ int			parse_objects(char *line, t_scene **rt);
 int			validate_object_parsing(t_lst_obj *obj);
 char		*skip_to_next_word(char *line);
 char		*skip_to_after_comma(char *line);
-void		parse_float_triplet(char *line, t_vector array);
+void		parse_float_vector(char *line, t_vector array);
+void		parse_float_point(char *line, t_point array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
@@ -140,6 +141,7 @@ float		vec_inner_product(t_vector a, t_vector b);
 t_vector	vec_cross_product(t_vector a, t_vector b);
 
 //src/mlx/colors.c
+void		parse_float_rgb(char *line, t_rgb array);
 void		pixel_put(t_scene *rt, int x, int y, int color);
 int			encode_rgb(
 				unsigned char red, unsigned char green, unsigned char blue);
