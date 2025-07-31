@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/30 11:50:14 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:27:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv)
 	mlx_hook(rt.mlx_win, 17, 0, close_win_button, &rt);
 	mlx_hook(rt.mlx_win, 2, 1L << 0, key_hook, &rt);
 	mlx_playground(&rt);
+	if (DEBUG)
+		finalize(&rt);
 	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.mlx_img, 0, 0);
 	mlx_loop(rt.mlx);
 	return (debug_write("ERROR: return from main()\n"), EXIT_FAILURE);
@@ -49,21 +51,92 @@ int	mlx_initialize(t_scene *rt)
 	return (EXIT_SUCCESS);
 }
 
+static void	get_pix_color(t_scene *rt, t_canvas coo, int edge)
+{
+	int			i;
+	int			j;
+
+	if ((((powf(coo.x - 420, 2) + powf(coo.y - 420, 2))) < pow(225, 2))
+		|| (((powf(coo.x - 0, 2) + powf(coo.y - 0, 2))) < pow(225, 2)))
+	{
+		if (((powf(coo.x - 0, 2) + powf(coo.y - 0, 2))) < pow(225, 2))
+			rt->map[coo.x][coo.y] = encode_rgb(255, 42, 42);
+		else
+			rt->map[coo.x][coo.y] = encode_rgb(255, 255, 42);
+		pixel_put(rt, (coo.x), (coo.y), rt->map[coo.x][coo.y]);
+		i = 0;
+		while (i < edge)
+		{
+			j = 0;
+			while (j < edge)
+			{
+				if ((coo.x + j < WIDTH) && (coo.y + i < HEIGHT)
+					&& (rt->map[coo.x + j][coo.y + i] == -1))
+					pixel_put(rt, (coo.x + j), (coo.y + i),
+						rt->map[coo.x][coo.y]);
+				j++;
+			}
+			i++;
+		}
+	}
+	else
+	{
+		rt->map[coo.x][coo.y] = encode_rgb(rt->a_rgb.r,
+				rt->a_rgb.g, rt->a_rgb.b);
+		pixel_put(rt, (coo.x), (coo.y), rt->map[coo.x][coo.y]);
+		i = 0;
+		while (i < edge)
+		{
+			j = 0;
+			while (j < edge)
+			{
+				if ((coo.x + j < WIDTH) && (coo.y + i < HEIGHT)
+					&& (rt->map[coo.x + j][coo.y + i] == -1))
+					pixel_put(rt, (coo.x + j), (coo.y + i),
+						rt->map[coo.x][coo.y]);
+				j++;
+			}
+			i++;
+		}
+	}
+}
+
 static void	mlx_playground(t_scene *rt)
 {
 	int			x;
 	int			y;
-	int			pixel_edge;
-	int			i;
-	int			j;
-	float		distance;
-	t_vector	uni;
-	t_vector	ori;
+	int			edge;
 
-	pixel_edge = HEIGHT;
+	edge = HEIGHT;
 	if (WIDTH > HEIGHT)
-		pixel_edge = WIDTH;
+		edge = WIDTH;
+	debug_write("Drawing a the map... ");
+	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
+	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
+	while (edge >= 1)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			x = 0;
+			while (x < WIDTH)
+			{
+				if (rt->map[x][y] == -1)
+					get_pix_color(rt, (t_canvas){x, y}, edge);
+				x += edge;
+			}
+			y += edge;
+		}
+		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
+		if (DEBUG)
+			ft_printf("%i, ", edge);
+		edge /= 2;
+	}
+	if (DEBUG)
+		write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
+}
 
+/*
 	debug_write("First pixel orientation calculation\n");
 	if (debug_write(""))
 		ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_ori.x,
@@ -80,89 +153,20 @@ static void	mlx_playground(t_scene *rt)
 	if (debug_write(""))
 		ft_printf("vector distance: %i,%i,%i\n", (int) uni.x,
 			(int) uni.y, (int) uni.z);
-
-	debug_write("Drawing a the map... ");
-	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
-	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
-	while (pixel_edge >= 1)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			x = 0;
-			while (x < WIDTH)
-			{
-				if (rt->map[x][y] == -1)
-				{
-					if ((((powf(x - 420, 2) + powf(y - 420, 2))) < pow(225, 2))
-						|| (((powf(x - 0, 2) + powf(y - 0, 2))) < pow(225, 2)))
-					{
-						if (((powf(x - 0, 2) + powf(y - 0, 2))) < pow(225, 2))
-							rt->map[x][y] = encode_rgb(255, 42, 42);
-						else
-							rt->map[x][y] = encode_rgb(255, 255, 42);
-						pixel_put(rt, (x), (y), rt->map[x][y]);
-						i = 0;
-						while (i < pixel_edge)
-						{
-							j = 0;
-							while (j < pixel_edge)
-							{
-								if ((x + j < WIDTH) && (y + i < HEIGHT)
-									&& (rt->map[x + j][y + i] == -1))
-									pixel_put(rt, (x + j), (y + i),
-										rt->map[x][y]);
-								j++;
-							}
-							i++;
-						}
-					}
-					else
-					{
-						rt->map[x][y] = encode_rgb(rt->a_rgb.r,
-								rt->a_rgb.g, rt->a_rgb.b);
-						pixel_put(rt, (x), (y), rt->map[x][y]);
-						i = 0;
-						while (i < pixel_edge)
-						{
-							j = 0;
-							while (j < pixel_edge)
-							{
-								if ((x + j < WIDTH) && (y + i < HEIGHT)
-									&& (rt->map[x + j][y + i] == -1))
-									pixel_put(rt, (x + j), (y + i),
-										rt->map[x][y]);
-								j++;
-							}
-							i++;
-						}
-					}
-				}
-				x += pixel_edge;
-			}
-			y += pixel_edge;
-		}
-		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
-		if (DEBUG)
-			ft_printf("%i, ", pixel_edge);
-		pixel_edge /= 2;
-	}
-	if (DEBUG)
-		write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
-}
+*/
 
 /*static void	mlx_playground(t_scene *rt)
 {
 	t_canvas	c;
 	float		j;
 	float		i;
-	int			pixel_edge;
+	int			edge;
 
-	pixel_edge = HEIGHT;
+	edge = HEIGHT;
 	if (WIDTH > HEIGHT)
-		pixel_edge = WIDTH;
+		edge = WIDTH;
 	debug_write("Drawing a yellow circle... ");
-	while (pixel_edge >= 1)
+	while (edge >= 1)
 	{
 		color_screen(rt, encode_rgb(
 				rt->a_rgb[0], rt->a_rgb[1], rt->a_rgb[2]));
@@ -177,10 +181,10 @@ static void	mlx_playground(t_scene *rt)
 					< pow(225, 2))
 				{
 					i = 0;
-					while (i < pixel_edge)
+					while (i < edge)
 					{
 						j = 0;
-						while (j < pixel_edge)
+						while (j < edge)
 						{
 							pixel_put(rt, (c.x + j), (c.y + i),
 								encode_rgb(255, 255, 0));
@@ -189,14 +193,14 @@ static void	mlx_playground(t_scene *rt)
 						i++;
 					}
 				}
-				c.y += pixel_edge;
+				c.y += edge;
 			}
-			c.x += pixel_edge;
+			c.x += edge;
 		}
 		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 		if (DEBUG)
-			ft_printf("%i, ", pixel_edge);
-		pixel_edge /= 2;
+			ft_printf("%i, ", edge);
+		edge /= 2;
 	}
 	if (DEBUG)
 		write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));

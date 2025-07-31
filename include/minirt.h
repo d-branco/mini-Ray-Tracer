@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/30 11:59:08 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:19:30 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ typedef struct s_lst_obj
 
 typedef struct s_canvas
 {
-	float					x;
-	float					y;
+	int						x;
+	int						y;
 }							t_canvas;
 
 //src/init/finalize.c
