@@ -47,7 +47,6 @@ static int	parse_line(char *line, t_scene *rt)
 {
 	int	d;
 
-	(void) rt;
 	if (!line || (line[0] == '\0') || (line[0] == '\n'))
 		return (EXIT_SUCCESS);
 	while (ft_isspace(*line))

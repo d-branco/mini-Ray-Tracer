@@ -27,11 +27,6 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
-	//rt->a_rgb = (t_rgb){0, 0, 0};
-	//rt->c_coord = (t_point){0, 0, 0};
-	//rt->c_ori = (t_vector){0, 0, 0};
-	//rt->l_coo = (t_point){0, 0, 0};
-	//rt->l_rgb = (t_rgb){0, 0, 0};
 	initialize_map(rt->map);
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (debug_write("ERROR: Parsing input\n"), 1);

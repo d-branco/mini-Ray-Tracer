@@ -12,14 +12,13 @@
 
 #include "minirt.h"
 
-void	parse_float_rgb(char *line, t_rgb array)
+void	parse_float_rgb(char *line, t_rgb *array)
 {
-	(void) array;
-	array.r = ft_atof(line);
+	array->r = ft_atof(line);
 	line = skip_to_after_comma(line);
-	array.g = ft_atof(line);
+	array->g = ft_atof(line);
 	line = skip_to_after_comma(line);
-	array.b = ft_atof(line);
+	array->b = ft_atof(line);
 }
 
 // from fdf
