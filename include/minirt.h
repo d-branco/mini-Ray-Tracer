@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 09:04:23 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 11:22:39 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef struct s_canvas
 	int						y;
 }							t_canvas;
 
+typedef struct s_canvasf
+{
+	float					x;
+	float					y;
+}							t_canvasf;
+
 //src/init/finalize.c
 void		finalize(t_scene *rt);
 //src/init/initialize.c
@@ -127,7 +133,7 @@ void		parse_float_point(char *line, t_point *array);
 int			parse_input(t_scene *rt, char **argv);
 
 //src/canvas/looping_loop.c
-void		mlx_playground(t_scene *rt);
+void		looping_loop(t_scene *rt);
 //src/math/addiction.c
 t_vector	vec_addiction(t_vector a, t_vector b);
 t_vector	vec_subtraction(t_vector a, t_vector b);
