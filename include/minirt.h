@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 11:22:39 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 20:22:03 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,11 @@ t_vector	vec_addiction(t_vector a, t_vector b);
 t_vector	vec_subtraction(t_vector a, t_vector b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
+//src/math/intersection_sphere.c
+int			smll_dst_to_sphere(
+				t_scene *rt, t_vector dir, t_lst_obj *sp, float *dst);
+//src/math/ray.c
+t_vector	get_ray_direction(t_scene *rt, t_canvas coo);
 //src/math/scalar_multiplication.c
 t_vector	vec_negation(t_vector v);
 t_vector	vec_scalar_multiplication(float s, t_vector v);

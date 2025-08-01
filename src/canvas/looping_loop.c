@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 09:26:12 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:17:03 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,35 @@ static void	paint_canvas(t_scene *rt, t_canvas coo, int edge)
 
 static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo)
 {
-	if ((((powf(coo.x - 420, 2) + powf(coo.y - 420, 2))) < pow(225, 2))
-		|| (((powf(coo.x - 0, 2) + powf(coo.y - 0, 2))) < pow(225, 2)))
+	t_lst_obj	*current;
+	float		dst;
+	t_vector	ray;
+	t_lst_obj	*nearest;
+
+	current = rt->lst_obj;
+	dst = 340282346638528859811704183484516925440.0f;
+	ray = get_ray_direction(rt, coo);
+	nearest = NULL;
+	while (current != NULL)
 	{
-		return ((rt->lst_obj));
+		if (current->id == e_SPHERE)
+		{
+			if (smll_dst_to_sphere(rt, ray, current, &dst))
+				nearest = current;
+		}
+		current = current->next;
 	}
+	if (nearest)
+		return (nearest);
 	return (NULL);
 }
 
 static int	get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj)
 {
-	(void) rt;
+	(void) coo;
 	if (obj == NULL)
 		return (encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
-	if (((powf(coo.x - 0, 2) + powf(coo.y - 0, 2))) < pow(225, 2))
-		return (encode_rgb(255, 42, 42));
 	else
-		return (encode_rgb(255, 255, 42));
+		return (encode_rgb(
+				(int)obj->rgb_rng.r, (int)obj->rgb_rng.g, (int)obj->rgb_rng.b));
 }

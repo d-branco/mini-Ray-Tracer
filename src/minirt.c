@@ -6,14 +6,13 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 12:11:38 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 19:44:56 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static void		mlx_playground(t_scene *rt);
-static t_vector	get_ray_direction(t_scene *rt, t_canvas coo);
 
 int	main(int argc, char **argv)
 {
@@ -56,31 +55,6 @@ static void	mlx_playground(t_scene *rt)
 	v = get_ray_direction(rt, (t_canvas){WIDTH / 2, HEIGHT / 2});
 	if (debug_write("vector: center pixel: "))
 		printf("(%f, %f, %f)\n", v.x, v.y, v.z);
-}
-
-static t_vector	get_ray_direction(t_scene *rt, t_canvas coo)
-{
-	t_vector	right;
-	t_vector	up;
-	t_canvasf	viewport;
-	t_canvasf	v;
-	t_vector	ray_dir;
-
-	ray_dir = (t_vector){0, 1, 0};
-	if (((rt->c_ori.y) > 0.9f) || ((rt->c_ori.y) < -0.9f))
-		ray_dir = (t_vector){0, 0, -1};
-	right = vec_normalization(vec_cross_product(
-				(t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}, ray_dir));
-	up = vec_normalization(vec_cross_product(
-				right, (t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}));
-	viewport.x = 2.0 * tan(rt->c_fov / 2.0);
-	viewport.y = viewport.x * ((float)HEIGHT / (float)WIDTH);
-	v.x = ((2.0f * coo.x / (WIDTH - 1)) - 1.0f) * (viewport.x / 2.0f);
-	v.y = ((2.0f * coo.y / (HEIGHT - 1)) - 1.0f) * (viewport.y / 2.0f);
-	ray_dir.x = rt->c_ori.x + (right.x * v.x) + (up.x * v.y);
-	ray_dir.y = rt->c_ori.y + (right.y * v.x) + (up.y * v.y);
-	ray_dir.z = rt->c_ori.z + (right.z * v.x) + (up.z * v.y);
-	return (vec_normalization(ray_dir));
 }
 
 /*
