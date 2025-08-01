@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/07/30 11:51:34 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/01 09:05:03 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRCS			:=	\
 	src/init/parse_utils.c													\
 	src/init/parse.c														\
 																			\
+	src/canvas/looping_loop.c												\
+																			\
 	src/math/addiction.c													\
 	src/math/comparisson.c													\
 	src/math/scalar_multiplication.c										\
@@ -48,6 +50,7 @@ SRCS			:=	\
 																			\
 	src/mlx/colors.c														\
 	src/mlx/hooks.c															\
+	src/mlx/mlx_init.c														\
 																			\
 	src/utils/ft_append_chr.c												\
 	src/utils/ft_atof.c														\

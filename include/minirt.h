@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/31 21:19:30 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 09:04:23 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void		parse_float_point(char *line, t_point *array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
+//src/canvas/looping_loop.c
+void		mlx_playground(t_scene *rt);
 //src/math/addiction.c
 t_vector	vec_addiction(t_vector a, t_vector b);
 t_vector	vec_subtraction(t_vector a, t_vector b);
@@ -149,6 +151,8 @@ void		color_screen(t_scene *rt, int color);
 //src/mlx/hooks.c
 int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);
+//src/mlx/mlx_init.c
+int			mlx_initialize(t_scene *rt);
 
 //src/utils
 char		*append_chr(char *str, char c);
