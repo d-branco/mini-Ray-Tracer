@@ -141,6 +141,8 @@ int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
 int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
+//src/math/matrix.c
+void		matrix_print(float *matrix, int size);
 //src/math/ray.c
 t_tuple		get_ray_direction(t_scene *rt, t_canvas coo);
 //src/math/scalar_multiplication.c
