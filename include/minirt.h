@@ -39,6 +39,10 @@
 
 // Margin Of Error
 # define EPSILON			0.000042f
+# define MAX_FLOAT			340282346638528859811704183484516925440.0f
+
+# define POINT				1
+# define VECTOR				0
 
 typedef struct s_rgb
 {
@@ -55,29 +59,15 @@ typedef struct s_tuple
 	float					w;
 }							t_tuple;
 
-typedef struct s_vector
-{
-	float					x;
-	float					y;
-	float					z;
-}							t_vector;
-
-typedef struct s_point
-{
-	float					x;
-	float					y;
-	float					z;
-}							t_point;
-
 typedef struct s_scene
 {
 	int						file_fd;
 	float					a_ratio;
 	struct s_rgb			a_rgb;
-	struct s_point			c_coord;
-	struct s_vector			c_ori;
+	struct s_tuple			c_coord;
+	struct s_tuple			c_ori;
 	float					c_fov;
-	struct s_point			l_coo;
+	struct s_tuple			l_coo;
 	float					l_bri;
 	struct s_rgb			l_rgb;
 	struct s_lst_obj		*lst_obj;
@@ -101,10 +91,10 @@ enum	e_obj
 typedef struct s_lst_obj
 {
 	int						id;
-	struct s_point			center;
+	struct s_tuple			center;
 	float					diameter;
 	struct s_rgb			rgb_rng;
-	struct s_vector			vec_uni;
+	struct s_tuple			vec_uni;
 	float					height;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
@@ -135,31 +125,32 @@ int			parse_objects(char *line, t_scene *rt);
 int			validate_object_parsing(t_lst_obj *obj);
 char		*skip_to_next_word(char *line);
 char		*skip_to_after_comma(char *line);
-void		parse_float_vector(char *line, t_vector *array);
-void		parse_float_point(char *line, t_point *array);
+void		parse_float_vector(char *line, t_tuple *array);
+void		parse_float_point(char *line, t_tuple *array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
 //src/canvas/looping_loop.c
 void		looping_loop(t_scene *rt);
 //src/math/addiction.c
-t_vector	vec_addiction(t_vector a, t_vector b);
-t_vector	vec_subtraction(t_vector a, t_vector b);
+t_tuple		vec_addiction(t_tuple a, t_tuple b);
+t_tuple		vec_subtraction(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
+int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
 int			smll_dst_to_sphere(
-				t_scene *rt, t_vector dir, t_lst_obj *sp, float *dst);
+				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
 //src/math/ray.c
-t_vector	get_ray_direction(t_scene *rt, t_canvas coo);
+t_tuple		get_ray_direction(t_scene *rt, t_canvas coo);
 //src/math/scalar_multiplication.c
-t_vector	vec_negation(t_vector v);
-t_vector	vec_scalar_multiplication(float s, t_vector v);
+t_tuple		vec_negation(t_tuple v);
+t_tuple		vec_scalar_multiplication(float s, t_tuple v);
 //src/math/vector_math.c
-float		vec_magnitude(t_vector v);
-t_vector	vec_normalization(t_vector v);
-float		vec_inner_product(t_vector a, t_vector b);
-t_vector	vec_cross_product(t_vector a, t_vector b);
+float		vec_magnitude(t_tuple v);
+t_tuple		vec_normalization(t_tuple v);
+float		vec_inner_product(t_tuple a, t_tuple b);
+t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);

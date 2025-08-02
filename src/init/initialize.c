@@ -31,10 +31,10 @@ int	initialize_scene(t_scene *rt, char **argv)
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (dbg_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
-	dbg_write("Correcting degrees to radians\n");
+	dbg_write("rad: Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
 	if (dbg_write(""))
-		ft_printf("s_scene: c_fov %i,%i rad\n",
+		ft_printf("rad: s_scene: c_fov %i,%i rad\n",
 			(int)(rt->c_fov), (((int)(rt->c_fov * 100)) % 100));
 	return (EXIT_SUCCESS);
 }

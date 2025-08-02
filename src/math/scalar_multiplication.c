@@ -12,24 +12,22 @@
 
 #include "minirt.h"
 
-//	typedef struct s_vector
-//	{
-//		float					x;
-//		float					y;
-//		float					z;
-//	}							t_vector;
-t_vector	vec_negation(t_vector v)
+t_tuple	vec_negation(t_tuple v)
 {
-	t_vector	result;
+	t_tuple	result;
 
+	if (v.w != VECTOR)
+		dbg_write("Warning: point intead of vector\n");
 	result = vec_scalar_multiplication(-1.0, v);
 	return (result);
 }
 
-t_vector	vec_scalar_multiplication(float s, t_vector v)
+t_tuple	vec_scalar_multiplication(float s, t_tuple v)
 {
-	t_vector	result;
+	t_tuple	result;
 
-	result = (t_vector){(s * v.x), (s * v.y), (s * v.z)};
+	if (v.w != VECTOR)
+		dbg_write("Warning: point intead of vector\n");
+	result = (t_tuple){(s * v.x), (s * v.y), (s * v.z), (s * v.w)};
 	return (result);
 }

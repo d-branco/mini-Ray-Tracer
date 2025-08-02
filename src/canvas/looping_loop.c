@@ -88,11 +88,11 @@ static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo)
 {
 	t_lst_obj	*current;
 	float		dst;
-	t_vector	ray;
+	t_tuple		ray;
 	t_lst_obj	*nearest;
 
 	current = rt->lst_obj;
-	dst = 340282346638528859811704183484516925440.0f;
+	dst = MAX_FLOAT;
 	ray = get_ray_direction(rt, coo);
 	nearest = NULL;
 	while (current != NULL)

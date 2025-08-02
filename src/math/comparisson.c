@@ -19,25 +19,12 @@ int	fl_equal(float a, float b)
 	return (FALSE);
 }
 
-/*
-//	cc src/math/comparisson.c -I./include -o o && ./o
-int	main(void)
+int	tuple_equal(t_tuple a, t_tuple b)
 {
-	float	a;
-	float	b;
-
-	a = 42;
-	b = a - (EPSILON / 2);
-	write(1, "Should be EQUAL:\n", 17);
-	if (fl_equal(a, b))
-		write(1, "          EQUAL\n", 16);
-	else
-		write(1, "          NOT EQUAL\n", 20);
-	b = a - (EPSILON * 2);
-	write(1, "Should be NOT EQUAL:\n", 21);
-	if (fl_equal(a, b))
-		write(1, "          EQUAL\n", 16);
-	else
-		write(1, "          NOT EQUAL\n", 20);
-	return (EXIT_SUCCESS);
-}*/
+	if ((((a.x - b.x) < EPSILON) && ((a.x - b.x) > (0 - EPSILON)))
+		|| (((a.y - b.y) < EPSILON) && ((a.y - b.y) > (0 - EPSILON)))
+		|| (((a.z - b.z) < EPSILON) && ((a.z - b.z) > (0 - EPSILON)))
+		|| (((a.w - b.w) < EPSILON) && ((a.w - b.w) > (0 - EPSILON))))
+		return (TRUE);
+	return (FALSE);
+}

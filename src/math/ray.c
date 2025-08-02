@@ -12,21 +12,21 @@
 
 #include "minirt.h"
 
-t_vector	get_ray_direction(t_scene *rt, t_canvas coo)
+t_tuple	get_ray_direction(t_scene *rt, t_canvas coo)
 {
-	t_vector	right;
-	t_vector	up;
+	t_tuple		right;
+	t_tuple		up;
 	t_canvasf	viewport;
 	t_canvasf	v;
-	t_vector	ray_dir;
+	t_tuple		ray_dir;
 
-	ray_dir = (t_vector){0, 1, 0};
+	ray_dir = (t_tuple){0, 1, 0, VECTOR};
 	if (((rt->c_ori.y) > 0.9f) || ((rt->c_ori.y) < -0.9f))
-		ray_dir = (t_vector){0, 0, -1};
+		ray_dir = (t_tuple){0, 0, -1, VECTOR};
 	right = vec_normalization(vec_cross_product(
-				(t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}, ray_dir));
+				(t_tuple){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z, 0}, ray_dir));
 	up = vec_normalization(vec_cross_product(
-				right, (t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}));
+				right, (t_tuple){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z, 0}));
 	viewport.x = 2.0f * tan(rt->c_fov / 2.0f);
 	viewport.y = viewport.x * ((float)HEIGHT / (float)WIDTH);
 	v.x = ((2.0f * coo.x / (WIDTH - 1)) - 1.0f) * (viewport.x / 2.0f);

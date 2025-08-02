@@ -12,16 +12,16 @@
 
 #include "minirt.h"
 
-int	smll_dst_to_sphere(t_scene *rt, t_vector dir, t_lst_obj *sp, float *dst)
+int	smll_dst_to_sphere(t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst)
 {
-	t_vector	oc;
-	t_point		abc;
+	t_tuple		oc;
+	t_tuple		abc;
 	float		discriminant;
 	float		smaller;
 	float		bigger;
 
 	oc = vec_subtraction(rt->c_ori,
-			(t_vector){sp->center.x, sp->center.y, sp->center.z});
+			(t_tuple){sp->center.x, sp->center.y, sp->center.z, VECTOR});
 	abc.x = vec_inner_product(dir, dir);
 	abc.y = 2.0f * vec_inner_product(oc, dir);
 	abc.z = vec_inner_product(oc, oc) - powf((sp->diameter / 2), 2);

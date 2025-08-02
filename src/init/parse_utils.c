@@ -35,22 +35,24 @@ char	*skip_to_after_comma(char *line)
 	return (&line[i]);
 }
 
-void	parse_float_vector(char *line, t_vector *array)
+void	parse_float_vector(char *line, t_tuple *array)
 {
 	array->x = ft_atof(line);
 	line = skip_to_after_comma(line);
 	array->y = ft_atof(line);
 	line = skip_to_after_comma(line);
 	array->z = ft_atof(line);
+	array->w = VECTOR;
 }
 
-void	parse_float_point(char *line, t_point *array)
+void	parse_float_point(char *line, t_tuple *array)
 {
 	array->x = ft_atof(line);
 	line = skip_to_after_comma(line);
 	array->y = ft_atof(line);
 	line = skip_to_after_comma(line);
 	array->z = ft_atof(line);
+	array->w = POINT;
 }
 
 int	validate_object_parsing(t_lst_obj *o)
