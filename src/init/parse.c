@@ -20,7 +20,7 @@ int	parse_input(t_scene *rt, char **argv)
 	int		ret;
 
 	ret = EXIT_SUCCESS;
-	debug_write("Parsing the input file\n");
+	dbg_write("Parsing the input file\n");
 	rt->file_fd = open(argv[1], O_RDONLY, 0644);
 	if (rt->file_fd == -1)
 		return (write(STDOUT_FILENO, "Error\ncould not open file\n", 26), 1);
@@ -31,7 +31,7 @@ int	parse_input(t_scene *rt, char **argv)
 	{
 		if (line[ft_strlen(line) - 1] != '\n')
 			line = append_chr(line, '\n');
-		debug_write("parsing line: ");
+		dbg_write("parsing line: ");
 		if (DEBUG)
 			ft_putstr_fd(line, STDOUT_FILENO);
 		if (parse_line(line, rt) != EXIT_SUCCESS)
@@ -40,7 +40,7 @@ int	parse_input(t_scene *rt, char **argv)
 		line = get_next_line(rt->file_fd);
 	}
 	free(line);
-	return (debug_write("TODO: Check if A, C and L exist\n"), ret);
+	return (dbg_write("TODO: Check if A, C and L exist\n"), ret);
 }
 
 static int	parse_line(char *line, t_scene *rt)
@@ -53,7 +53,7 @@ static int	parse_line(char *line, t_scene *rt)
 		line++;
 	if (DEBUG)
 	{
-		debug_write("id: ");
+		dbg_write("id: ");
 		d = 0;
 		while (ft_isalpha(line[d]))
 			ft_putchar_fd(line[d++], 1);

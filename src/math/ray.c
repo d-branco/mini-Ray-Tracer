@@ -27,10 +27,10 @@ t_vector	get_ray_direction(t_scene *rt, t_canvas coo)
 				(t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}, ray_dir));
 	up = vec_normalization(vec_cross_product(
 				right, (t_vector){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z}));
-	viewport.x = 2.0 * tan(rt->c_fov / 2.0);
+	viewport.x = 2.0f * tan(rt->c_fov / 2.0f);
 	viewport.y = viewport.x * ((float)HEIGHT / (float)WIDTH);
 	v.x = ((2.0f * coo.x / (WIDTH - 1)) - 1.0f) * (viewport.x / 2.0f);
-	v.y = (0 - (2.0f * coo.y / (HEIGHT - 1)) + 1.0f) * (viewport.y / 2.0f);
+	v.y = (0.0f - (2.0f * coo.y / (HEIGHT - 1)) + 1.0f) * (viewport.y / 2.0f);
 	ray_dir.x = rt->c_ori.x + (right.x * v.x) + (up.x * v.y);
 	ray_dir.y = rt->c_ori.y + (right.y * v.x) + (up.y * v.y);
 	ray_dir.z = rt->c_ori.z + (right.z * v.x) + (up.z * v.y);

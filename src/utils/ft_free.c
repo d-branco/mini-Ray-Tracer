@@ -23,20 +23,20 @@ void	ft_free_n_null(void **ptr)
 	if ((ptr) && (*ptr))
 	{
 		free(*ptr);
-		if (debug_write("Pointer at: "))
+		if (dbg_write("Pointer at: "))
 			ft_printf("%p points to %p. Now freed.\n", ptr, *ptr);
-		if (debug_write("Pointer at: "))
+		if (dbg_write("Pointer at: "))
 			ft_printf("%p ", ptr);
 		*ptr = NULL;
 		if (DEBUG)
 			ft_printf("is set to %p.\n", *ptr);
 	}
-	else if (debug_write("Hmmmmm, "))
+	else if (dbg_write("Hmmmmm, "))
 		ft_printf("at %p there's no pointer to free!\n", ptr);
 }
 
 /* Requires DEBUG and TRUE macros
-int	debug_write(char *str)
+int	dbg_write(char *str)
 {
 	size_t	len;
 

@@ -69,5 +69,5 @@ int	validate_object_parsing(t_lst_obj *o)
 		return (ft_printf("Error\nInvalid vector unit value\n"), EXIT_FAILURE);
 	if ((o->id == e_CYlINDER) && (o->height <= 0))
 		return (ft_printf("Error\nInvalid height value\n"), EXIT_FAILURE);
-	return (debug_write("Obj values validated\n"), EXIT_SUCCESS);
+	return (dbg_write("Obj values validated\n"), EXIT_SUCCESS);
 }

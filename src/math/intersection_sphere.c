@@ -30,9 +30,9 @@ int	smll_dst_to_sphere(t_scene *rt, t_vector dir, t_lst_obj *sp, float *dst)
 		return (FALSE);
 	smaller = (-abc.y - sqrtf(discriminant)) / (2 * abc.x);
 	bigger = (-abc.y + sqrtf(discriminant)) / (2 * abc.x);
-	if ((smaller > MOE) && (smaller < *dst))
+	if ((smaller > EPSILON) && (smaller < *dst))
 		return (*dst = smaller, TRUE);
-	else if ((bigger > MOE) && (bigger < *dst))
+	else if ((bigger > EPSILON) && (bigger < *dst))
 		return (*dst = bigger, TRUE);
 	return (FALSE);
 }

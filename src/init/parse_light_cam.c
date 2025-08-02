@@ -43,7 +43,7 @@ int	parse_lights_and_camera(char *line, t_scene *rt)
 
 static int	parse_light(char *line, t_scene *rt)
 {
-	debug_write("identified: Capital letter \'L\'!\n");
+	dbg_write("identified: Capital letter \'L\'!\n");
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (rt->l_bri = -2, ft_putstr_fd("Error\ninvali"
@@ -72,7 +72,7 @@ static int	parse_light(char *line, t_scene *rt)
 
 static int	parse_camera(char *line, t_scene *rt)
 {
-	debug_write("identified: Capital letter \'C\'!\n");
+	dbg_write("identified: Capital letter \'C\'!\n");
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (rt->a_ratio = -2, ft_putstr_fd("Error\ninvalid Camera "
@@ -97,7 +97,7 @@ static int	parse_camera(char *line, t_scene *rt)
 
 static int	parse_ambient_light(char *line, t_scene *rt)
 {
-	debug_write("identified: Capital letter \'A\'!\n");
+	dbg_write("identified: Capital letter \'A\'!\n");
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return (rt->a_ratio = -2, ft_putstr_fd("Error\n"
@@ -129,7 +129,7 @@ static int	validate_value_range(t_scene *rt)
 		))
 		return (ft_putstr_fd("Error\nInvalid Ambient lighing value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
-	debug_write("TODO: Check if Camara orientation vector is normalized!\n");
+	dbg_write("TODO: Check if Camara orientation vector is normalized!\n");
 	if (!(fl_equal(rt->c_fov, -1.0f))
 		&& ((rt->c_fov < 0.0f) || (rt->c_fov > 180.0f)
 			|| (rt->c_ori.x < -1.0f) || (rt->c_ori.x > 1.0f)
@@ -137,7 +137,7 @@ static int	validate_value_range(t_scene *rt)
 			|| (rt->c_ori.z < -1.0f) || (rt->c_ori.z > 1.0f)))
 		return (ft_putstr_fd("Error\nInvalid Camera value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
-	debug_write("TODO: Check RGB range if Bonus!\n");
+	dbg_write("TODO: Check RGB range if Bonus!\n");
 	if (!(fl_equal(rt->l_bri, -1.0f))
 		&& ((rt->l_bri < 0.0) || (rt->l_bri > 1.0)))
 		return (ft_putstr_fd("Error\nInvalid Light value range\n",

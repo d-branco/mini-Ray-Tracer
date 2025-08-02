@@ -14,7 +14,7 @@
 
 int	fl_equal(float a, float b)
 {
-	if (((a - b) < MOE) && ((a - b) > (0 - MOE)))
+	if (((a - b) < EPSILON) && ((a - b) > (0 - EPSILON)))
 		return (TRUE);
 	return (FALSE);
 }
@@ -27,13 +27,13 @@ int	main(void)
 	float	b;
 
 	a = 42;
-	b = a - (MOE / 2);
+	b = a - (EPSILON / 2);
 	write(1, "Should be EQUAL:\n", 17);
 	if (fl_equal(a, b))
 		write(1, "          EQUAL\n", 16);
 	else
 		write(1, "          NOT EQUAL\n", 20);
-	b = a - (MOE * 2);
+	b = a - (EPSILON * 2);
 	write(1, "Should be NOT EQUAL:\n", 21);
 	if (fl_equal(a, b))
 		write(1, "          EQUAL\n", 16);

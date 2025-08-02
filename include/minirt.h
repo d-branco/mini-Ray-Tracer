@@ -26,19 +26,19 @@
 //# define WIDTH (1920 / 2)
 //# define HEIGHT (1080 - 40)
 //# define HEIGHT (1080 - 40 - 30)
-//# define WIDTH				960
-//# define HEIGHT				1010
 # define WIDTH 960
 # define HEIGHT 1010
 
 # define TRUE				1
 # define FALSE				0
 
-# define PI					3.14159265358979323846264338328
-# define TAU				6.28318530717958647692528676656
+# define UNSET				-1
+
+# define PI					3.14159265358979323846264338328f
+# define TAU				6.28318530717958647692528676656f
 
 // Margin Of Error
-# define MOE				0.000042
+# define EPSILON			0.000042f
 
 typedef struct s_rgb
 {
@@ -46,6 +46,14 @@ typedef struct s_rgb
 	float					g;
 	float					b;
 }							t_rgb;
+
+typedef struct s_tuple
+{
+	float					x;
+	float					y;
+	float					z;
+	float					w;
+}							t_tuple;
 
 typedef struct s_vector
 {
@@ -168,7 +176,9 @@ int			mlx_initialize(t_scene *rt);
 //src/utils
 char		*append_chr(char *str, char c);
 float		ft_atof(const char *str);
-int			debug_write(char *str);
+int			dbg_write(char *str);
+int			dbg_write_code(char *str, const char *code);
+int			dbg_write_reset(char *str);
 void		ft_free_n_null(void **ptr);
 int			ft_isfloat(const char *str);
 int			ft_isspace(char chr);

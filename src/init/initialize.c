@@ -18,7 +18,7 @@ static void	initialize_map(int map[WIDTH][HEIGHT]);
 
 int	initialize_scene(t_scene *rt, char **argv)
 {
-	debug_write("Initializing the struct scene\n");
+	dbg_write("Initializing the struct scene\n");
 	rt->a_ratio = -1.0f;
 	rt->c_fov = -1.0f;
 	rt->l_bri = -1.0f;
@@ -29,11 +29,11 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_addr = NULL;
 	initialize_map(rt->map);
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
-		return (debug_write("ERROR: Parsing input\n"), 1);
+		return (dbg_write("ERROR: Parsing input\n"), 1);
 	debug_print_s_scene(rt);
-	debug_write("Correcting degrees to radians\n");
+	dbg_write("Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
-	if (debug_write(""))
+	if (dbg_write(""))
 		ft_printf("s_scene: c_fov %i,%i rad\n",
 			(int)(rt->c_fov), (((int)(rt->c_fov * 100)) % 100));
 	return (EXIT_SUCCESS);
@@ -45,26 +45,26 @@ static void	debug_print_s_scene(t_scene *rt)
 {
 	if (!DEBUG)
 		return ;
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: file_fd: %i\n", rt->file_fd);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: a_ratio: %i.%i\n", (int) rt->a_ratio,
 		(((int)(rt->a_ratio * 100)) % 100));
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->a_rgb.r,
 		(int) rt->a_rgb.g, (int) rt->a_rgb.b);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord.x,
 		(int) rt->c_coord.y, (int) rt->c_coord.z);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_ori.x,
 		(int) rt->c_ori.y, (int) rt->c_ori.z);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: c_fov %i degrees\n", (int)rt->c_fov);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: l_coo: %i,%i,%i\n", (int) rt->l_coo.x,
 		(int) rt->l_coo.y, (int) rt->l_coo.z);
-	debug_write("");
+	dbg_write("");
 	ft_printf("s_scene: lig_brit: %i.%i\n", (int)rt->l_bri,
 		(((int)(rt->l_bri * 100)) % 100));
 	print_obj_list(&(rt->lst_obj));

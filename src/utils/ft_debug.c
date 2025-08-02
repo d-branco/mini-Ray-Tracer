@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int	debug_write(char *str)
+int	dbg_write(char *str)
 {
 	size_t	len;
 
@@ -21,5 +21,19 @@ int	debug_write(char *str)
 	write(STDOUT_FILENO, "==DEBUG== ", 10);
 	len = ft_strlen(str);
 	write(STDOUT_FILENO, str, len);
+	return (TRUE);
+}
+
+int	dbg_write_code(char *str, const char *code)
+{
+	size_t	len;
+
+	if (!DEBUG)
+		return (FALSE);
+	write(STDOUT_FILENO, code, 8);
+	write(STDOUT_FILENO, "==DEBUG== ", 10);
+	len = ft_strlen(str);
+	write(STDOUT_FILENO, str, len);
+	write(STDOUT_FILENO, "\033[0m", 5);
 	return (TRUE);
 }

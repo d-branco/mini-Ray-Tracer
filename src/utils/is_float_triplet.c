@@ -22,9 +22,17 @@ int	is_float_triplet(char *str)
 	int	digit;
 	int	comma;
 
-	debug_write("Is it a float_triplet: ");
+	dbg_write("Is it a float_triplet: ");
 	if (DEBUG)
-		ft_putstr_fd(str, 1);
+	{
+		i = 0;
+		while (str[i] == ',' || str[i] == '.' || ft_isdigit(str[i]))
+		{
+			ft_putchar_fd(str[i], 1);
+			i++;
+		}
+		write(1, "\n", 1);
+	}
 	comma = -1;
 	reset_counters(&dot, &digit, &comma, ' ');
 	i = skip_to_digit(str);
@@ -39,9 +47,9 @@ int	is_float_triplet(char *str)
 		else if (str[i] == ',' && (digit > 0))
 			i += reset_counters(&dot, &digit, &comma, str[i + 1]);
 		else
-			return (debug_write("It is NOT a float_triplet!\n"), FALSE);
+			return (dbg_write("It is NOT a float_triplet!\n"), FALSE);
 	}
-	return (debug_write("It is a float_triplet!\n"), TRUE);
+	return (dbg_write("It is a float_triplet!\n"), TRUE);
 }
 
 static int	reset_counters(int *dot, int *digit, int *comma, char sign)

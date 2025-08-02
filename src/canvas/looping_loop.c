@@ -24,7 +24,7 @@ void	looping_loop(t_scene *rt)
 	edge = HEIGHT;
 	if (WIDTH > HEIGHT)
 		edge = WIDTH;
-	debug_write("Drawing a the map... ");
+	dbg_write("Drawing a the map... ");
 	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 	while (edge >= 1)

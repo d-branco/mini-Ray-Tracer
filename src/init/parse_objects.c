@@ -23,8 +23,8 @@ int	parse_objects(char *line, t_scene *rt)
 	int	ret;
 
 	ret = 0;
-	debug_write("identified: object!\n");
-	debug_write("TODO: Validate, check if repeated and add to linked list\n");
+	dbg_write("identified: object!\n");
+	dbg_write("TODO: Validate, check if repeated and add to linked list\n");
 	if ((line[0] == 's') && (line[1] == 'p'))
 		ret += parse_sphere(line, rt);
 	else if ((line[0] == 'p') && (line[1] == 'l'))
@@ -39,7 +39,7 @@ static int	parse_cylinder(char *line, t_scene *rt)
 	t_lst_obj	*obj;
 
 	obj = (t_lst_obj *)ft_malloc(sizeof(t_lst_obj) * 1);
-	debug_write("identified: object: CYlinder!\n");
+	dbg_write("identified: object: CYlinder!\n");
 	(*obj).id = e_CYlINDER;
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
@@ -80,7 +80,7 @@ static int	parse_plane(char *line, t_scene *rt)
 	t_lst_obj	*obj;
 
 	obj = (t_lst_obj *)ft_malloc(sizeof(t_lst_obj) * 1);
-	debug_write("identified: object: PLane!\n");
+	dbg_write("identified: object: PLane!\n");
 	(*obj).id = e_PLANE;
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
@@ -107,7 +107,7 @@ static int	parse_sphere(char *line, t_scene *rt)
 	t_lst_obj	*obj;
 
 	obj = (t_lst_obj *)ft_malloc(sizeof(t_lst_obj) * 1);
-	debug_write("identified: object: SPhere!\n");
+	dbg_write("identified: object: SPhere!\n");
 	obj->id = e_SPHERE;
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
