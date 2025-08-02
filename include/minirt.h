@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/02 18:07:30 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 18:32:40 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,10 @@ t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 void		m4_print(t_matrix4 matrix);
 void		m3_print(t_matrix3 matrix);
 void		m2_print(t_matrix2 matrix);
+//src/matrixes/mx_equal.c
+int			m4_equal(t_matrix4 a, t_matrix4 b);
+int			m3_equal(t_matrix3 a, t_matrix3 b);
+int			m2_equal(t_matrix2 a, t_matrix2 b);
 
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);
