@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 19:44:56 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 17:32:24 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	rt.mlx = mlx_init();
 	if (dbg_write("Pointer to mlx: "))
 		ft_printf("%p\n", rt.mlx);
-	dbg_write_code("Initiating miniLibX\n", "\033[1;35m");
+	dbg_write_code("Initiating miniLibX\n", PURPLE);
 	if (mlx_initialize(&rt) != EXIT_SUCCESS)
 		return (dbg_write("Goodbye, friend\n"), 4);
 	mlx_hook(rt.mlx_win, 17, 0, close_win_button, &rt);

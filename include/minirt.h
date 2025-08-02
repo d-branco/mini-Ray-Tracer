@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 20:22:03 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 18:07:30 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@
 
 # define POINT				1
 # define VECTOR				0
+
+# define PURPLE				"\033[1;35m"
+# define GRAY				"\033[1;90m"
+# define YELLOW				"\033[1;93m"
+# define BLUE				"\033[1;96m"
 
 typedef struct s_rgb
 {
@@ -111,6 +116,23 @@ typedef struct s_canvasf
 	float					y;
 }							t_canvasf;
 
+typedef struct s_matrix4
+{
+	float					m[4][4];
+}							t_matrix4;
+
+//m4 = (t_matrix4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+
+typedef struct s_matrix3
+{
+	float					m[3][3];
+}							t_matrix3;
+
+typedef struct s_matrix2
+{
+	float					m[2][2];
+}							t_matrix2;
+
 //src/init/finalize.c
 void		finalize(t_scene *rt);
 //src/init/initialize.c
@@ -141,8 +163,6 @@ int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
 int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
-//src/math/matrix.c
-void		matrix_print(float *matrix, int size);
 //src/math/ray.c
 t_tuple		get_ray_direction(t_scene *rt, t_canvas coo);
 //src/math/scalar_multiplication.c
@@ -153,6 +173,11 @@ float		vec_magnitude(t_tuple v);
 t_tuple		vec_normalization(t_tuple v);
 float		vec_inner_product(t_tuple a, t_tuple b);
 t_tuple		vec_cross_product(t_tuple a, t_tuple b);
+
+//src/matrixes/mx_print.c
+void		m4_print(t_matrix4 matrix);
+void		m3_print(t_matrix3 matrix);
+void		m2_print(t_matrix2 matrix);
 
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);
@@ -171,7 +196,6 @@ char		*append_chr(char *str, char c);
 float		ft_atof(const char *str);
 int			dbg_write(char *str);
 int			dbg_write_code(char *str, const char *code);
-int			dbg_write_reset(char *str);
 void		ft_free_n_null(void **ptr);
 int			ft_isfloat(const char *str);
 int			ft_isspace(char chr);

@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/01 19:45:38 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/02 18:08:00 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRCS			:=	\
 	src/math/intersection_sphere.c											\
 	src/math/scalar_multiplication.c										\
 	src/math/vector_math.c													\
+																			\
+	src/matrixes/mx_print.c													\
 																			\
 	src/mlx/colors.c														\
 	src/mlx/hooks.c															\
