@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 07:35:01 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 08:44:03 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 09:07:33 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 //m4 = (t_matrix4){{{1, 2, 3, 4}, {1, 1, 0, 0}, {1, 0, 1, 0}, {1, 0, 0, 1}}};
 //m4 = (t_matrix4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
-//cc -Wall -Wextra -Werror src/matrixes/mx_equal.c src/math/comparisson.c
-//	src/matrixes/mx_print.c src/matrixes/m4_multiplication.c
+//cc -Wall -Wextra -Werror src/matrices/mx_equal.c src/math/comparisson.c
+//	src/matrices/mx_print.c src/matrices/m4_multiplication.c
 //	src/utils/ft_debug.c -I./include include/libft/libft.a -o o && ./o ; rm -f o
 
-t_matrix4	matrix_multiplication(t_matrix4 a, t_matrix4 b)
+t_matrix4	m4_multiplication(t_matrix4 a, t_matrix4 b)
 {
 	t_matrix4	ret;
 	t_canvas	i;
@@ -40,7 +40,7 @@ t_matrix4	matrix_multiplication(t_matrix4 a, t_matrix4 b)
 	return (ret);
 }
 
-t_tuple	matrix_tuple_multiplication(t_matrix4 m, t_tuple t)
+t_tuple	m4_tuple_multiplication(t_matrix4 m, t_tuple t)
 {
 	t_tuple	ret;
 
@@ -55,7 +55,28 @@ t_tuple	matrix_tuple_multiplication(t_matrix4 m, t_tuple t)
 	return (ret);
 }
 
-/*int	main(void)
+t_matrix4	m4_transpose(t_matrix4 a)
+{
+	t_matrix4	ret;
+	t_canvas	i;
+	int			size;
+
+	size = 4;
+	i = (t_canvas){0, 0};
+	while (i.y < size)
+	{
+		ret.m[i.x][i.y] = a.m[i.y][i.x];
+		i.x++;
+		if (i.x >= size)
+		{
+			i.x = 0;
+			i.y++;
+		}
+	}
+	return (ret);
+}
+
+int	main(void)
 {
 	t_matrix4	a;
 	t_matrix4	b;
@@ -67,13 +88,15 @@ t_tuple	matrix_tuple_multiplication(t_matrix4 m, t_tuple t)
 	printf("times\n");
 	m4_print(b);
 	printf("equals\n");
-	a = matrix_multiplication(a, b);
+	a = m4_multiplication(a, b);
 	m4_print(a);
 	printf("\n\n");
 	a = (t_matrix4){{{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}}};
 	t = (t_tuple){1, 2, 3, 1};
 	m4_print(a);
 	printf("tuple: {%i, %i, %i, %i}\n", (int)t.x, (int)t.y, (int)t.z, (int)t.w);
-	t = matrix_tuple_multiplication(a, t);
+	t = m4_tuple_multiplication(a, t);
 	printf("tuple: {%i, %i, %i, %i}\n", (int)t.x, (int)t.y, (int)t.z, (int)t.w);
-}*/
+	a = m4_transpose(a);
+	m4_print(a);
+}

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 18:13:28 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/02 18:31:54 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 08:45:36 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	m2_equal(t_matrix2 a, t_matrix2 b)
 }
 
 //cc -Wall -Wextra -Werror -I./include
-//	src/matrixes/mx_equal.c src/math/comparisson.c -o o && ./o ; rm -f o
+//	src/matrices/mx_equal.c src/math/comparisson.c -o o && ./o ; rm -f o
 /*int	main(void)
 {
 	t_matrix4	a;
