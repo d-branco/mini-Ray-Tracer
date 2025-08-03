@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 09:17:19 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 14:51:25 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,19 @@ typedef struct s_canvasf
 typedef struct s_matrix4
 {
 	float					m[4][4];
-}							t_matrix4;
+}							t_m4;
 
-//m4 = (t_matrix4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+//m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
 typedef struct s_matrix3
 {
 	float					m[3][3];
-}							t_matrix3;
+}							t_m3;
 
 typedef struct s_matrix2
 {
 	float					m[2][2];
-}							t_matrix2;
+}							t_m2;
 
 //src/init/finalize.c
 void		finalize(t_scene *rt);
@@ -174,21 +174,26 @@ t_tuple		vec_normalization(t_tuple v);
 float		vec_inner_product(t_tuple a, t_tuple b);
 t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 
+//src/matrices/determinant_3.c
+float		m3_determinant(t_m3 m3);
+//src/matrices/determinant_42.c
+float		m4_determinant(t_m4 m4);
+float		m2_determinant(t_m2 m2);
 //src/matrices/m4_multiplication.c
-t_matrix4	m4_multiplication(t_matrix4 a, t_matrix4 b);
-t_tuple		m4_tuple_multiplication(t_matrix4 m, t_tuple t);
+t_m4		m4_multiplication(t_m4 a, t_m4 b);
+t_tuple		m4_tuple_multiplication(t_m4 m, t_tuple t);
 //src/matrices/mx_print.c
-void		m4_print(t_matrix4 matrix);
-void		m3_print(t_matrix3 matrix);
-void		m2_print(t_matrix2 matrix);
+void		m4_print(t_m4 matrix);
+void		m3_print(t_m3 matrix);
+void		m2_print(t_m2 matrix);
 //src/matrices/mx_equal.c
-int			m4_equal(t_matrix4 a, t_matrix4 b);
-int			m3_equal(t_matrix3 a, t_matrix3 b);
-int			m2_equal(t_matrix2 a, t_matrix2 b);
+int			m4_equal(t_m4 a, t_m4 b);
+int			m3_equal(t_m3 a, t_m3 b);
+int			m2_equal(t_m2 a, t_m2 b);
 //src/matrices/mx_transpose.c
-t_matrix4	m4_transpose(t_matrix4 a);
-t_matrix3	m3_transpose(t_matrix3 a);
-t_matrix2	m2_transpose(t_matrix2 a);
+t_m4		m4_transpose(t_m4 a);
+t_m3		m3_transpose(t_m3 a);
+t_m2		m2_transpose(t_m2 a);
 
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);

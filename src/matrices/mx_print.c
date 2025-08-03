@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:02:46 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/02 18:09:37 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 11:37:50 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 /*typedef struct s_matrix4
 {
 	float					m[4][4];
-}							t_matrix4;
+}							t_m4;
 typedef struct s_matrix3
 {
 	float					m[3][3];
-}							t_matrix3;
+}							t_m3;
 typedef struct s_matrix2
 {
 	float					m[2][2];
-}							t_matrix2;*/
+}							t_m2;*/
 
 //for a matrix size 4:
 //matrix_print((float*)matrix_4x4, 4)
-void	m4_print(t_matrix4 matrix)
+void	m4_print(t_m4 matrix)
 {
 	t_canvas	i;
 	int			size;
@@ -51,7 +51,7 @@ void	m4_print(t_matrix4 matrix)
 	}
 }
 
-void	m3_print(t_matrix3 matrix)
+void	m3_print(t_m3 matrix)
 {
 	t_canvas	i;
 	int			size;
@@ -75,7 +75,7 @@ void	m3_print(t_matrix3 matrix)
 	}
 }
 
-void	m2_print(t_matrix2 matrix)
+void	m2_print(t_m2 matrix)
 {
 	t_canvas	i;
 	int			size;
@@ -99,18 +99,18 @@ void	m2_print(t_matrix2 matrix)
 	}
 }
 
-//m4 = (t_matrix4){{{1, 2, 3, 4}, {1, 1, 0, 0}, {1, 0, 1, 0}, {1, 0, 0, 1}}};
-//m4 = (t_matrix4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+//m4 = (t_m4){{{1, 2, 3, 4}, {1, 1, 0, 0}, {1, 0, 1, 0}, {1, 0, 0, 1}}};
+//m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 //cc -Wall -Wextra -Werror -I./include src/math/matrix.c -o o && ./o ; rm -f o
 /*int	main(void)
 {
-	t_matrix2	m2;
-	t_matrix3	m3;
-	t_matrix4	m4;
+	t_m2	m2;
+	t_m3	m3;
+	t_m4	m4;
 
-	m2 = (t_matrix2){{{1, 2}, {1, 1}}};
-	m3 = (t_matrix3){{{1, 2, 3}, {1, 1, 0}, {1, 0, 1}}};
-	m4 = (t_matrix4){{{1, 2, 3, 4}, {1, 1, 0, 0}, {1, 0, 1, 0}, {1, 0, 0, 1}}};
+	m2 = (t_m2){{{1, 2}, {1, 1}}};
+	m3 = (t_m3){{{1, 2, 3}, {1, 1, 0}, {1, 0, 1}}};
+	m4 = (t_m4){{{1, 2, 3, 4}, {1, 1, 0, 0}, {1, 0, 1, 0}, {1, 0, 0, 1}}};
 	m2_print(m2);
 	printf("\n");
 	m3_print(m3);
