@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:32 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/18 08:27:43 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 18:30:10 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	dbg_write_code(char *str, const char *code)
 
 	if (!DEBUG)
 		return (FALSE);
-	write(STDOUT_FILENO, code, 8);
+	write(STDOUT_FILENO, code, 6);
 	write(STDOUT_FILENO, "==DEBUG== ", 10);
 	len = ft_strlen(str);
 	write(STDOUT_FILENO, str, len);

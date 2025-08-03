@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 15:32:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 18:28:55 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@
 # define POINT				1
 # define VECTOR				0
 
-# define PURPLE				"\033[1;35m"
-# define GRAY				"\033[1;90m"
-# define YELLOW				"\033[1;93m"
-# define BLUE				"\033[1;96m"
+# define PURPLE				"\033[35m"
+# define GRAY				"\033[90m"
+# define YELLOW				"\033[93m"
+# define BLUE				"\033[96m"
+# define RED				"\033[41m"
 
 typedef struct s_rgb
 {
@@ -183,6 +184,12 @@ float		m2_determinant(t_m2 m2);
 //src/matrices/m4_multiplication.c
 t_m4		m4_multiplication(t_m4 a, t_m4 b);
 t_tuple		m4_tuple_multiplication(t_m4 m, t_tuple t);
+//src/matrices/transformations.c
+t_m4		translation(t_tuple t);
+t_m4		scaling(t_tuple t);
+t_m4		rotate_xx(float rad);
+t_m4		rotate_yy(float rad);
+t_m4		rotate_zz(float rad);
 //src/matrices/mx_print.c
 void		m4_print(t_m4 matrix);
 void		m3_print(t_m3 matrix);
