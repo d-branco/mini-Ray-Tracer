@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/02 18:32:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 08:16:36 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ t_tuple		vec_normalization(t_tuple v);
 float		vec_inner_product(t_tuple a, t_tuple b);
 t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 
+//src/matrixes/m4_multiplication.c
+t_matrix4	matrix_multiplication(t_matrix4 a, t_matrix4 b);
 //src/matrixes/mx_print.c
 void		m4_print(t_matrix4 matrix);
 void		m3_print(t_matrix3 matrix);
