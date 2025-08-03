@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 14:51:25 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 15:32:40 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 float		m3_determinant(t_m3 m3);
 //src/matrices/determinant_42.c
 float		m4_determinant(t_m4 m4);
+float		m4_cofactor(t_m4 m4, t_canvas c);
 float		m2_determinant(t_m2 m2);
 //src/matrices/m4_multiplication.c
 t_m4		m4_multiplication(t_m4 a, t_m4 b);

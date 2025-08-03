@@ -6,13 +6,12 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 14:44:47 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 14:49:20 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 15:32:29 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static float	m4_cofactor(t_m4 m4, t_canvas c);
 static t_m3		m4_submatrix(t_m4 m4, t_canvas rm);
 
 float	m4_determinant(t_m4 m4)
@@ -31,7 +30,7 @@ float	m2_determinant(t_m2 m2)
 	return (m2.m[0][0] * m2.m[1][1] - m2.m[0][1] * m2.m[1][0]);
 }
 
-static float	m4_cofactor(t_m4 m4, t_canvas c)
+float	m4_cofactor(t_m4 m4, t_canvas c)
 {
 	float	ret;
 

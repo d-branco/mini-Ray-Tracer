@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:02:46 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 11:37:50 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 17:03:35 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@ typedef struct s_matrix2
 
 //for a matrix size 4:
 //matrix_print((float*)matrix_4x4, 4)
+//	void	m4_print(t_m4 matrix)
+//	{
+//		t_canvas	i;
+//		int			size;
+//
+//		size = 4;
+//		i = (t_canvas){0, 0};
+//		while (i.x < size)
+//		{
+//			dbg_write("");
+//			if (i.y == 0)
+//				printf("|\t");
+//			printf("% 4f", matrix.m[i.x][i.y]);
+//			printf("\t|\t");
+//			i.y++;
+//			if (i.y >= size)
+//			{
+//				i.y = 0;
+//				i.x++;
+//				printf("\n");
+//			}
+//		}
+//	}
+
 void	m4_print(t_m4 matrix)
 {
 	t_canvas	i;
@@ -38,9 +62,10 @@ void	m4_print(t_m4 matrix)
 	{
 		dbg_write("");
 		if (i.y == 0)
-			ft_printf("|\t");
-		ft_printf("% 4i", (int)matrix.m[i.x][i.y]);
-		ft_printf("\t|\t");
+			ft_printf("| ");
+		ft_printf("% 3i,%02i", (int)matrix.m[i.x][i.y],
+			(((int)(fabs(matrix.m[i.x][i.y]) * 100)) % 100));
+		ft_printf(" | ");
 		i.y++;
 		if (i.y >= size)
 		{
