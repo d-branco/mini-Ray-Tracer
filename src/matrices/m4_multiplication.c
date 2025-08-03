@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 07:35:01 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 09:07:33 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/03 09:12:14 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,7 @@ t_tuple	m4_tuple_multiplication(t_matrix4 m, t_tuple t)
 	return (ret);
 }
 
-t_matrix4	m4_transpose(t_matrix4 a)
-{
-	t_matrix4	ret;
-	t_canvas	i;
-	int			size;
-
-	size = 4;
-	i = (t_canvas){0, 0};
-	while (i.y < size)
-	{
-		ret.m[i.x][i.y] = a.m[i.y][i.x];
-		i.x++;
-		if (i.x >= size)
-		{
-			i.x = 0;
-			i.y++;
-		}
-	}
-	return (ret);
-}
-
-int	main(void)
+/*int	main(void)
 {
 	t_matrix4	a;
 	t_matrix4	b;
@@ -97,6 +76,4 @@ int	main(void)
 	printf("tuple: {%i, %i, %i, %i}\n", (int)t.x, (int)t.y, (int)t.z, (int)t.w);
 	t = m4_tuple_multiplication(a, t);
 	printf("tuple: {%i, %i, %i, %i}\n", (int)t.x, (int)t.y, (int)t.z, (int)t.w);
-	a = m4_transpose(a);
-	m4_print(a);
-}
+}*/
