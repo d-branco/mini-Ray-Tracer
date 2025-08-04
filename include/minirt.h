@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 16:16:33 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 20:45:25 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WIDTH				960
 # define HEIGHT				1010
 
-# define MAP_RESOLUTION 	48
+# define MAP_RESOLUTION 	128
 
 # define TRUE				1
 # define FALSE				0
@@ -103,6 +103,12 @@ enum	e_obj
 	e_CYlINDER
 };
 
+typedef struct s_intersect
+{
+	int						count;
+	float					dst[2];
+}							t_intersect;
+
 typedef struct s_lst_obj
 {
 	int						id;
@@ -111,6 +117,7 @@ typedef struct s_lst_obj
 	struct s_rgb			rgb_rng;
 	struct s_tuple			vec_uni;
 	float					height;
+	struct s_intersect		intersect;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
@@ -169,8 +176,9 @@ void		parse_float_point(char *line, t_tuple *array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
-//src/canvas/looping_loop.c
-int			looping_loop(t_scene *rt);
+//src/canvas/old_looping_loop.c
+int			old_looping_loop(t_scene *rt);
+
 //src/math/addiction.c
 t_tuple		vec_addiction(t_tuple a, t_tuple b);
 t_tuple		vec_subtraction(t_tuple a, t_tuple b);
@@ -179,6 +187,7 @@ t_tuple		pnt_subtraction_into_vec(t_tuple a, t_tuple b);
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
+t_intersect	*sp_intersect(t_lst_obj *sp, t_ray ray);
 int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
 //src/math/rays.c

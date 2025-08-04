@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   looping_loop.c                                     :+:      :+:    :+:   */
+/*   old_looping_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 16:44:12 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:57:50 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
 static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo);
 static int			get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj);
 
-int	looping_loop(t_scene *rt)
+int	old_looping_loop(t_scene *rt)
 {
 	if (rt->edge >= MAP_RESOLUTION)
 		rt->edge = MAP_RESOLUTION - 1;
