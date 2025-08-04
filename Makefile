@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/04 08:13:06 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/04 16:42:22 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -217,6 +217,12 @@ exe: fclean $(NAME)
 	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
 
 run: $(NAME)
+	@\
+	./miniRT test.rt													||	\
+	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
+
+debug: CFLAGS += $(DEBUG_FLAGS)
+debug: fclean $(NAME)
 	@\
 	./miniRT test.rt													||	\
 	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"

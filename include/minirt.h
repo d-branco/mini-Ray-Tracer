@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 08:39:13 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:16:33 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 //# define WIDTH (1920 / 2)
 //# define HEIGHT (1080 - 40)
 //# define HEIGHT (1080 - 40 - 30)
-# define WIDTH 960
-# define HEIGHT 1010
+# define WIDTH				960
+# define HEIGHT				1010
+
+# define MAP_RESOLUTION 	48
 
 # define TRUE				1
 # define FALSE				0
@@ -49,6 +51,12 @@
 # define YELLOW				"\033[93m"
 # define BLUE				"\033[96m"
 # define RED				"\033[41m"
+
+# define KEY_ESC			65307
+# define KEY_LEFT			65361
+# define KEY_RIGHT			65363
+# define KEY_DOWN			65364
+# define KEY_UP				65362
 
 typedef struct s_rgb
 {
@@ -85,6 +93,7 @@ typedef struct s_scene
 	int						line_length;
 	int						endian;
 	int						map[WIDTH][HEIGHT];
+	int						edge;
 }							t_scene;
 
 enum	e_obj
@@ -144,6 +153,7 @@ typedef struct s_ray
 void		finalize(t_scene *rt);
 //src/init/initialize.c
 int			initialize_scene(t_scene *rt, char **argv);
+void		initialize_map(t_scene *rt);;
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/init/parse_light_cam.c
@@ -160,10 +170,11 @@ void		parse_float_point(char *line, t_tuple *array);
 int			parse_input(t_scene *rt, char **argv);
 
 //src/canvas/looping_loop.c
-void		looping_loop(t_scene *rt);
+int			looping_loop(t_scene *rt);
 //src/math/addiction.c
 t_tuple		vec_addiction(t_tuple a, t_tuple b);
 t_tuple		vec_subtraction(t_tuple a, t_tuple b);
+t_tuple		pnt_subtraction_into_vec(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);

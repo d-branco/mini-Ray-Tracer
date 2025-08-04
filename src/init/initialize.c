@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/30 12:00:13 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:48:53 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	debug_print_s_scene(t_scene *rt);
 static void	print_obj_list(t_lst_obj **head);
-static void	initialize_map(int map[WIDTH][HEIGHT]);
 
 int	initialize_scene(t_scene *rt, char **argv)
 {
@@ -27,9 +26,15 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
-	initialize_map(rt->map);
+	rt->edge = MAP_RESOLUTION;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (dbg_write("ERROR: Parsing input\n"), 1);
+	rt->mlx = mlx_init();
+	if (dbg_write_code("Initiating miniLibX\n", PURPLE))
+		ft_printf("%p\n", rt->mlx);
+	if (mlx_initialize(rt) != EXIT_SUCCESS)
+		return (dbg_write("Goodbye, friend\n"), 4);
+	initialize_map(rt);
 	debug_print_s_scene(rt);
 	dbg_write("rad: Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
@@ -99,20 +104,23 @@ static void	print_obj_list(t_lst_obj **head)
 	}
 }
 
-static void	initialize_map(int map[WIDTH][HEIGHT])
+void	initialize_map(t_scene *rt)
 {
 	int	x;
 	int	y;
 
+	dbg_write("Initiating the map\n");
 	x = 0;
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGHT)
 		{
-			map[x][y] = -1;
+			rt->map[x][y] = -1;
 			y++;
 		}
 		x++;
 	}
+	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
+	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 }

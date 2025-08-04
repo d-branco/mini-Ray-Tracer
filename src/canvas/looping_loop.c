@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 07:26:06 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:44:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,30 @@ static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
 static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo);
 static int			get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj);
 
-void	looping_loop(t_scene *rt)
+int	looping_loop(t_scene *rt)
 {
-	int	edge;
-
-	edge = HEIGHT;
-	if (WIDTH > HEIGHT)
-		edge = WIDTH;
-	dbg_write("Drawing a the map... ");
-	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
-	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
-	while (edge >= 1)
+	if (rt->edge >= MAP_RESOLUTION)
+		rt->edge = MAP_RESOLUTION - 1;
+	if (rt->edge >= 1)
 	{
-		canvas_loop(rt, edge);
+		dbg_write("Drawing a the map with edge: ");
 		if (DEBUG)
-			ft_printf("%i, ", edge);
-		edge /= 2;
-		if ((edge % 2) && (edge > 2))
-			edge++;
+			ft_printf("%i... ", rt->edge);
+		canvas_loop(rt, rt->edge);
+		rt->edge /= 2;
+		if ((rt->edge % 2) && (rt->edge > 2))
+			rt->edge++;
+		if (DEBUG)
+			write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
 	}
-	if (DEBUG)
-		write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
+	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
+	return (0);
 }
 
 static void	canvas_loop(t_scene *rt, int edge)
 {
 	t_canvas	canvas;
+	t_lst_obj	*o;
 
 	canvas.y = edge / 2;
 	while (canvas.y < HEIGHT)
@@ -51,23 +49,23 @@ static void	canvas_loop(t_scene *rt, int edge)
 		while (canvas.x < WIDTH)
 		{
 			if (rt->map[canvas.x][canvas.y] == -1)
+			{
+				o = get_intersetion(rt, canvas);
+				rt->map[canvas.x][canvas.y] = get_color(rt, canvas, o);
+				pixel_put(rt, canvas.x, canvas.y, rt->map[canvas.x][canvas.y]);
 				paint_canvas(rt, (t_canvas){canvas.x, canvas.y}, edge);
+			}
 			canvas.x += edge;
 		}
 		canvas.y += edge;
 	}
-	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 }
 
 static void	paint_canvas(t_scene *rt, t_canvas coo, int edge)
 {
 	t_canvas	t;
-	t_lst_obj	*o;
 
 	t = (t_canvas){0, 0};
-	o = get_intersetion(rt, coo);
-	rt->map[coo.x][coo.y] = get_color(rt, coo, o);
-	pixel_put(rt, (coo.x), (coo.y), rt->map[coo.x][coo.y]);
 	t.y = - (edge / 2);
 	while (t.y < (edge / 2))
 	{
