@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/01 21:17:03 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 07:26:06 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo)
 
 	current = rt->lst_obj;
 	dst = MAX_FLOAT;
-	ray = get_ray_direction(rt, coo);
+	ray = old_get_ray_direction(rt, coo);
 	nearest = NULL;
 	while (current != NULL)
 	{

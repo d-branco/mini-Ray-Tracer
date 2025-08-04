@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 18:28:55 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 08:39:13 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,12 @@ typedef struct s_matrix2
 	float					m[2][2];
 }							t_m2;
 
+typedef struct s_ray
+{
+	t_tuple					origin;
+	t_tuple					direction;
+}							t_ray;
+
 //src/init/finalize.c
 void		finalize(t_scene *rt);
 //src/init/initialize.c
@@ -164,11 +170,19 @@ int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
 int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
-//src/math/ray.c
-t_tuple		get_ray_direction(t_scene *rt, t_canvas coo);
+//src/math/rays.c
+t_ray		make_ray(t_tuple origin, t_tuple direction);
+t_tuple		ray_position(t_ray r, float dst);
+t_tuple		old_get_ray_direction(t_scene *rt, t_canvas coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);
+//src/math/tuples.c
+t_tuple		mk_pnt(float x, float y, float z);
+t_tuple		mk_vec(float x, float y, float z);
+int			pt_equal(t_tuple a, t_tuple b);
+int			vc_equal(t_tuple a, t_tuple b);
+void		tuple_print(t_tuple data);
 //src/math/vector_math.c
 float		vec_magnitude(t_tuple v);
 t_tuple		vec_normalization(t_tuple v);
@@ -187,9 +201,9 @@ t_tuple		m4_tuple_multiplication(t_m4 m, t_tuple t);
 //src/matrices/transformations.c
 t_m4		translation(t_tuple t);
 t_m4		scaling(t_tuple t);
-t_m4		rotate_xx(float rad);
-t_m4		rotate_yy(float rad);
-t_m4		rotate_zz(float rad);
+t_m4		rotate_x(float rad);
+t_m4		rotate_y(float rad);
+t_m4		rotate_z(float rad);
 //src/matrices/mx_print.c
 void		m4_print(t_m4 matrix);
 void		m3_print(t_m3 matrix);

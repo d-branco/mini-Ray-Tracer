@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/03 18:29:27 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/04 08:13:06 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,15 +45,16 @@ SRCS			:=	\
 																			\
 	src/math/addiction.c													\
 	src/math/comparisson.c													\
-	src/math/ray.c															\
+	src/math/rays.c															\
 	src/math/intersection_sphere.c											\
 	src/math/scalar_multiplication.c										\
+	src/math/tuples.c														\
 	src/math/vector_math.c													\
 																			\
 	src/matrices/determinant_3.c											\
 	src/matrices/determinant_42.c											\
 	src/matrices/m4_multiplication.c										\
-	src/matrices/m4_transformations.c											\
+	src/matrices/m4_transformations.c										\
 	src/matrices/mx_print.c													\
 	src/matrices/mx_equal.c													\
 	src/matrices/mx_transpose.c												\
