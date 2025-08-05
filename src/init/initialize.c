@@ -6,14 +6,11 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 21:08:44 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:26:24 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static void	debug_print_s_scene(t_scene *rt);
-static void	print_obj_list(t_lst_obj **head);
 
 int	initialize_scene(t_scene *rt, char **argv)
 {
@@ -35,6 +32,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 		return (dbg_write("Goodbye, friend\n"), 4);
 	initialize_map(rt);
 	debug_print_s_scene(rt);
+	rt->key_pressed = FALSE;
 	dbg_write("rad: Correcting degrees to radians\n");
 	rt->c_fov = (rt->c_fov) * (TAU / 360.0);
 	if (dbg_write(""))
@@ -45,7 +43,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 
 //		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->l_rgb[0],
 //			(int) rt->l_rgb[1], (int) rt->l_rgb[2]);
-static void	debug_print_s_scene(t_scene *rt)
+void	debug_print_s_scene(t_scene *rt)
 {
 	if (!DEBUG)
 		return ;
@@ -74,7 +72,7 @@ static void	debug_print_s_scene(t_scene *rt)
 	print_obj_list(&(rt->lst_obj));
 }
 
-static void	print_obj_list(t_lst_obj **head)
+void	print_obj_list(t_lst_obj **head)
 {
 	t_lst_obj	*o;
 	const char	*str[] = {"sphere  (   )", "plane ///////", "cylinder(\\ )\\"};

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:48:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 21:09:36 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:27:26 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	key_hook(int keycode, t_scene *rt)
 
 static void	key_right_left(t_scene *rt, float translation)
 {
+	if (rt->key_pressed == TRUE)
+		return ;
+	rt->key_pressed = TRUE;
 	if (translation > 0)
 		dbg_write("key RIGHT pressed!\n");
 	else
@@ -54,6 +57,9 @@ static void	key_right_left(t_scene *rt, float translation)
 
 static void	key_up_down(t_scene *rt, float translation)
 {
+	if (rt->key_pressed == TRUE)
+		return ;
+	rt->key_pressed = TRUE;
 	if (translation > 0)
 		dbg_write("key UP pressed!\n");
 	else

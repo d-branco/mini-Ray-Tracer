@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 17:57:50 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:34:42 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	old_looping_loop(t_scene *rt)
 			write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
 	}
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
+	rt->key_pressed = FALSE;
 	return (0);
 }
 

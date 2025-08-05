@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:30:17 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 21:03:26 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:22:29 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	main(int argc, char **argv)
 	return (dbg_write("ERROR: return from main()\n"), EXIT_FAILURE);
 }
 
-static void	temp_testing(t_scene *rt)
-{
-	(void) rt;
-}
+//static void	temp_testing(t_scene *rt)
+//{
+//	(void) rt;
+//}
 
-/*static void	temp_testing(t_scene *rt)
+static void	temp_testing(t_scene *rt)
 {
 	t_ray		ray;
 	t_lst_obj	sp;
@@ -99,7 +99,7 @@ static void	temp_testing(t_scene *rt)
 	else
 		ft_printf("[ ] ");
 	ft_printf(" TEST ends\n\n");
-}*/
+}
 
 /*
 typedef struct s_lst_obj

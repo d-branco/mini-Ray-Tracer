@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 20:45:25 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:25:58 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_scene
 	int						endian;
 	int						map[WIDTH][HEIGHT];
 	int						edge;
+	int						key_pressed;
 }							t_scene;
 
 enum	e_obj
@@ -120,6 +121,16 @@ typedef struct s_lst_obj
 	struct s_intersect		intersect;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
+
+//intersection list
+typedef struct s_lst_xs
+{
+	t_lst_obj				*obj;
+	struct s_tuple			point;
+	float					hit;
+	float					t[2];
+	struct s_lst_xs	*next;
+}							t_lst_xs;
 
 typedef struct s_canvas
 {
@@ -160,7 +171,9 @@ typedef struct s_ray
 void		finalize(t_scene *rt);
 //src/init/initialize.c
 int			initialize_scene(t_scene *rt, char **argv);
-void		initialize_map(t_scene *rt);;
+void		initialize_map(t_scene *rt);
+void		debug_print_s_scene(t_scene *rt);
+void		print_obj_list(t_lst_obj **head);
 //src/init/input_validation.c
 int			input_validation(int argc, char **argv);
 //src/init/parse_light_cam.c
