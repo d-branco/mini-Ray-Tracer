@@ -70,6 +70,8 @@ static int	rest_of_the_friendly_cylinder(
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid cylinder!\n"), free(obj), 1);
+	obj->transform = (t_m4)
+	{{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 	(*obj).next = NULL;
 	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));
@@ -97,6 +99,8 @@ static int	parse_plane(char *line, t_scene *rt)
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid plane!\n"), free(obj), 1);
+	obj->transform = (t_m4)
+	{{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 	(*obj).next = NULL;
 	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));
@@ -124,6 +128,8 @@ static int	parse_sphere(char *line, t_scene *rt)
 	line = skip_to_next_word(line);
 	if (line && ft_isprint(*line))
 		return (ft_printf("Error\nInvalid sphere!\n"), free(obj), 1);
+	obj->transform = (t_m4)
+	{{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 	obj->next = NULL;
 	rt_lstadd_back(&(*rt).lst_obj, obj);
 	return (validate_object_parsing(obj));

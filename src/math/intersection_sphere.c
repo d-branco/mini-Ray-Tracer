@@ -24,11 +24,13 @@ t_intersect	*sp_intersect(t_lst_obj *sp, t_ray ray)
 {
 	t_tuple		abc;
 	t_tuple		sphere_to_ray;
+	t_ray		rayt;
 
+	rayt = ray_transform(ray, m4_inverse(sp->transform));
 	sp->intersect.count = 2;
-	sphere_to_ray = pnt_subtraction_into_vec(ray.origin, sp->center);
-	abc.x = vec_inner_product(ray.direction, ray.direction);
-	abc.y = 2 * vec_inner_product(ray.direction, sphere_to_ray);
+	sphere_to_ray = pnt_subtraction_into_vec(rayt.origin, sp->center);
+	abc.x = vec_inner_product(rayt.direction, rayt.direction);
+	abc.y = 2 * vec_inner_product(rayt.direction, sphere_to_ray);
 	abc.z = vec_inner_product(sphere_to_ray, sphere_to_ray) - 1.0f;
 	abc.w = powf(abc.y, 2) - (4 * abc.x * abc.z);
 	if (dbg_write("Discriminator: "))

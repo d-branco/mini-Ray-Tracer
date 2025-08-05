@@ -110,6 +110,11 @@ typedef struct s_intersect
 	float					dst[2];
 }							t_intersect;
 
+typedef struct s_matrix4
+{
+	float					m[4][4];
+}							t_m4;
+
 typedef struct s_lst_obj
 {
 	int						id;
@@ -119,6 +124,7 @@ typedef struct s_lst_obj
 	struct s_tuple			vec_uni;
 	float					height;
 	struct s_intersect		intersect;
+	struct s_matrix4		transform;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
@@ -141,11 +147,6 @@ typedef struct s_canvasf
 	float					x;
 	float					y;
 }							t_canvasf;
-
-typedef struct s_matrix4
-{
-	float					m[4][4];
-}							t_m4;
 
 //m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
