@@ -125,11 +125,9 @@ typedef struct s_lst_obj
 //intersection list
 typedef struct s_lst_xs
 {
+	float					dst;
 	t_lst_obj				*obj;
-	struct s_tuple			point;
-	float					hit;
-	float					t[2];
-	struct s_lst_xs	*next;
+	struct s_lst_xs			*next;
 }							t_lst_xs;
 
 typedef struct s_canvas

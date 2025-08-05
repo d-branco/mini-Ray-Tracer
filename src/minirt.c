@@ -12,7 +12,8 @@
 
 #include "minirt.h"
 
-static void	temp_testing(t_scene *rt);
+static void		temp_testing(t_scene *rt);
+static t_lst_xs	*obj_hit(t_lst_xs *xs);
 
 int	main(int argc, char **argv)
 {
@@ -38,70 +39,74 @@ int	main(int argc, char **argv)
 
 static void	temp_testing(t_scene *rt)
 {
-	t_ray		ray;
-	t_lst_obj	sp;
-	t_lst_obj	*ptr;
-	t_intersect	xs;
+	t_lst_xs	a;
+	t_lst_xs	b;
+	t_lst_xs	c;
+	t_lst_xs	d;
 
 	(void) rt;
-	(void) ray;
-	ft_printf("\n TEST starts\n");
-	ray = (t_ray){mk_pnt(0, 0, 0), mk_vec(0, 0, 1)};
-	sp = (t_lst_obj){0, mk_pnt(0, 0, 0), 2.0f, (t_rgb){42, 42, 42},
-		mk_vec(1, 1, 1), 0.0f, (t_intersect){0, {0, 0}}, NULL};
-	ptr = &sp;
-	if (!sp.next)
-		ft_printf("Sempre escreve!\n");
-	print_obj_list(&ptr);
-	sp_intersect(ptr, ray);
-	xs = ptr->intersect;
-	ft_printf("xs.count: %i\n", xs.count);
-	ft_printf("ptr->intersect.count: %i\n", ptr->intersect.count);
-	if (ptr->intersect.count == 2)
-	{
-		ft_printf("[x] ");
-		if (fl_equal(xs.dst[0], -1.0f))
-			ft_printf("[x] ");
-		else
-			ft_printf("[ ] ");
-		if (fl_equal(xs.dst[1], 1.0f))
-			ft_printf("[x] ");
-		else
-			ft_printf("[ ] ");
-	}
+	ft_printf("\n TEST starts\n ");
+	b = (t_lst_xs){2, rt->lst_obj, NULL};
+	a = (t_lst_xs){1, rt->lst_obj, &b};
+	if (obj_hit(&a) == &a)
+		ft_printf("[1] ");
 	else
-		ft_printf("[ ] ");
-	ft_printf(" TEST ends\n\n");
-	ft_printf("\n TEST starts\n");
-	ray = (t_ray){mk_pnt(0, 0, 5), mk_vec(0, 0, 1)};
-	sp = (t_lst_obj){0, mk_pnt(0, 0, 0), 2.0f, (t_rgb){42, 42, 42},
-		mk_vec(1, 1, 1), 0.0f, (t_intersect){0, {0, 0}}, NULL};
-	ptr = &sp;
-	if (!sp.next)
-		ft_printf("Sempre escreve!\n");
-	print_obj_list(&ptr);
-	sp_intersect(ptr, ray);
-	xs = ptr->intersect;
-	ft_printf("xs.count: %i\n", xs.count);
-	ft_printf("ptr->intersect.count: %i\n", ptr->intersect.count);
-	if (ptr->intersect.count == 2)
-	{
-		ft_printf("[x] ");
-		if (fl_equal(xs.dst[0], -6.0f))
-			ft_printf("[x] ");
-		else
-			ft_printf("[ ] ");
-		if (fl_equal(xs.dst[1], -4.0f))
-			ft_printf("[x] ");
-		else
-			ft_printf("[ ] ");
-	}
+		ft_printf(" ERROR 1! ");
+
+	b = (t_lst_xs){1, rt->lst_obj, NULL};
+	a = (t_lst_xs){-1, rt->lst_obj, &b};
+	if (obj_hit(&a) == &b)
+		ft_printf("[2] ");
 	else
-		ft_printf("[ ] ");
-	ft_printf(" TEST ends\n\n");
+		ft_printf(" ERROR 2! ");
+
+	b = (t_lst_xs){-1, rt->lst_obj, NULL};
+	a = (t_lst_xs){-2, rt->lst_obj, &b};
+	if (obj_hit(&a) == NULL)
+		ft_printf("[3] ");
+	else
+		ft_printf(" ERROR 3! ");
+
+	d = (t_lst_xs)(t_lst_xs){2, rt->lst_obj, NULL};
+	c = (t_lst_xs)(t_lst_xs){-3, rt->lst_obj, &d};
+	b = (t_lst_xs){7, rt->lst_obj, &c};
+	a = (t_lst_xs){5, rt->lst_obj, &b};
+	if (obj_hit(&a) == &d)
+		ft_printf("[4] ");
+	else
+		ft_printf(" ERROR 4! ");
+
+	ft_printf("\n TEST ends\n\n");
+
 }
 
-/*
+// Returns the lowest positiv distant element of the intersection list or NULL
+static t_lst_xs	*obj_hit(t_lst_xs *xs)
+{
+	t_lst_xs	*ptr;
+	float		distance;
+
+	ptr = NULL;
+	distance = MAX_FLOAT;
+	while (xs)
+	{
+		if ((xs->dst > 0) && (xs->dst < distance))
+		{
+			distance = xs->dst;
+			ptr = xs;
+		}
+		xs = xs->next;
+	}
+	return (ptr);
+}
+
+/*typedef struct s_lst_xs
+{
+	float					dst;
+	t_lst_obj				*obj;
+	struct s_lst_xs			*next;
+}							t_lst_xs;
+
 typedef struct s_lst_obj
 {
 	int						id;
