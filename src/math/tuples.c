@@ -44,12 +44,12 @@ int	vc_equal(t_tuple a, t_tuple b)
 
 void	tuple_print(t_tuple data)
 {
-	if (!DEBUG)
-		return ;
-	if (data.w == POINT)
-		dbg_write("point:  ");
-	else if (data.w == VECTOR)
-		dbg_write("vector: ");
+	if (fl_equal(data.w, POINT))
+		ft_printf("point:  ");
+	else if (fl_equal(data.w, VECTOR))
+		ft_printf("vector: ");
+	else
+		ft_printf("Type: %i  ", (int)data.w);
 	ft_printf("(% 3i.%02i, % 3i.%02i, % 3i.%02i)\n",
 		(int)data.x, (((int)(fabs(data.x) * 100)) % 100),
 		(int)data.y, (((int)(fabs(data.y) * 100)) % 100),

@@ -16,7 +16,7 @@ int	m4_is_invertible(t_m4 m4)
 {
 	if (fl_equal(m4_determinant(m4), 0))
 		return (FALSE);
-	dbg_write("Matrix found to NOT be invertible!\n");
+	dbg_write_code("Matrix found to NOT be invertible!\n", RED);
 	return (TRUE);
 }
 
@@ -27,7 +27,7 @@ t_m4	m4_inverse(t_m4 m4)
 	float		det;
 	int			size;
 
-	dbg_write("Remeber to check m4_is_invertible()!\n");
+	dbg_write("Remeber to check m4_is_invertible()\n");
 	size = 4;
 	i = (t_canvas){0, 0};
 	det = m4_determinant(m4);

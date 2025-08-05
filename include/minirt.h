@@ -226,6 +226,9 @@ float		m3_determinant(t_m3 m3);
 float		m4_determinant(t_m4 m4);
 float		m4_cofactor(t_m4 m4, t_canvas c);
 float		m2_determinant(t_m2 m2);
+//src/matrices/m4_inverse.c
+int			m4_is_invertible(t_m4 m4);
+t_m4		m4_inverse(t_m4 m4);
 //src/matrices/m4_multiplication.c
 t_m4		m4_multiplication(t_m4 a, t_m4 b);
 t_tuple		m4_tuple_multiplication(t_m4 m, t_tuple t);
@@ -247,6 +250,8 @@ int			m2_equal(t_m2 a, t_m2 b);
 t_m4		m4_transpose(t_m4 a);
 t_m3		m3_transpose(t_m3 a);
 t_m2		m2_transpose(t_m2 a);
+//src/matrices/trasnform.c
+t_ray		ray_transform(t_ray ray, t_m4 matrix);
 
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);
@@ -260,6 +265,9 @@ int			key_hook(int keycode, t_scene *rt);
 //src/mlx/mlx_init.c
 int			mlx_initialize(t_scene *rt);
 
+//src/obj/hit.c
+t_lst_xs	*obj_hit(t_lst_xs *xs);
+
 //src/utils
 char		*append_chr(char *str, char c);
 float		ft_atof(const char *str);
@@ -272,5 +280,8 @@ void		*ft_malloc(int total_size);
 int			ft_strcmp(const char *s1, const char *s2);
 int			is_float_triplet(char *str);
 void		rt_lstadd_back(t_lst_obj **lst, t_lst_obj *new);
+
+//temp
+void		temp_testing(t_scene *rt);
 
 #endif

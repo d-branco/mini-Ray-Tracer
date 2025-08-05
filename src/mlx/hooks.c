@@ -41,7 +41,6 @@ static void	key_right_left(t_scene *rt, float translation)
 {
 	if (rt->key_pressed == TRUE)
 		return ;
-	rt->key_pressed = TRUE;
 	if (translation > 0)
 		dbg_write("key RIGHT pressed!\n");
 	else
@@ -52,14 +51,13 @@ static void	key_right_left(t_scene *rt, float translation)
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	rt->edge = MAP_RESOLUTION;
 	initialize_map(rt);
-	old_looping_loop(rt);
+	rt->key_pressed = TRUE;
 }
 
 static void	key_up_down(t_scene *rt, float translation)
 {
 	if (rt->key_pressed == TRUE)
 		return ;
-	rt->key_pressed = TRUE;
 	if (translation > 0)
 		dbg_write("key UP pressed!\n");
 	else
@@ -70,7 +68,7 @@ static void	key_up_down(t_scene *rt, float translation)
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	rt->edge = MAP_RESOLUTION;
 	initialize_map(rt);
-	old_looping_loop(rt);
+	rt->key_pressed = TRUE;
 }
 
 /* old version

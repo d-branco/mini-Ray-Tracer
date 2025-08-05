@@ -21,6 +21,8 @@ int	fl_equal(float a, float b)
 
 int	tuple_equal(t_tuple a, t_tuple b)
 {
+	if ((DEBUG) && !fl_equal(a.w, b.w))
+		dbg_write_code("Comparisson between different tuple types!\n", RED);
 	if ((((a.x - b.x) < EPSILON) && ((a.x - b.x) > (0 - EPSILON)))
 		|| (((a.y - b.y) < EPSILON) && ((a.y - b.y) > (0 - EPSILON)))
 		|| (((a.z - b.z) < EPSILON) && ((a.z - b.z) > (0 - EPSILON)))
