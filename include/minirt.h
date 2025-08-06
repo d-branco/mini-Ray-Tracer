@@ -191,7 +191,7 @@ int			parse_input(t_scene *rt, char **argv);
 
 //src/canvas/old_looping_loop.c
 int			old_looping_loop(t_scene *rt);
-
+int			get_color(t_scene *rt, t_lst_obj *obj);
 //src/math/addiction.c
 t_tuple		vec_addiction(t_tuple a, t_tuple b);
 t_tuple		vec_subtraction(t_tuple a, t_tuple b);

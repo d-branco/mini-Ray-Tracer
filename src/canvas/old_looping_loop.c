@@ -15,7 +15,6 @@
 static void			canvas_loop(t_scene *rt, int edge);
 static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
 static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo);
-static int			get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj);
 
 int	old_looping_loop(t_scene *rt)
 {
@@ -52,7 +51,7 @@ static void	canvas_loop(t_scene *rt, int edge)
 			if (rt->map[canvas.x][canvas.y] == -1)
 			{
 				o = get_intersection(rt, canvas);
-				rt->map[canvas.x][canvas.y] = get_color(rt, canvas, o);
+				rt->map[canvas.x][canvas.y] = get_color(rt, o);
 				pixel_put(rt, canvas.x, canvas.y, rt->map[canvas.x][canvas.y]);
 				paint_canvas(rt, (t_canvas){canvas.x, canvas.y}, edge);
 			}
@@ -109,26 +108,4 @@ static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo)
 		current = current->next;
 	}
 	return (nearest);
-}
-
-static int	get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj)
-{
-	t_tuple	xs_to_c;
-
-	(void) coo;
-	if (obj == NULL)
-		return (encode_rgb(53, 3, 144));
-	//		(int)(rt->a_rgb.r * rt->a_ratio),
-	//	(int)(rt->a_rgb.g * rt->a_ratio), (int)(rt->a_rgb.b * rt->a_ratio)));
-	//if it can see the light, get the norm and check the angle.
-	xs_to_c = pnt_subtraction_into_vec(rt->l_coo, obj->xs_pnt);
-	if (!check_obj_xs(rt, obj->xs_pnt, xs_to_c))
-		return (encode_rgb((int)obj->rgb_rng.r,
-				(int)obj->rgb_rng.g,
-				(int)obj->rgb_rng.b));
-	// if no intersection with objects before hitting the ligh
-	//	is of his own color plus the ambient light:
-	return (encode_rgb((int)(obj->rgb_rng.r * rt->a_ratio),
-		(int)(obj->rgb_rng.g * rt->a_ratio),
-		(int)(obj->rgb_rng.b * rt->a_ratio)));
 }

@@ -22,7 +22,7 @@ CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-#DEBUG_FLAGS		+= -g
+DEBUG_FLAGS		+= -g
 #DEBUG_FLAGS		+= -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
@@ -42,6 +42,7 @@ SRCS			:=	\
 	src/init/parse_utils.c													\
 	src/init/parse.c														\
 																			\
+	src/canvas/color.c														\
 	src/canvas/old_looping_loop.c											\
 																			\
 	src/math/addiction.c													\
