@@ -22,7 +22,7 @@ CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-DEBUG_FLAGS		+= -g
+#DEBUG_FLAGS		+= -g
 #DEBUG_FLAGS		+= -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
@@ -48,6 +48,7 @@ SRCS			:=	\
 	src/math/comparisson.c													\
 	src/math/rays.c															\
 	src/math/intersection_sphere.c											\
+	src/math/intersections.c												\
 	src/math/scalar_multiplication.c										\
 	src/math/tuples.c														\
 	src/math/vector_math.c													\

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 12:06:21 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 13:42:52 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo)
 		if (current->id == e_SPHERE)
 		{
 			if (smll_dst_to_sphere(rt, ray, current, &dst))
+			{
 				nearest = current;
+				nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x,
+						rt->c_coord.y + dst * ray.y,
+						rt->c_coord.z + dst * ray.z);
+			}
 		}
 		current = current->next;
 	}
@@ -108,11 +113,22 @@ static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo)
 
 static int	get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj)
 {
+	t_tuple	xs_to_c;
+
 	(void) coo;
 	if (obj == NULL)
-		return (encode_rgb(
-				(int)rt->a_rgb.r, (int)rt->a_rgb.g, (int)rt->a_rgb.b));
-	else
-		return (encode_rgb(
-				(int)obj->rgb_rng.r, (int)obj->rgb_rng.g, (int)obj->rgb_rng.b));
+		return (encode_rgb(53, 3, 144));
+	//		(int)(rt->a_rgb.r * rt->a_ratio),
+	//	(int)(rt->a_rgb.g * rt->a_ratio), (int)(rt->a_rgb.b * rt->a_ratio)));
+	//if it can see the light, get the norm and check the angle.
+	xs_to_c = pnt_subtraction_into_vec(rt->l_coo, obj->xs_pnt);
+	if (!check_obj_xs(rt, obj->xs_pnt, xs_to_c))
+		return (encode_rgb((int)obj->rgb_rng.r,
+				(int)obj->rgb_rng.g,
+				(int)obj->rgb_rng.b));
+	// if no intersection with objects before hitting the ligh
+	//	is of his own color plus the ambient light:
+	return (encode_rgb((int)(obj->rgb_rng.r * rt->a_ratio),
+		(int)(obj->rgb_rng.g * rt->a_ratio),
+		(int)(obj->rgb_rng.b * rt->a_ratio)));
 }

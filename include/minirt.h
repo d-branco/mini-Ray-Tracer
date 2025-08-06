@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 12:01:32 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 13:33:40 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_lst_obj
 	float					height;
 	struct s_intersect		intersect;
 	struct s_matrix4		transform;
+	struct s_tuple			xs_pnt;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
@@ -199,9 +200,11 @@ t_tuple		pnt_subtraction_into_vec(t_tuple a, t_tuple b);
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);
 //src/math/intersection_sphere.c
-t_intersect	*sp_intersect(t_lst_obj *sp, t_ray ray);
+int			sp_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *sp);
 int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
+//src/math/intersections.c
+int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
 //src/math/rays.c
 t_ray		make_ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, float dst);
