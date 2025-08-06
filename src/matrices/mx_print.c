@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:02:46 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 17:03:35 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:14:13 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	m4_print(t_m4 matrix)
 		dbg_write("");
 		if (i.y == 0)
 			ft_printf("| ");
-		ft_printf("% 3i,%02i", (int)matrix.m[i.x][i.y],
-			(((int)(fabs(matrix.m[i.x][i.y]) * 100)) % 100));
+		ft_printf("% 3i,%02i", (int)matrix.m[(int)i.x][(int)i.y],
+			(((int)(fabs(matrix.m[(int)i.x][(int)i.y]) * 100)) % 100));
 		ft_printf(" | ");
 		i.y++;
 		if (i.y >= size)
@@ -88,7 +88,7 @@ void	m3_print(t_m3 matrix)
 		dbg_write("");
 		if (i.y == 0)
 			ft_printf("|\t");
-		ft_printf("% 4i", (int)matrix.m[i.x][i.y]);
+		ft_printf("% 4i", (int)matrix.m[(int)i.x][(int)i.y]);
 		ft_printf("\t|\t");
 		i.y++;
 		if (i.y >= size)
@@ -112,7 +112,7 @@ void	m2_print(t_m2 matrix)
 		dbg_write("");
 		if (i.y == 0)
 			ft_printf("|\t");
-		ft_printf("% 4i", (int)matrix.m[i.x][i.y]);
+		ft_printf("% 4i", (int)matrix.m[(int)i.x][(int)i.y]);
 		ft_printf("\t|\t");
 		i.y++;
 		if (i.y >= size)

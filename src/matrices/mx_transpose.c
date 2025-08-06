@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 09:10:05 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 14:30:17 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:15:24 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_m4	m4_transpose(t_m4 a)
 	i = (t_canvas){0, 0};
 	while (i.y < size)
 	{
-		ret.m[i.x][i.y] = a.m[i.y][i.x];
+		ret.m[(int)i.x][(int)i.y] = a.m[(int)i.y][(int)i.x];
 		i.x++;
 		if (i.x >= size)
 		{
@@ -50,7 +50,7 @@ t_m3	m3_transpose(t_m3 a)
 	i = (t_canvas){0, 0};
 	while (i.y < size)
 	{
-		ret.m[i.x][i.y] = a.m[i.y][i.x];
+		ret.m[(int)i.x][(int)i.y] = a.m[(int)i.y][(int)i.x];
 		i.x++;
 		if (i.x >= size)
 		{
@@ -71,7 +71,7 @@ t_m2	m2_transpose(t_m2 a)
 	i = (t_canvas){0, 0};
 	while (i.y < size)
 	{
-		ret.m[i.x][i.y] = a.m[i.y][i.x];
+		ret.m[(int)i.x][(int)i.y] = a.m[(int)i.y][(int)i.x];
 		i.x++;
 		if (i.x >= size)
 		{

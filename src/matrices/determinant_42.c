@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 14:44:47 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 15:32:29 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:12:10 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float	m4_cofactor(t_m4 m4, t_canvas c)
 	float	ret;
 
 	ret = m3_determinant(m4_submatrix(m4, c));
-	if (((c.x + c.y) % 2) == 1)
+	if (((int)(c.x + c.y) % 2) == 1)
 		ret = -ret;
 	return (ret);
 }
@@ -56,7 +56,8 @@ static t_m3	m4_submatrix(t_m4 m4, t_canvas rm)
 			offset.x = 1;
 		if (rm.y == i.y)
 			offset.y = 1;
-		ret.m[i.x][i.y] = m4.m[i.x + offset.x][i.y + offset.y];
+		ret.m[(int)i.x][(int)i.y]
+			= m4.m[(int)(i.x + offset.x)][(int)(i.y + offset.y)];
 		i.x++;
 		if (i.x >= size - 1)
 		{

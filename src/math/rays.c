@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:44:11 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 20:13:02 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:08:55 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_tuple	old_get_ray_direction(t_scene *rt, t_canvas coo)
 {
 	t_tuple		right;
 	t_tuple		up;
-	t_canvasf	viewport;
-	t_canvasf	v;
+	t_canvas	viewport;
+	t_canvas	v;
 	t_tuple		ray_dir;
 
 	ray_dir = (t_tuple){0, 1, 0, VECTOR};

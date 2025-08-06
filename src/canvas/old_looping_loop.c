@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 13:42:52 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:08:00 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static void	canvas_loop(t_scene *rt, int edge, t_canvas *c)
 		c->x = edge / 2;
 		while (c->x < WIDTH)
 		{
-			if (rt->map[c->x][c->y] == -1)
+			if (rt->map[(int)c->x][(int)c->y] == -1)
 			{
 				o = get_intersection(rt, *c);
-				rt->map[c->x][c->y] = get_color(rt, o);
-				pixel_put(rt, c->x, c->y, rt->map[c->x][c->y]);
+				rt->map[(int)c->x][(int)c->y] = get_color(rt, o);
+				pixel_put(rt, c->x, c->y, rt->map[(int)c->x][(int)c->y]);
 				paint_canvas(rt, (t_canvas){c->x, c->y}, edge);
 			}
 			c->x += edge;
@@ -76,9 +76,9 @@ static void	paint_canvas(t_scene *rt, t_canvas coo, int edge)
 		while (t.x < (edge / 2))
 		{
 			if ((coo.x + t.x < WIDTH) && (coo.y + t.y < HEIGHT)
-				&& (rt->map[coo.x + t.x][coo.y + t.y] == -1))
-				pixel_put(rt, (coo.x + t.x), (coo.y + t.y),
-					rt->map[coo.x][coo.y]);
+				&& (rt->map[(int)(coo.x + t.x)][(int)(coo.y + t.y)] == -1))
+				pixel_put(rt, (coo.x + t.x), ((int)coo.y + t.y),
+					rt->map[(int)coo.x][(int)coo.y]);
 			t.x++;
 		}
 		t.y++;

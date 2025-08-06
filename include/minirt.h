@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 20:13:02 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:05:56 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,15 @@ typedef struct s_lst_xs
 
 typedef struct s_canvas
 {
-	int						x;
-	int						y;
+	float						x;
+	float						y;
 }							t_canvas;
 
-typedef struct s_canvasf
-{
-	float					x;
-	float					y;
-}							t_canvasf;
+//typedef struct s_canvasf
+//{
+//	float					x;
+//	float					y;
+//}							t_canvasf;
 
 //m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
