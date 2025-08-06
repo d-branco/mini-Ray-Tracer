@@ -22,7 +22,8 @@ CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-#DEBUG_FLAGS		+= -g -pg
+DEBUG_FLAGS		+= -g
+#DEBUG_FLAGS		+= -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM				:= rm -f

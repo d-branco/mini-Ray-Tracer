@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/05 07:26:24 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 10:05:07 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
-	rt->edge = MAP_RESOLUTION;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (dbg_write("ERROR: Parsing input\n"), 1);
 	rt->mlx = mlx_init();
@@ -119,4 +118,5 @@ void	initialize_map(t_scene *rt)
 		x++;
 	}
 	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
+	rt->edge = MAP_RESOLUTION;
 }

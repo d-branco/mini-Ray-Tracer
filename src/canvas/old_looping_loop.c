@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/05 07:34:42 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:06:21 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void			canvas_loop(t_scene *rt, int edge);
 static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
-static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo);
+static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo);
 static int			get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj);
 
 int	old_looping_loop(t_scene *rt)
@@ -51,7 +51,7 @@ static void	canvas_loop(t_scene *rt, int edge)
 		{
 			if (rt->map[canvas.x][canvas.y] == -1)
 			{
-				o = get_intersetion(rt, canvas);
+				o = get_intersection(rt, canvas);
 				rt->map[canvas.x][canvas.y] = get_color(rt, canvas, o);
 				pixel_put(rt, canvas.x, canvas.y, rt->map[canvas.x][canvas.y]);
 				paint_canvas(rt, (t_canvas){canvas.x, canvas.y}, edge);
@@ -83,7 +83,7 @@ static void	paint_canvas(t_scene *rt, t_canvas coo, int edge)
 	}
 }
 
-static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo)
+static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo)
 {
 	t_lst_obj	*current;
 	float		dst;
@@ -103,16 +103,15 @@ static t_lst_obj	*get_intersetion(t_scene *rt, t_canvas coo)
 		}
 		current = current->next;
 	}
-	if (nearest)
-		return (nearest);
-	return (NULL);
+	return (nearest);
 }
 
 static int	get_color(t_scene *rt, t_canvas coo, t_lst_obj *obj)
 {
 	(void) coo;
 	if (obj == NULL)
-		return (encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
+		return (encode_rgb(
+				(int)rt->a_rgb.r, (int)rt->a_rgb.g, (int)rt->a_rgb.b));
 	else
 		return (encode_rgb(
 				(int)obj->rgb_rng.r, (int)obj->rgb_rng.g, (int)obj->rgb_rng.b));
