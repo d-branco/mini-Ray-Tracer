@@ -117,6 +117,6 @@ void	initialize_map(t_scene *rt)
 		}
 		x++;
 	}
-	color_screen(rt, encode_rgb(rt->a_rgb.r, rt->a_rgb.g, rt->a_rgb.b));
+	color_screen(rt, encode_rgb(0, 0, 0));
 	rt->edge = MAP_RESOLUTION;
 }
