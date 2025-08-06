@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 13:33:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 20:13:02 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int			vc_equal(t_tuple a, t_tuple b);
 void		tuple_print(t_tuple data);
 //src/math/vector_math.c
 float		vec_magnitude(t_tuple v);
-t_tuple		vec_normalization(t_tuple v);
+t_tuple		vec_norm(t_tuple v);
 float		vec_inner_product(t_tuple a, t_tuple b);
 t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 

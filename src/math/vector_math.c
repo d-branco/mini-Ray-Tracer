@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:26:53 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/28 14:57:42 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 20:13:02 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	vec_magnitude(t_tuple v)
 }
 
 //returns a unit vector
-t_tuple	vec_normalization(t_tuple v)
+t_tuple	vec_norm(t_tuple v)
 {
 	t_tuple	result;
 	float	magnitude;

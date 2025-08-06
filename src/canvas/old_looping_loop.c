@@ -12,52 +12,55 @@
 
 #include "minirt.h"
 
-static void			canvas_loop(t_scene *rt, int edge);
+static void			canvas_loop(t_scene *rt, int edge, t_canvas *canvas);
 static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
 static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo);
 
 int	old_looping_loop(t_scene *rt)
 {
+	static t_canvas	canvas = {WIDTH, HEIGHT};
+
 	if (rt->edge >= MAP_RESOLUTION)
 		rt->edge = MAP_RESOLUTION - 1;
 	if (rt->edge >= 1)
 	{
-		dbg_write("Drawing a the map with edge: ");
-		if (DEBUG)
-			ft_printf("%i... ", rt->edge);
-		canvas_loop(rt, rt->edge);
-		rt->edge /= 2;
-		if ((rt->edge % 2) && (rt->edge > 2))
-			rt->edge++;
-		if (DEBUG)
-			write(STDOUT_FILENO, "done!\n", ft_strlen("done!\n"));
+		if ((canvas.y >= HEIGHT) && (dbg_write("Drawing with edge: ")))
+			ft_printf("%i... \n", rt->edge);
+		canvas_loop(rt, rt->edge, &canvas);
+		if (canvas.y >= HEIGHT)
+		{
+			canvas = (t_canvas){WIDTH, HEIGHT};
+			rt->edge /= 2;
+			if ((rt->edge % 2) && (rt->edge > 2))
+				rt->edge++;
+		}
 	}
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->mlx_img, 0, 0);
 	rt->key_pressed = FALSE;
 	return (0);
 }
 
-static void	canvas_loop(t_scene *rt, int edge)
+static void	canvas_loop(t_scene *rt, int edge, t_canvas *c)
 {
-	t_canvas	canvas;
 	t_lst_obj	*o;
 
-	canvas.y = edge / 2;
-	while (canvas.y < HEIGHT)
+	if (c->y >= HEIGHT)
+		c->y = edge / 2;
+	if (c->y < HEIGHT)
 	{
-		canvas.x = edge / 2;
-		while (canvas.x < WIDTH)
+		c->x = edge / 2;
+		while (c->x < WIDTH)
 		{
-			if (rt->map[canvas.x][canvas.y] == -1)
+			if (rt->map[c->x][c->y] == -1)
 			{
-				o = get_intersection(rt, canvas);
-				rt->map[canvas.x][canvas.y] = get_color(rt, o);
-				pixel_put(rt, canvas.x, canvas.y, rt->map[canvas.x][canvas.y]);
-				paint_canvas(rt, (t_canvas){canvas.x, canvas.y}, edge);
+				o = get_intersection(rt, *c);
+				rt->map[c->x][c->y] = get_color(rt, o);
+				pixel_put(rt, c->x, c->y, rt->map[c->x][c->y]);
+				paint_canvas(rt, (t_canvas){c->x, c->y}, edge);
 			}
-			canvas.x += edge;
+			c->x += edge;
 		}
-		canvas.y += edge;
+		c->y += edge;
 	}
 }
 

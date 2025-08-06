@@ -46,8 +46,8 @@ static void	key_right_left(t_scene *rt, float translation)
 	else
 		dbg_write("key LEFT pressed!\n");
 	rt->c_coord.x += translation;
-	if (DEBUG)
-		ft_printf("s_scene: c_coord: %3i,%3i,%3i\n", (int) rt->c_coord.x,
+	if (dbg_write("Camara: center: "))
+		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	initialize_map(rt);
 	rt->key_pressed = TRUE;
@@ -62,8 +62,8 @@ static void	key_up_down(t_scene *rt, float translation)
 	else
 		dbg_write("key DOWN pressed!\n");
 	rt->c_coord.y += translation;
-	if (DEBUG)
-		ft_printf("s_scene: c_coord: %3i,%3i,%3i\n", (int) rt->c_coord.x,
+	if (dbg_write("Camara: center: "))
+		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	initialize_map(rt);
 	rt->key_pressed = TRUE;

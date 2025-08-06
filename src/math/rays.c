@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:44:11 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/04 08:46:24 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 20:13:02 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ t_tuple	old_get_ray_direction(t_scene *rt, t_canvas coo)
 	ray_dir = (t_tuple){0, 1, 0, VECTOR};
 	if (((rt->c_ori.y) > 0.9f) || ((rt->c_ori.y) < -0.9f))
 		ray_dir = (t_tuple){0, 0, -1, VECTOR};
-	right = vec_normalization(vec_cross_product(
+	right = vec_norm(vec_cross_product(
 				(t_tuple){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z, 0}, ray_dir));
-	up = vec_normalization(vec_cross_product(
+	up = vec_norm(vec_cross_product(
 				right, (t_tuple){rt->c_ori.x, rt->c_ori.y, rt->c_ori.z, 0}));
 	viewport.x = 2.0f * tan(rt->c_fov / 2.0f);
 	viewport.y = viewport.x * ((float)HEIGHT / (float)WIDTH);
@@ -54,5 +54,5 @@ t_tuple	old_get_ray_direction(t_scene *rt, t_canvas coo)
 	ray_dir.x = rt->c_ori.x + (right.x * v.x) + (up.x * v.y);
 	ray_dir.y = rt->c_ori.y + (right.y * v.x) + (up.y * v.y);
 	ray_dir.z = rt->c_ori.z + (right.z * v.x) + (up.z * v.y);
-	return (vec_normalization(ray_dir));
+	return (vec_norm(ray_dir));
 }
