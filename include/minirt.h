@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 21:05:56 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:05:29 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,13 +141,13 @@ typedef struct s_canvas
 {
 	float						x;
 	float						y;
-}							t_canvas;
+}							t_cnv;
 
 //typedef struct s_canvasf
 //{
 //	float					x;
 //	float					y;
-//}							t_canvasf;
+//}							t_cnvf;
 
 //m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
@@ -191,7 +191,10 @@ int			parse_input(t_scene *rt, char **argv);
 
 //src/canvas/old_looping_loop.c
 int			old_looping_loop(t_scene *rt);
+//src/canvas/color.c
 int			get_color(t_scene *rt, t_lst_obj *obj);
+int			rgb_merge(int rgb1, int rgb2);
+
 //src/math/addiction.c
 t_tuple		vec_addiction(t_tuple a, t_tuple b);
 t_tuple		vec_subtraction(t_tuple a, t_tuple b);
@@ -208,7 +211,7 @@ int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
 //src/math/rays.c
 t_ray		make_ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, float dst);
-t_tuple		old_get_ray_direction(t_scene *rt, t_canvas coo);
+t_tuple		old_get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);
@@ -228,7 +231,7 @@ t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 float		m3_determinant(t_m3 m3);
 //src/matrices/determinant_42.c
 float		m4_determinant(t_m4 m4);
-float		m4_cofactor(t_m4 m4, t_canvas c);
+float		m4_cofactor(t_m4 m4, t_cnv c);
 float		m2_determinant(t_m2 m2);
 //src/matrices/m4_inverse.c
 int			m4_is_invertible(t_m4 m4);

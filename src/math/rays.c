@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:44:11 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 21:08:55 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:07:57 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_tuple	ray_position(t_ray r, float dst)
 			r.origin.z + r.direction.z * dst));
 }
 
-t_tuple	old_get_ray_direction(t_scene *rt, t_canvas coo)
+t_tuple	old_get_ray_direction(t_scene *rt, t_cnv coo)
 {
 	t_tuple		right;
 	t_tuple		up;
-	t_canvas	viewport;
-	t_canvas	v;
+	t_cnv		viewport;
+	t_cnv		v;
 	t_tuple		ray_dir;
 
 	ray_dir = (t_tuple){0, 1, 0, VECTOR};

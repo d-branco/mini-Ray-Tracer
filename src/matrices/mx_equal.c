@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 18:13:28 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 21:14:52 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:08:38 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	m4_equal(t_m4 a, t_m4 b)
 {
-	int			size;
-	t_canvas	i;
+	int		size;
+	t_cnv	i;
 
 	size = 4;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		if (!fl_equal(a.m[(int)i.x][(int)i.y], b.m[(int)i.x][(int)i.y]))
@@ -35,11 +35,11 @@ int	m4_equal(t_m4 a, t_m4 b)
 
 int	m3_equal(t_m3 a, t_m3 b)
 {
-	int			size;
-	t_canvas	i;
+	int		size;
+	t_cnv	i;
 
 	size = 3;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		if (!fl_equal(a.m[(int)i.x][(int)i.y], b.m[(int)i.x][(int)i.y]))
@@ -56,11 +56,11 @@ int	m3_equal(t_m3 a, t_m3 b)
 
 int	m2_equal(t_m2 a, t_m2 b)
 {
-	int			size;
-	t_canvas	i;
+	int		size;
+	t_cnv	i;
 
 	size = 2;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		if (!fl_equal(a.m[(int)i.x][(int)i.y], b.m[(int)i.x][(int)i.y]))

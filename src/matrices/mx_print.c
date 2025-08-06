@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:02:46 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 21:14:13 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:08:53 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef struct s_matrix2
 //matrix_print((float*)matrix_4x4, 4)
 //	void	m4_print(t_m4 matrix)
 //	{
-//		t_canvas	i;
+//		t_cnv	i;
 //		int			size;
 //
 //		size = 4;
-//		i = (t_canvas){0, 0};
+//		i = (t_cnv){0, 0};
 //		while (i.x < size)
 //		{
 //			dbg_write("");
@@ -53,11 +53,11 @@ typedef struct s_matrix2
 
 void	m4_print(t_m4 matrix)
 {
-	t_canvas	i;
-	int			size;
+	t_cnv	i;
+	int		size;
 
 	size = 4;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		dbg_write("");
@@ -78,11 +78,11 @@ void	m4_print(t_m4 matrix)
 
 void	m3_print(t_m3 matrix)
 {
-	t_canvas	i;
-	int			size;
+	t_cnv	i;
+	int		size;
 
 	size = 3;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		dbg_write("");
@@ -102,11 +102,11 @@ void	m3_print(t_m3 matrix)
 
 void	m2_print(t_m2 matrix)
 {
-	t_canvas	i;
-	int			size;
+	t_cnv	i;
+	int		size;
 
 	size = 2;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.x < size)
 	{
 		dbg_write("");

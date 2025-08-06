@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:07:28 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 21:12:36 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:08:23 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	m4_is_invertible(t_m4 m4)
 t_m4	m4_inverse(t_m4 m4)
 {
 	t_m4		ret;
-	t_canvas	i;
+	t_cnv		i;
 	float		det;
 	int			size;
 
 	dbg_write("Remeber to check m4_is_invertible()\n");
 	size = 4;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	det = m4_determinant(m4);
 	while (i.y < size)
 	{

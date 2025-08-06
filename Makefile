@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/04 17:57:23 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/06 22:24:35 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 DEBUG_FLAGS		+= -g
-#DEBUG_FLAGS		+= -pg
+GPROF_FLAGS		+= -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM				:= rm -f
@@ -233,3 +233,10 @@ debug: fclean $(NAME)
 	@\
 	./miniRT test.rt													||	\
 	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
+
+gprof: CFLAGS += $(GPROF_FLAGS)
+gprof: fclean $(NAME)
+	@\
+	./miniRT test.rt													;	\
+	gprof miniRT gmon.out > gmon-ignoreme.txt							;	\
+	cat gmon-ignoreme.txt
