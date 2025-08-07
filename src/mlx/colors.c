@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abessa-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:28:37 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/23 13:28:40 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:49:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	parse_float_rgb(char *line, t_rgb *array)
 	array->b = ft_atof(line);
 }
 
-// from fdf
 void	pixel_put(t_scene *rt, int x, int y, int color)
 {
 	int	offset;
@@ -32,13 +31,11 @@ void	pixel_put(t_scene *rt, int x, int y, int color)
 	*((unsigned int *)(rt->mlx_addr + offset)) = color;
 }
 
-// from fdf
 int	encode_rgb(unsigned char red, unsigned char green, unsigned char blue)
 {
 	return (red << 16 | green << 8 | blue);
 }
 
-// from fdf
 void	color_screen(t_scene *rt, int color)
 {
 	int	x;

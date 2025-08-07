@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:02:46 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 13:45:20 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 21:43:31 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	sp_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *sp)
 	abc.y = 2.0f * vec_inner_product(oc, dir);
 	abc.z = vec_inner_product(oc, oc) - powf((sp->diameter / 2), 2);
 	discriminant = (abc.y * abc.y) - (4 * abc.x * abc.z);
-	if (discriminant < 0)
+	if (discriminant < EPSILON)
 		return (FALSE);
 	if (((-abc.y + sqrtf(discriminant)) / (2 * abc.x) > EPSILON)
 		|| ((-abc.y - sqrtf(discriminant)) / (2 * abc.x) > EPSILON))

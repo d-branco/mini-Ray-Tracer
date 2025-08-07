@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 07:35:01 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/03 14:30:31 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:09:23 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@
 
 t_m4	m4_multiplication(t_m4 a, t_m4 b)
 {
-	t_m4		ret;
-	t_canvas	i;
-	int			size;
+	t_m4	ret;
+	t_cnv	i;
+	int		size;
 
 	size = 4;
-	i = (t_canvas){0, 0};
+	i = (t_cnv){0, 0};
 	while (i.y < size)
 	{
-		ret.m[i.x][i.y] = a.m[i.x][0] * b.m[0][i.y] + a.m[i.x][1] * b.m[1][i.y]
-			+ a.m[i.x][2] * b.m[2][i.y] + a.m[i.x][3] * b.m[3][i.y];
+		ret.m[(int)i.x][(int)i.y]
+			= a.m[(int)i.x][0] * b.m[0][(int)i.y]
+			+ a.m[(int)i.x][1] * b.m[1][(int)i.y]
+			+ a.m[(int)i.x][2] * b.m[2][(int)i.y]
+			+ a.m[(int)i.x][3] * b.m[3][(int)i.y];
 		i.x++;
 		if (i.x >= size)
 		{

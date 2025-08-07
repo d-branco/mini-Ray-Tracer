@@ -6,19 +6,18 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 13:42:52 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:51:14 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void			canvas_loop(t_scene *rt, int edge, t_canvas *canvas);
-static void			paint_canvas(t_scene *rt, t_canvas coo, int edge);
-static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo);
+static void			canvas_loop(t_scene *rt, int edge, t_cnv *canvas);
+static void			paint_cnv(t_scene *rt, t_cnv coo, int edge);
 
 int	old_looping_loop(t_scene *rt)
 {
-	static t_canvas	canvas = {WIDTH, HEIGHT};
+	static t_cnv	canvas = {WIDTH, HEIGHT};
 
 	if (rt->edge >= MAP_RESOLUTION)
 		rt->edge = MAP_RESOLUTION - 1;
@@ -29,7 +28,9 @@ int	old_looping_loop(t_scene *rt)
 		canvas_loop(rt, rt->edge, &canvas);
 		if (canvas.y >= HEIGHT)
 		{
-			canvas = (t_canvas){WIDTH, HEIGHT};
+			canvas = (t_cnv){WIDTH, HEIGHT};
+			if (rt->edge == 1)
+				dbg_write("Drawing done!\n");
 			rt->edge /= 2;
 			if ((rt->edge % 2) && (rt->edge > 2))
 				rt->edge++;
@@ -40,10 +41,8 @@ int	old_looping_loop(t_scene *rt)
 	return (0);
 }
 
-static void	canvas_loop(t_scene *rt, int edge, t_canvas *c)
+static void	canvas_loop(t_scene *rt, int edge, t_cnv *c)
 {
-	t_lst_obj	*o;
-
 	if (c->y >= HEIGHT)
 		c->y = edge / 2;
 	if (c->y < HEIGHT)
@@ -51,12 +50,11 @@ static void	canvas_loop(t_scene *rt, int edge, t_canvas *c)
 		c->x = edge / 2;
 		while (c->x < WIDTH)
 		{
-			if (rt->map[c->x][c->y] == -1)
+			if (rt->map[(int)c->x][(int)c->y] == -1)
 			{
-				o = get_intersection(rt, *c);
-				rt->map[c->x][c->y] = get_color(rt, o);
-				pixel_put(rt, c->x, c->y, rt->map[c->x][c->y]);
-				paint_canvas(rt, (t_canvas){c->x, c->y}, edge);
+				rt->map[(int)c->x][(int)c->y] = pix_smooth4(rt, c);
+				pixel_put(rt, c->x, c->y, rt->map[(int)c->x][(int)c->y]);
+				paint_cnv(rt, (t_cnv){c->x, c->y}, edge);
 			}
 			c->x += edge;
 		}
@@ -64,51 +62,23 @@ static void	canvas_loop(t_scene *rt, int edge, t_canvas *c)
 	}
 }
 
-static void	paint_canvas(t_scene *rt, t_canvas coo, int edge)
+static void	paint_cnv(t_scene *rt, t_cnv coo, int edge)
 {
-	t_canvas	t;
+	t_cnv	t;
 
-	t = (t_canvas){0, 0};
+	t = (t_cnv){0, 0};
 	t.y = - (edge / 2);
-	while (t.y < (edge / 2))
+	//while (t.y < (edge / 2))
 	{
 		t.x = - (edge / 2);
-		while (t.x < (edge / 2))
+		//while (t.x < (edge / 2))
 		{
 			if ((coo.x + t.x < WIDTH) && (coo.y + t.y < HEIGHT)
-				&& (rt->map[coo.x + t.x][coo.y + t.y] == -1))
-				pixel_put(rt, (coo.x + t.x), (coo.y + t.y),
-					rt->map[coo.x][coo.y]);
+				&& (rt->map[(int)(coo.x + t.x)][(int)(coo.y + t.y)] == -1))
+				pixel_put(rt, (coo.x + t.x), ((int)coo.y + t.y),
+					rt->map[(int)coo.x][(int)coo.y]);
 			t.x++;
 		}
 		t.y++;
 	}
-}
-
-static t_lst_obj	*get_intersection(t_scene *rt, t_canvas coo)
-{
-	t_lst_obj	*current;
-	float		dst;
-	t_tuple		ray;
-	t_lst_obj	*nearest;
-
-	current = rt->lst_obj;
-	dst = MAX_FLOAT;
-	ray = old_get_ray_direction(rt, coo);
-	nearest = NULL;
-	while (current != NULL)
-	{
-		if (current->id == e_SPHERE)
-		{
-			if (smll_dst_to_sphere(rt, ray, current, &dst))
-			{
-				nearest = current;
-				nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x,
-						rt->c_coord.y + dst * ray.y,
-						rt->c_coord.z + dst * ray.z);
-			}
-		}
-		current = current->next;
-	}
-	return (nearest);
 }

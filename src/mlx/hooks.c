@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:48:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 10:05:41 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 09:00:42 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,26 @@ int	key_hook(int keycode, t_scene *rt)
 	return (EXIT_SUCCESS);
 }
 
+static void	looping_map(t_scene *rt)
+{
+	int	x;
+	int	y;
+
+	dbg_write("Initiating the map\n");
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			rt->map[x][y] = -1;
+			y++;
+		}
+		x++;
+	}
+	rt->edge = MAP_RESOLUTION;
+}
+
 static void	key_right_left(t_scene *rt, float translation)
 {
 	if (rt->key_pressed == TRUE)
@@ -49,7 +69,8 @@ static void	key_right_left(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	initialize_map(rt);
+	//initialize_map(rt);
+	looping_map(rt);
 	rt->key_pressed = TRUE;
 }
 
@@ -65,6 +86,7 @@ static void	key_up_down(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	initialize_map(rt);
+	//initialize_map(rt);
+	looping_map(rt);
 	rt->key_pressed = TRUE;
 }

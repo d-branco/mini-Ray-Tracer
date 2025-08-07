@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/04 17:57:23 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/07 08:42:33 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS			+= -Werror
 MLX_FLAGS		:= \
 	-L./include/minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 DEBUG_FLAGS		+= -g
-#DEBUG_FLAGS		+= -pg
+GPROF_FLAGS		+= -pg
 DEBUG_FLAGS		+= -D DEBUG=1
 ########################################################### Intermidiate steps #
 RM				:= rm -f
@@ -186,15 +186,15 @@ test: fclean $(NAME)
 	$(COR)$(GRAY)========================================== $(NAME) END\n\
 	$(COR)RETURN VALUE: $$?"											&&	\
 	\
-		norminette src/ include/minirt.h									\
-		| grep -v OK 														\
-		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
 		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
-		| wc -l
+		| wc -l															;	\
+	norminette src/*.c src/*/*.c include/*.h								\
+		| grep -v -E 'OK!|Setting locale to en_US'					\
+		|| echo "$(BLUE)Perfect$(COR)"
 
 valgrind: $(NAME)
 	@\
@@ -208,15 +208,16 @@ valgrind: $(NAME)
 	\
 		./miniRT test.rt												;	\
 	\
-		norminette src/ include/minirt.h									\
-		| grep -v OK 														\
-		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
 		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
-		| wc -l
+		| wc -l															;	\
+	norminette src/*.c src/*/*.c include/*.h								\
+		| grep -v -E 'OK!|Setting locale to en_US'					\
+		|| echo "$(BLUE)Perfect$(COR)"
+
 
 exe: fclean $(NAME)
 	@\
@@ -233,3 +234,10 @@ debug: fclean $(NAME)
 	@\
 	./miniRT test.rt													||	\
 	echo "RETURN VALUE: $(YELLOW)$$?$(COR)"
+
+gprof: CFLAGS += $(GPROF_FLAGS)
+gprof: fclean $(NAME)
+	@\
+	./miniRT test.rt													;	\
+	gprof miniRT gmon.out > gmon-ignoreme.txt							;	\
+	cat gmon-ignoreme.txt
