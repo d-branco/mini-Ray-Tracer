@@ -29,7 +29,8 @@
 # define WIDTH				960
 # define HEIGHT				1010
 
-# define MAP_RESOLUTION 	128
+# define MAP_RESOLUTION		128
+# define POINT_AFTER_POINT	FALSE
 
 # define TRUE				1
 # define FALSE				0

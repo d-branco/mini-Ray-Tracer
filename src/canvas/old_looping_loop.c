@@ -19,8 +19,6 @@ int	old_looping_loop(t_scene *rt)
 {
 	static t_cnv	canvas = {WIDTH, HEIGHT};
 
-	if (rt->edge >= MAP_RESOLUTION)
-		rt->edge = MAP_RESOLUTION - 1;
 	if (rt->edge >= 1)
 	{
 		if ((canvas.y >= HEIGHT) && (dbg_write("Drawing with edge: ")))
@@ -68,17 +66,21 @@ static void	paint_cnv(t_scene *rt, t_cnv coo, int edge)
 
 	t = (t_cnv){0, 0};
 	t.y = - (edge / 2);
-	//while (t.y < (edge / 2))
+	while (t.y < (edge / 2))
 	{
 		t.x = - (edge / 2);
-		//while (t.x < (edge / 2))
+		while (t.x < (edge / 2))
 		{
 			if ((coo.x + t.x < WIDTH) && (coo.y + t.y < HEIGHT)
 				&& (rt->map[(int)(coo.x + t.x)][(int)(coo.y + t.y)] == -1))
 				pixel_put(rt, (coo.x + t.x), ((int)coo.y + t.y),
 					rt->map[(int)coo.x][(int)coo.y]);
 			t.x++;
+			if (POINT_AFTER_POINT)
+				break ;
 		}
 		t.y++;
+		if (POINT_AFTER_POINT)
+			break ;
 	}
 }

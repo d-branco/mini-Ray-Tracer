@@ -69,8 +69,9 @@ static void	key_right_left(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	//initialize_map(rt);
 	looping_map(rt);
+	if (POINT_AFTER_POINT)
+		color_screen(rt, encode_rgb(0, 0, 0));
 	rt->key_pressed = TRUE;
 }
 
@@ -86,7 +87,8 @@ static void	key_up_down(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	//initialize_map(rt);
 	looping_map(rt);
+	if (POINT_AFTER_POINT)
+		color_screen(rt, encode_rgb(0, 0, 0));
 	rt->key_pressed = TRUE;
 }
