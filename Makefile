@@ -54,21 +54,9 @@ SRCS			:=	\
 	src/math/tuples.c														\
 	src/math/vector_math.c													\
 																			\
-	src/matrices/determinant_3.c											\
-	src/matrices/determinant_42.c											\
-	src/matrices/m4_inverse.c												\
-	src/matrices/m4_multiplication.c										\
-	src/matrices/m4_transformations.c										\
-	src/matrices/mx_print.c													\
-	src/matrices/mx_equal.c													\
-	src/matrices/mx_transpose.c												\
-	src/matrices/transform.c												\
-																			\
 	src/mlx/colors.c														\
 	src/mlx/hooks.c															\
 	src/mlx/mlx_init.c														\
-																			\
-	src/obj/hit.c															\
 																			\
 	src/utils/ft_append_chr.c												\
 	src/utils/ft_atof.c														\
@@ -82,7 +70,7 @@ SRCS			:=	\
 	src/utils/obj_lst.c														\
 
 OBJS			:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
-SRCS-BONUS		:=	\
+SRCS-BONUS		:=	
 
 OBJS-BONUS		:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
 ###################################################################### Targets #

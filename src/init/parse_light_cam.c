@@ -82,7 +82,7 @@ static int	parse_camera(char *line, t_scene *rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (rt->c_fov = -2, ft_putstr_fd("Error\ninvalid Camera "
 				"orientation (float,float,float)\n", 2), EXIT_FAILURE);
-	parse_float_vector(line, &(rt->c_ori));
+	parse_float_vector(line, &(rt->c_dir));
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return (rt->c_fov = -2, ft_putstr_fd("Error\ninvalid Camera "
@@ -132,9 +132,9 @@ static int	validate_value_range(t_scene *rt)
 	dbg_write("TODO: Check if Camara orientation vector is normalized!\n");
 	if (!(fl_equal(rt->c_fov, -1.0f))
 		&& ((rt->c_fov < 0.0f) || (rt->c_fov > 180.0f)
-			|| (rt->c_ori.x < -1.0f) || (rt->c_ori.x > 1.0f)
-			|| (rt->c_ori.y < -1.0f) || (rt->c_ori.y > 1.0f)
-			|| (rt->c_ori.z < -1.0f) || (rt->c_ori.z > 1.0f)))
+			|| (rt->c_dir.x < -1.0f) || (rt->c_dir.x > 1.0f)
+			|| (rt->c_dir.y < -1.0f) || (rt->c_dir.y > 1.0f)
+			|| (rt->c_dir.z < -1.0f) || (rt->c_dir.z > 1.0f)))
 		return (ft_putstr_fd("Error\nInvalid Camera value range\n",
 				STDERR_FILENO), EXIT_FAILURE);
 	dbg_write("TODO: Check RGB range if Bonus!\n");

@@ -40,8 +40,6 @@ int	initialize_scene(t_scene *rt, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-//		ft_printf("s_scene: ligh_rgb: %i,%i,%i\n", (int) rt->l_rgb[0],
-//			(int) rt->l_rgb[1], (int) rt->l_rgb[2]);
 void	debug_print_s_scene(t_scene *rt)
 {
 	if (!DEBUG)
@@ -58,8 +56,8 @@ void	debug_print_s_scene(t_scene *rt)
 	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord.x,
 		(int) rt->c_coord.y, (int) rt->c_coord.z);
 	dbg_write("");
-	ft_printf("s_scene: c_orient: %i,%i,%i\n", (int) rt->c_ori.x,
-		(int) rt->c_ori.y, (int) rt->c_ori.z);
+	ft_printf("s_scene: c_dirent: %i,%i,%i\n", (int) rt->c_dir.x,
+		(int) rt->c_dir.y, (int) rt->c_dir.z);
 	dbg_write("");
 	ft_printf("s_scene: c_fov %i degrees\n", (int)rt->c_fov);
 	dbg_write("");
