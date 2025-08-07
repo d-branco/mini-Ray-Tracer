@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/06 22:24:35 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/07 08:42:33 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,15 +186,15 @@ test: fclean $(NAME)
 	$(COR)$(GRAY)========================================== $(NAME) END\n\
 	$(COR)RETURN VALUE: $$?"											&&	\
 	\
-		norminette src/ include/minirt.h									\
-		| grep -v OK 														\
-		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
 		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
-		| wc -l
+		| wc -l															;	\
+	norminette src/*.c src/*/*.c include/*.h								\
+		| grep -v -E 'OK!|Setting locale to en_US'					\
+		|| echo "$(BLUE)Perfect$(COR)"
 
 valgrind: $(NAME)
 	@\
@@ -208,15 +208,16 @@ valgrind: $(NAME)
 	\
 		./miniRT test.rt												;	\
 	\
-		norminette src/ include/minirt.h									\
-		| grep -v OK 														\
-		| grep -v 'Setting locale to en_US'								;	\
 	echo -n "Norminette error count: "									;	\
 		norminette src/ include/minirt.h 									\
 			| grep -v OK 													\
 			| grep -v 'Setting locale to en_US'								\
 			| grep -v Error!												\
-		| wc -l
+		| wc -l															;	\
+	norminette src/*.c src/*/*.c include/*.h								\
+		| grep -v -E 'OK!|Setting locale to en_US'					\
+		|| echo "$(BLUE)Perfect$(COR)"
+
 
 exe: fclean $(NAME)
 	@\

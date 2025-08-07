@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 22:51:13 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:43:16 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void			canvas_loop(t_scene *rt, int edge, t_cnv *canvas);
 static void			paint_cnv(t_scene *rt, t_cnv coo, int edge);
-static t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 
 int	old_looping_loop(t_scene *rt)
 {
@@ -53,15 +52,7 @@ static void	canvas_loop(t_scene *rt, int edge, t_cnv *c)
 		{
 			if (rt->map[(int)c->x][(int)c->y] == -1)
 			{
-				rt->map[(int)c->x][(int)c->y]
-					= rgb_merge(
-						rgb_merge(get_color(rt, get_xs(rt, *c)),
-							get_color(rt,
-								get_xs(rt, (t_cnv){c->x + 0.5, c->y}))),
-						rgb_merge(get_color(rt,
-								get_xs(rt, (t_cnv){c->x + 0.5, c->y + 0.5})),
-							get_color(rt,
-								get_xs(rt, (t_cnv){c->x, c->y + 0.5}))));
+				rt->map[(int)c->x][(int)c->y] = pix_smooth4(rt, c);
 				pixel_put(rt, c->x, c->y, rt->map[(int)c->x][(int)c->y]);
 				paint_cnv(rt, (t_cnv){c->x, c->y}, edge);
 			}
@@ -90,32 +81,4 @@ static void	paint_cnv(t_scene *rt, t_cnv coo, int edge)
 		}
 		t.y++;
 	}
-}
-
-static t_lst_obj	*get_xs(t_scene *rt, t_cnv coo)
-{
-	t_lst_obj	*current;
-	float		dst;
-	t_tuple		ray;
-	t_lst_obj	*nearest;
-
-	current = rt->lst_obj;
-	dst = MAX_FLOAT;
-	ray = old_get_ray_direction(rt, coo);
-	nearest = NULL;
-	while (current != NULL)
-	{
-		if (current->id == e_SPHERE)
-		{
-			if (smll_dst_to_sphere(rt, ray, current, &dst))
-			{
-				nearest = current;
-				nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x,
-						rt->c_coord.y + dst * ray.y,
-						rt->c_coord.z + dst * ray.z);
-			}
-		}
-		current = current->next;
-	}
-	return (nearest);
 }

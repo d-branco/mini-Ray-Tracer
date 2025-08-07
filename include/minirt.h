@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 22:05:29 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:32:18 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ int			parse_input(t_scene *rt, char **argv);
 //src/canvas/old_looping_loop.c
 int			old_looping_loop(t_scene *rt);
 //src/canvas/color.c
+int			pix_smooth4(t_scene *rt, t_cnv *c);
 int			get_color(t_scene *rt, t_lst_obj *obj);
 int			rgb_merge(int rgb1, int rgb2);
 
@@ -208,6 +209,7 @@ int			smll_dst_to_sphere(
 				t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst);
 //src/math/intersections.c
 int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
+t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 //src/math/rays.c
 t_ray		make_ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, float dst);
