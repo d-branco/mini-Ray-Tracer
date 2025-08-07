@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	temp_testing(&rt);
 	mlx_loop_hook(rt.mlx, &old_looping_loop, &rt);
 	mlx_loop(rt.mlx);
-	return (dbg_write("ERROR: return from main()\n"), EXIT_FAILURE);
+	return (dbg_write_code("ERROR: return from main()\n", RED), EXIT_FAILURE);
 }
 
 void	temp_testing(t_scene *rt)

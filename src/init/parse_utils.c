@@ -65,10 +65,10 @@ int	validate_object_parsing(t_lst_obj *o)
 			|| (o->rgb_rng.b < 0.0f) || (o->rgb_rng.b > 255.0f)))
 		return (ft_printf("Error\nInvalid rgb range value\n"), EXIT_FAILURE);
 	if (((o->id == e_PLANE) || (o->id == e_CYlINDER))
-		&& ((o->vec_uni.x < 0.0f) || (o->vec_uni.x > 1.0f)
-			|| (o->vec_uni.y < 0.0f) || (o->vec_uni.y > 1.0f)
-			|| (o->vec_uni.z < 0.0f) || (o->vec_uni.z > 1.0f)))
-		return (ft_printf("Error\nInvalid vector unit value\n"), EXIT_FAILURE);
+		&& ((o->vec_uni.x < -1.0f) || (o->vec_uni.x > 1.0f)
+			|| (o->vec_uni.y < -1.0f) || (o->vec_uni.y > 1.0f)
+			|| (o->vec_uni.z < -1.0f) || (o->vec_uni.z > 1.0f)))
+		return (ft_printf("Error\nInvalid pl/cy vector unit value\n", o->id), 1);
 	if ((o->id == e_CYlINDER) && (o->height <= 0))
 		return (ft_printf("Error\nInvalid height value\n"), EXIT_FAILURE);
 	return (dbg_write("Obj values validated\n"), EXIT_SUCCESS);

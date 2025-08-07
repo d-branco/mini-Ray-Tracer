@@ -19,7 +19,7 @@ int	close_win_button(t_scene *rt)
 {
 	dbg_write("Closing by CLOSE button on the window\n");
 	finalize(rt);
-	return (dbg_write("ERROR: return from close_win_button()\n"), 0);
+	return (dbg_write_code("ERROR: return from close_win_button()\n", RED), 0);
 }
 
 int	key_hook(int keycode, t_scene *rt)
@@ -69,9 +69,9 @@ static void	key_right_left(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	looping_map(rt);
-	if (POINT_AFTER_POINT)
+	if (!POINT_AFTER_POINT)
 		color_screen(rt, encode_rgb(0, 0, 0));
+	looping_map(rt);
 	rt->key_pressed = TRUE;
 }
 
@@ -87,8 +87,8 @@ static void	key_up_down(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	looping_map(rt);
-	if (POINT_AFTER_POINT)
+	if (!POINT_AFTER_POINT)
 		color_screen(rt, encode_rgb(0, 0, 0));
+	looping_map(rt);
 	rt->key_pressed = TRUE;
 }

@@ -30,7 +30,7 @@
 # define HEIGHT				1010
 
 # define MAP_RESOLUTION		128
-# define POINT_AFTER_POINT	FALSE
+# define POINT_AFTER_POINT	TRUE
 
 # define TRUE				1
 # define FALSE				0

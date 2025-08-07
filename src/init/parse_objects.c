@@ -91,7 +91,7 @@ static int	parse_plane(char *line, t_scene *rt)
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid pl vector!\n"), free(obj), 1);
-	parse_float_vector(line, &(*obj).vec_uni);
+	parse_float_vector(line, &(obj->vec_uni));
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid pl rgb range!\n"), free(obj), 1);

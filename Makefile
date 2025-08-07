@@ -122,7 +122,7 @@ clean:
 	make --silent --no-print-directory -C $(LIBFT_DIR) clean			;	\
 	make --silent --no-print-directory -C $(MINILIBX_DIR) clean			;	\
 	$(RM) -r $(BUILD_DIR)												;	\
-	rm -fr *.o *.gch *.exe 				 								;	\
+	rm -fr *.o include/*.gch *.exe 				 								;	\
 	echo "$(GRAY)Files cleaned.$(COR)"
 
 fclean: clean
@@ -135,7 +135,7 @@ fclean: clean
 re: fclean all
 	@echo "$(GRAY)redone$(COR)"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re scenes
 #################################################################### mini libX #
 MINILIBX_URL := \
 	https://cdn.intra.42.fr/document/document/36087/minilibx-linux.tgz
@@ -241,3 +241,13 @@ gprof: fclean $(NAME)
 	./miniRT test.rt													;	\
 	gprof miniRT gmon.out > gmon-ignoreme.txt							;	\
 	cat gmon-ignoreme.txt
+
+scenes:
+	@\
+	./miniRT test.rt													;	\
+	for file in scenes/*; do												\
+		echo "    Now testing: $(RED) $$file $(COR)"					;	\
+		./miniRT "$$file"												;	\
+		echo															;	\
+		sleep 0.42														;	\
+	done

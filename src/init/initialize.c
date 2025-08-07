@@ -24,7 +24,7 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
-		return (dbg_write("ERROR: Parsing input\n"), 1);
+		return (dbg_write_code("ERROR:\n Parsing input\n", RED), 1);
 	rt->mlx = mlx_init();
 	dbg_write_code("Initiating miniLibX\n", PURPLE);
 	if (mlx_initialize(rt) != EXIT_SUCCESS)

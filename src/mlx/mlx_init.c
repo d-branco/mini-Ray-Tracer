@@ -19,6 +19,6 @@ int	mlx_initialize(t_scene *rt)
 	rt->mlx_addr = mlx_get_data_addr(
 			rt->mlx_img, &rt->bits_per_pixel, &rt->line_length, &rt->endian);
 	if (!rt->mlx_win || !rt->mlx_img || !rt->mlx_addr)
-		return (finalize(rt), dbg_write("ERROR: mlx pointer\n"), 1);
+		return (finalize(rt), dbg_write_code("ERROR: mlx pointer\n", RED), 1);
 	return (EXIT_SUCCESS);
 }
