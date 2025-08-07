@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:03:38 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 08:43:16 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:51:14 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ static void	paint_cnv(t_scene *rt, t_cnv coo, int edge)
 
 	t = (t_cnv){0, 0};
 	t.y = - (edge / 2);
-	while (t.y < (edge / 2))
+	//while (t.y < (edge / 2))
 	{
 		t.x = - (edge / 2);
-		while (t.x < (edge / 2))
+		//while (t.x < (edge / 2))
 		{
 			if ((coo.x + t.x < WIDTH) && (coo.y + t.y < HEIGHT)
 				&& (rt->map[(int)(coo.x + t.x)][(int)(coo.y + t.y)] == -1))
