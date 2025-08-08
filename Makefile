@@ -43,7 +43,7 @@ SRCS			:=	\
 	src/init/parse.c														\
 																			\
 	src/canvas/color.c														\
-	src/canvas/old_looping_loop.c											\
+	src/canvas/looping_loop.c												\
 																			\
 	src/math/addiction.c													\
 	src/math/comparisson.c													\
@@ -70,7 +70,7 @@ SRCS			:=	\
 	src/utils/obj_lst.c														\
 
 OBJS			:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
-SRCS-BONUS		:=	
+SRCS-BONUS		:=
 
 OBJS-BONUS		:= $(SRCS-BONUS:src/%.c=$(BUILD_DIR)/%.o)
 ###################################################################### Targets #
@@ -110,7 +110,7 @@ clean:
 	make --silent --no-print-directory -C $(LIBFT_DIR) clean			;	\
 	make --silent --no-print-directory -C $(MINILIBX_DIR) clean			;	\
 	$(RM) -r $(BUILD_DIR)												;	\
-	rm -fr *.o include/*.gch *.exe 				 								;	\
+	rm -fr *.o include/*.gch *.exe 				 						;	\
 	echo "$(GRAY)Files cleaned.$(COR)"
 
 fclean: clean
@@ -181,7 +181,7 @@ test: fclean $(NAME)
 			| grep -v Error!												\
 		| wc -l															;	\
 	norminette src/*.c src/*/*.c include/*.h								\
-		| grep -v -E 'OK!|Setting locale to en_US'					\
+		| grep -v -E 'OK!|Setting locale to en_US'							\
 		|| echo "$(BLUE)Perfect$(COR)"
 
 valgrind: $(NAME)
@@ -203,7 +203,7 @@ valgrind: $(NAME)
 			| grep -v Error!												\
 		| wc -l															;	\
 	norminette src/*.c src/*/*.c include/*.h								\
-		| grep -v -E 'OK!|Setting locale to en_US'					\
+		| grep -v -E 'OK!|Setting locale to en_US'							\
 		|| echo "$(BLUE)Perfect$(COR)"
 
 

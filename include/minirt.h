@@ -158,8 +158,8 @@ void		parse_float_point(char *line, t_tuple *array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
-//src/canvas/old_looping_loop.c
-int			old_looping_loop(t_scene *rt);
+//src/canvas/looping_loop.c
+int			looping_loop(t_scene *rt);
 //src/canvas/color.c
 int			pix_smooth4(t_scene *rt, t_cnv *c);
 int			get_color(t_scene *rt, t_lst_obj *obj);
@@ -182,7 +182,7 @@ t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 //src/math/rays.c
 t_ray		make_ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, float dst);
-t_tuple		old_get_ray_direction(t_scene *rt, t_cnv coo);
+t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);

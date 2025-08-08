@@ -32,7 +32,7 @@ t_tuple	ray_position(t_ray r, float dst)
 			r.origin.z + r.direction.z * dst));
 }
 
-t_tuple	old_get_ray_direction(t_scene *rt, t_cnv coo)
+t_tuple	get_ray_direction(t_scene *rt, t_cnv coo)
 {
 	t_tuple		right;
 	t_tuple		up;
