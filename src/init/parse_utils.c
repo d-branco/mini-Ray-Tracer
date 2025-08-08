@@ -68,7 +68,7 @@ int	validate_object_parsing(t_lst_obj *o)
 		&& ((o->vec_uni.x < -1.0f) || (o->vec_uni.x > 1.0f)
 			|| (o->vec_uni.y < -1.0f) || (o->vec_uni.y > 1.0f)
 			|| (o->vec_uni.z < -1.0f) || (o->vec_uni.z > 1.0f)))
-		return (ft_printf("Error\nInvalid pl/cy vector unit value\n", o->id), 1);
+		return (ft_printf("Error\nInvalid pl/cy vector unit value\n"), 1);
 	if ((o->id == e_CYlINDER) && (o->height <= 0))
 		return (ft_printf("Error\nInvalid height value\n"), EXIT_FAILURE);
 	return (dbg_write("Obj values validated\n"), EXIT_SUCCESS);

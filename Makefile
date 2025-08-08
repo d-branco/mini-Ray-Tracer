@@ -48,6 +48,7 @@ SRCS			:=	\
 	src/math/addiction.c													\
 	src/math/comparisson.c													\
 	src/math/rays.c															\
+	src/math/intersection_plane.c											\
 	src/math/intersection_sphere.c											\
 	src/math/intersections.c												\
 	src/math/scalar_multiplication.c										\

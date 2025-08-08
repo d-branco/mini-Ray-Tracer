@@ -30,7 +30,7 @@
 # define HEIGHT				1010
 
 # define MAP_RESOLUTION		128
-# define POINT_AFTER_POINT	TRUE
+# define POINT_AFTER_POINT	FALSE
 
 # define TRUE				1
 # define FALSE				0
@@ -204,6 +204,11 @@ t_tuple		pnt_subtraction_into_vec(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);
+//src/math/intersection_plane.c
+int			pl_intersect(
+				t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *pl);
+int			smll_dst_to_plane(
+				t_scene *rt, t_tuple dir, t_lst_obj *pl, float *dst);
 //src/math/intersection_sphere.c
 int			sp_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *sp);
 int			smll_dst_to_sphere(
