@@ -25,21 +25,14 @@ t_lst_obj	*get_xs(t_scene *rt, t_cnv coo)
 	nearest = NULL;
 	while (current != NULL)
 	{
-		if ((current->id == e_SPHERE)
-			&& (smll_dst_to_sphere(rt, ray, current, &dst)))
+		if (((current->id == e_SPHERE)
+				&& (smll_dst_to_sphere(rt, ray, current, &dst)))
+			|| ((current->id == e_PLANE)
+				&& (smll_dst_to_plane(rt, ray, current, &dst))))
 		{
 			nearest = current;
-			nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x,
-					rt->c_coord.y + dst * ray.y,
-					rt->c_coord.z + dst * ray.z);
-		}
-		else if ((current->id == e_PLANE)
-			&& (smll_dst_to_plane(rt, ray, current, &dst)))
-		{
-			nearest = current;
-			nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x,
-					rt->c_coord.y + dst * ray.y,
-					rt->c_coord.z + dst * ray.z);
+			nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x, rt->c_coord.y
+					+ dst * ray.y, rt->c_coord.z + dst * ray.z);
 		}
 		current = current->next;
 	}

@@ -41,9 +41,9 @@ int	get_color(t_scene *rt, t_lst_obj *obj)
 		(sqrtf(obj->rgb_rng.b * rt->a_rgb.b) * rt->a_ratio)};
 	xs_to_c = pnt_subtraction_into_vec(rt->l_coo, obj->xs_pnt);
 	pnt = amb;
-	pnt = (t_rgb){sqrtf(pnt.r * obj->rgb_rng.r * rt->l_bri * normal),
-		sqrtf(pnt.g * obj->rgb_rng.g * rt->l_bri * normal),
-		sqrtf(pnt.b * obj->rgb_rng.b * rt->l_bri * normal)};
+	pnt = (t_rgb){sqrtf(obj->rgb_rng.r * rt->l_rgb.r * rt->l_bri * normal),
+		sqrtf(obj->rgb_rng.g * rt->l_rgb.g * rt->l_bri * normal),
+		sqrtf(obj->rgb_rng.b * rt->l_rgb.b * rt->l_bri * normal)};
 	pnt = rgb_ratios(pnt, amb);
 	if (!check_obj_xs(rt, obj->xs_pnt, xs_to_c))
 		return (encode_rgb((int)pnt.r, (int)pnt.g, (int)pnt.b));
