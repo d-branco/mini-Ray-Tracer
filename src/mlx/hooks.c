@@ -37,7 +37,7 @@ int	key_hook(int keycode, t_scene *rt)
 	return (EXIT_SUCCESS);
 }
 
-static void	looping_map(t_scene *rt)
+static void	ghosting_map(t_scene *rt)
 {
 	int	x;
 	int	y;
@@ -69,9 +69,10 @@ static void	key_right_left(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	if (!POINT_AFTER_POINT)
-		color_screen(rt, encode_rgb(0, 0, 0));
-	looping_map(rt);
+	if (POINT_AFTER_POINT)
+		ghosting_map(rt);
+	else
+		initialize_map(rt);
 	rt->key_pressed = TRUE;
 }
 
@@ -87,8 +88,9 @@ static void	key_up_down(t_scene *rt, float translation)
 	if (dbg_write("Camara: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
-	if (!POINT_AFTER_POINT)
-		color_screen(rt, encode_rgb(0, 0, 0));
-	looping_map(rt);
+	if (POINT_AFTER_POINT)
+		ghosting_map(rt);
+	else
+		initialize_map(rt);
 	rt->key_pressed = TRUE;
 }

@@ -23,9 +23,6 @@
 #  define DEBUG FALSE
 # endif
 
-//# define WIDTH (1920 / 2)
-//# define HEIGHT (1080 - 40)
-//# define HEIGHT (1080 - 40 - 30)
 # define WIDTH				960
 # define HEIGHT				1010
 
@@ -34,13 +31,10 @@
 
 # define TRUE				1
 # define FALSE				0
-
 # define UNSET				-1
 
 # define PI					3.14159265358979323846264338328f
 # define TAU				6.28318530717958647692528676656f
-
-// Margin Of Error
 # define EPSILON			0.000042f
 # define MAX_FLOAT			340282346638528859811704183484516925440.0f
 
@@ -48,16 +42,21 @@
 # define VECTOR				0
 
 # define PURPLE				"\033[35m"
-# define GRAY				"\033[90m"
-# define YELLOW				"\033[93m"
-# define BLUE				"\033[96m"
-# define RED				"\033[41m"
+# define GRAY				"\033[30m"
+# define YELLOW				"\033[33m"
+# define BLUE				"\033[36m"
+# define RED				"\033[31m"
 
 # define KEY_ESC			65307
+
 # define KEY_LEFT			65361
+# define KEY_UP				65362
 # define KEY_RIGHT			65363
 # define KEY_DOWN			65364
-# define KEY_UP				65362
+
+# define KEY_C				99
+# define KEY_A				97
+# define KEY_L				108
 
 typedef struct s_rgb
 {
@@ -80,7 +79,7 @@ typedef struct s_scene
 	float					a_ratio;
 	struct s_rgb			a_rgb;
 	struct s_tuple			c_coord;
-	struct s_tuple			c_ori;
+	struct s_tuple			c_dir;
 	float					c_fov;
 	struct s_tuple			l_coo;
 	float					l_bri;
@@ -105,17 +104,6 @@ enum	e_obj
 	e_CYlINDER
 };
 
-typedef struct s_intersect
-{
-	int						count;
-	float					dst[2];
-}							t_intersect;
-
-typedef struct s_matrix4
-{
-	float					m[4][4];
-}							t_m4;
-
 typedef struct s_lst_obj
 {
 	int						id;
@@ -124,8 +112,6 @@ typedef struct s_lst_obj
 	struct s_rgb			rgb_rng;
 	struct s_tuple			vec_uni;
 	float					height;
-	struct s_intersect		intersect;
-	struct s_matrix4		transform;
 	struct s_tuple			xs_pnt;
 	struct s_lst_obj		*next;
 }							t_lst_obj;
@@ -143,24 +129,6 @@ typedef struct s_canvas
 	float						x;
 	float						y;
 }							t_cnv;
-
-//typedef struct s_canvasf
-//{
-//	float					x;
-//	float					y;
-//}							t_cnvf;
-
-//m4 = (t_m4){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
-
-typedef struct s_matrix3
-{
-	float					m[3][3];
-}							t_m3;
-
-typedef struct s_matrix2
-{
-	float					m[2][2];
-}							t_m2;
 
 typedef struct s_ray
 {
@@ -190,8 +158,8 @@ void		parse_float_point(char *line, t_tuple *array);
 //src/init/parse.c
 int			parse_input(t_scene *rt, char **argv);
 
-//src/canvas/old_looping_loop.c
-int			old_looping_loop(t_scene *rt);
+//src/canvas/looping_loop.c
+int			looping_loop(t_scene *rt);
 //src/canvas/color.c
 int			pix_smooth4(t_scene *rt, t_cnv *c);
 int			get_color(t_scene *rt, t_lst_obj *obj);
@@ -219,7 +187,7 @@ t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 //src/math/rays.c
 t_ray		make_ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, float dst);
-t_tuple		old_get_ray_direction(t_scene *rt, t_cnv coo);
+t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);
@@ -235,39 +203,6 @@ t_tuple		vec_norm(t_tuple v);
 float		vec_inner_product(t_tuple a, t_tuple b);
 t_tuple		vec_cross_product(t_tuple a, t_tuple b);
 
-//src/matrices/determinant_3.c
-float		m3_determinant(t_m3 m3);
-//src/matrices/determinant_42.c
-float		m4_determinant(t_m4 m4);
-float		m4_cofactor(t_m4 m4, t_cnv c);
-float		m2_determinant(t_m2 m2);
-//src/matrices/m4_inverse.c
-int			m4_is_invertible(t_m4 m4);
-t_m4		m4_inverse(t_m4 m4);
-//src/matrices/m4_multiplication.c
-t_m4		m4_multiplication(t_m4 a, t_m4 b);
-t_tuple		m4_tuple_multiplication(t_m4 m, t_tuple t);
-//src/matrices/transformations.c
-t_m4		translation(t_tuple t);
-t_m4		scaling(t_tuple t);
-t_m4		rotate_x(float rad);
-t_m4		rotate_y(float rad);
-t_m4		rotate_z(float rad);
-//src/matrices/mx_print.c
-void		m4_print(t_m4 matrix);
-void		m3_print(t_m3 matrix);
-void		m2_print(t_m2 matrix);
-//src/matrices/mx_equal.c
-int			m4_equal(t_m4 a, t_m4 b);
-int			m3_equal(t_m3 a, t_m3 b);
-int			m2_equal(t_m2 a, t_m2 b);
-//src/matrices/mx_transpose.c
-t_m4		m4_transpose(t_m4 a);
-t_m3		m3_transpose(t_m3 a);
-t_m2		m2_transpose(t_m2 a);
-//src/matrices/trasnform.c
-t_ray		ray_transform(t_ray ray, t_m4 matrix);
-
 //src/mlx/colors.c
 void		parse_float_rgb(char *line, t_rgb *array);
 void		pixel_put(t_scene *rt, int x, int y, int color);
@@ -279,9 +214,6 @@ int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);
 //src/mlx/mlx_init.c
 int			mlx_initialize(t_scene *rt);
-
-//src/obj/hit.c
-t_lst_xs	*obj_hit(t_lst_xs *xs);
 
 //src/utils
 char		*append_chr(char *str, char c);

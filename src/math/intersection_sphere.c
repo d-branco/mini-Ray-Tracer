@@ -32,12 +32,6 @@ int	sp_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *sp)
 	return (FALSE);
 }
 
-//typedef struct s_intersect
-//{
-//	int						count;
-//	float					dst[2];
-//}							t_intersect;
-
 int	smll_dst_to_sphere(t_scene *rt, t_tuple dir, t_lst_obj *sp, float *dst)
 {
 	t_tuple		oc;

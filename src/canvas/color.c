@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:26:44 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 08:29:54 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/07 16:39:16 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,10 @@ static t_rgb	rgb_ratios(t_rgb pnt, t_rgb amb);
 
 int	pix_smooth4(t_scene *rt, t_cnv *c)
 {
-	return (
-		rgb_merge(
-			rgb_merge(
-				get_color(rt, get_xs(rt, *c)),
+	return (rgb_merge(rgb_merge(get_color(rt, get_xs(rt, *c)),
 				get_color(rt, get_xs(rt, (t_cnv){c->x + 0.5, c->y}))),
-		rgb_merge(
-			get_color(rt, get_xs(rt, (t_cnv){c->x + 0.5, c->y + 0.5})),
-		get_color(rt, get_xs(rt, (t_cnv){c->x, c->y + 0.5}))))
-		);
+		rgb_merge(get_color(rt, get_xs(rt, (t_cnv){c->x + 0.5, c->y + 0.5})),
+		get_color(rt, get_xs(rt, (t_cnv){c->x, c->y + 0.5})))));
 }
 
 int	get_color(t_scene *rt, t_lst_obj *obj)

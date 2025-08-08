@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   old_looping_loop.c                                 :+:      :+:    :+:   */
+/*   looping_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 static void			canvas_loop(t_scene *rt, int edge, t_cnv *canvas);
 static void			paint_cnv(t_scene *rt, t_cnv coo, int edge);
 
-int	old_looping_loop(t_scene *rt)
+int	looping_loop(t_scene *rt)
 {
 	static t_cnv	canvas = {WIDTH, HEIGHT};
 

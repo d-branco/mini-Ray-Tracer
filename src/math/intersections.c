@@ -21,7 +21,7 @@ t_lst_obj	*get_xs(t_scene *rt, t_cnv coo)
 
 	current = rt->lst_obj;
 	dst = MAX_FLOAT;
-	ray = old_get_ray_direction(rt, coo);
+	ray = get_ray_direction(rt, coo);
 	nearest = NULL;
 	while (current != NULL)
 	{
