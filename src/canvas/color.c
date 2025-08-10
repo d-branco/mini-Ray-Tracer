@@ -31,9 +31,18 @@ int	get_color(t_scene *rt, t_lst_obj *obj)
 
 	if (obj == NULL)
 		return (encode_rgb(0, 0, 0));
-	normal = vec_inner_product(
-			vec_norm(pnt_subtraction_into_vec(obj->center, obj->xs_pnt)),
-			vec_norm(pnt_subtraction_into_vec(obj->xs_pnt, rt->l_coo)));
+	if (obj->id == e_SPHERE)
+		normal = vec_inner_product(
+				vec_norm(pnt_subtraction_into_vec(obj->center, obj->xs_pnt)),
+				vec_norm(pnt_subtraction_into_vec(obj->xs_pnt, rt->l_coo)));
+	if (obj->id == e_PLANE)
+	{
+		normal = vec_inner_product(
+				vec_norm(obj->vec_uni),
+				vec_norm(pnt_subtraction_into_vec(rt->l_coo, obj->xs_pnt)));
+		if (normal < 0)
+			normal = -normal;
+	}
 	if (normal <= EPSILON)
 		normal = 0;
 	amb = (t_rgb){(sqrtf(obj->rgb_rng.r * rt->a_rgb.r) * rt->a_ratio),
@@ -41,9 +50,9 @@ int	get_color(t_scene *rt, t_lst_obj *obj)
 		(sqrtf(obj->rgb_rng.b * rt->a_rgb.b) * rt->a_ratio)};
 	xs_to_c = pnt_subtraction_into_vec(rt->l_coo, obj->xs_pnt);
 	pnt = amb;
-	pnt = (t_rgb){sqrtf(obj->rgb_rng.r * rt->l_rgb.r * rt->l_bri * normal),
-		sqrtf(obj->rgb_rng.g * rt->l_rgb.g * rt->l_bri * normal),
-		sqrtf(obj->rgb_rng.b * rt->l_rgb.b * rt->l_bri * normal)};
+	pnt = (t_rgb){sqrtf(obj->rgb_rng.r * rt->l_rgb.r * rt->l_bri) * normal,
+		sqrtf(obj->rgb_rng.g * rt->l_rgb.g * rt->l_bri) * normal,
+		sqrtf(obj->rgb_rng.b * rt->l_rgb.b * rt->l_bri) * normal};
 	pnt = rgb_ratios(pnt, amb);
 	if (!check_obj_xs(rt, obj->xs_pnt, xs_to_c))
 		return (encode_rgb((int)pnt.r, (int)pnt.g, (int)pnt.b));
