@@ -28,7 +28,7 @@ int	looping_loop(t_scene *rt)
 		{
 			canvas = (t_cnv){WIDTH, HEIGHT};
 			if (rt->edge == 1)
-				dbg_write("Drawing done!\n");
+				dbg_write_code("Drawing done!\n", YELLOW);
 			rt->edge /= 2;
 			if ((rt->edge % 2) && (rt->edge > 2))
 				rt->edge++;
@@ -50,7 +50,7 @@ static void	canvas_loop(t_scene *rt, int edge, t_cnv *c)
 		{
 			if (rt->map[(int)c->x][(int)c->y] == -1)
 			{
-				rt->map[(int)c->x][(int)c->y] = pix_smooth4(rt, c);
+				rt->map[(int)c->x][(int)c->y] = pix_smooth16(rt, c);
 				pixel_put(rt, c->x, c->y, rt->map[(int)c->x][(int)c->y]);
 				paint_cnv(rt, (t_cnv){c->x, c->y}, edge);
 			}

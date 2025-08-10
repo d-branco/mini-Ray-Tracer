@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 08:50:46 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:00:28 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 # define PURPLE				"\033[35m"
 # define GRAY				"\033[30m"
-# define YELLOW				"\033[33m"
+# define YELLOW				"\033[93m"
 # define BLUE				"\033[36m"
 # define RED				"\033[31m"
 
@@ -161,14 +161,14 @@ int			parse_input(t_scene *rt, char **argv);
 //src/canvas/looping_loop.c
 int			looping_loop(t_scene *rt);
 //src/canvas/color.c
-int			pix_smooth4(t_scene *rt, t_cnv *c);
+int			pix_smooth16(t_scene *rt, t_cnv *c);
 int			get_color(t_scene *rt, t_lst_obj *obj);
 int			rgb_merge(int rgb1, int rgb2);
 
 //src/math/addiction.c
 t_tuple		vec_addiction(t_tuple a, t_tuple b);
 t_tuple		vec_subtraction(t_tuple a, t_tuple b);
-t_tuple		pnt_subtraction_into_vec(t_tuple a, t_tuple b);
+t_tuple		pnt_subtr_to_vec(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);

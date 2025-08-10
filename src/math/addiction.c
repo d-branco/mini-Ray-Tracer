@@ -32,7 +32,7 @@ t_tuple	vec_subtraction(t_tuple a, t_tuple b)
 	return (result);
 }
 
-t_tuple	pnt_subtraction_into_vec(t_tuple a, t_tuple b)
+t_tuple	pnt_subtr_to_vec(t_tuple a, t_tuple b)
 {
 	t_tuple	result;
 
