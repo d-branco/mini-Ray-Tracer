@@ -12,26 +12,6 @@
 
 #include "minirt.h"
 
-t_ray	make_ray(t_tuple origin, t_tuple direction)
-{
-	t_ray	ret;
-
-	if (origin.w != POINT)
-		dbg_write_code("Error:\nThis is NOT a point!\n", RED);
-	if (direction.w != VECTOR)
-		dbg_write_code("Error:\nThis is NOT a vector!\n", RED);
-	ret = (t_ray){origin, direction};
-	return (ret);
-}
-
-t_tuple	ray_position(t_ray r, float dst)
-{
-	return (mk_pnt(
-			r.origin.x + r.direction.x * dst,
-			r.origin.y + r.direction.y * dst,
-			r.origin.z + r.direction.z * dst));
-}
-
 t_tuple	get_ray_direction(t_scene *rt, t_cnv coo)
 {
 	t_tuple		right;

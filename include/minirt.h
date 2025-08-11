@@ -54,9 +54,9 @@
 # define KEY_RIGHT			65363
 # define KEY_DOWN			65364
 
-# define KEY_C				99
-# define KEY_A				97
-# define KEY_L				108
+# define KEY_C				'C'
+# define KEY_A				'A'
+# define KEY_L				'L'
 
 typedef struct s_rgb
 {
@@ -116,25 +116,11 @@ typedef struct s_lst_obj
 	struct s_lst_obj		*next;
 }							t_lst_obj;
 
-//intersection list
-typedef struct s_lst_xs
-{
-	float					dst;
-	t_lst_obj				*obj;
-	struct s_lst_xs			*next;
-}							t_lst_xs;
-
 typedef struct s_canvas
 {
 	float						x;
 	float						y;
 }							t_cnv;
-
-typedef struct s_ray
-{
-	t_tuple					origin;
-	t_tuple					direction;
-}							t_ray;
 
 //src/init/finalize.c
 void		finalize(t_scene *rt);
@@ -185,8 +171,6 @@ int			smll_dst_to_sphere(
 int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
 t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 //src/math/rays.c
-t_ray		make_ray(t_tuple origin, t_tuple direction);
-t_tuple		ray_position(t_ray r, float dst);
 t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
