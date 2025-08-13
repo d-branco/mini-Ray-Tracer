@@ -175,12 +175,6 @@ t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);
-//src/math/tuples.c
-t_tuple		mk_pnt(float x, float y, float z);
-t_tuple		mk_vec(float x, float y, float z);
-int			pt_equal(t_tuple a, t_tuple b);
-int			vc_equal(t_tuple a, t_tuple b);
-void		tuple_print(t_tuple data);
 //src/math/vector_math.c
 float		vec_magnitude(t_tuple v);
 t_tuple		vec_norm(t_tuple v);

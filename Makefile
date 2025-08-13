@@ -52,7 +52,6 @@ SRCS			:=	\
 	src/math/intersection_sphere.c											\
 	src/math/intersections.c												\
 	src/math/scalar_multiplication.c										\
-	src/math/tuples.c														\
 	src/math/vector_math.c													\
 																			\
 	src/mlx/colors.c														\

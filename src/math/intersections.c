@@ -31,8 +31,9 @@ t_lst_obj	*get_xs(t_scene *rt, t_cnv coo)
 				&& (smll_dst_to_plane(rt, ray, current, &dst))))
 		{
 			nearest = current;
-			nearest->xs_pnt = mk_pnt(rt->c_coord.x + dst * ray.x, rt->c_coord.y
-					+ dst * ray.y, rt->c_coord.z + dst * ray.z);
+			nearest->xs_pnt = (t_tuple){rt->c_coord.x + dst * ray.x,
+				rt->c_coord.y + dst * ray.y,
+				rt->c_coord.z + dst * ray.z, POINT};
 		}
 		current = current->next;
 	}
