@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/10 19:00:28 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 07:40:12 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ int			smll_dst_to_sphere(
 //src/math/intersections.c
 int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
 t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
+//src/math/normal.c
+float		calculate_normal(t_scene *rt, t_lst_obj *obj);
 //src/math/rays.c
 t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
 //src/math/scalar_multiplication.c

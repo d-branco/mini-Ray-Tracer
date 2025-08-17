@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:26:44 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 16:39:16 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 07:40:26 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,7 @@ int	get_color(t_scene *rt, t_lst_obj *obj)
 		(sqrtf(obj->rgb_rng.b * rt->a_rgb.b) * rt->a_ratio)};
 	if (check_obj_xs(rt, obj->xs_pnt, pnt_subtr_to_vec(rt->l_coo, obj->xs_pnt)))
 		return (encode_rgb((int)amb.r, (int)amb.g, (int)amb.b));
-	if (obj->id == e_SPHERE)
-		normal = vec_inner_product(
-				vec_norm(pnt_subtr_to_vec(obj->center, obj->xs_pnt)),
-				vec_norm(pnt_subtr_to_vec(obj->xs_pnt, rt->l_coo)));
-	if (obj->id == e_PLANE)
-		normal = fabsf(vec_inner_product(vec_norm(obj->vec_uni),
-					vec_norm(pnt_subtr_to_vec(rt->l_coo, obj->xs_pnt))));
-	if (normal <= EPSILON)
-		normal = 0;
+	normal = calculate_normal(rt, obj);
 	pnt = (t_rgb){sqrtf(obj->rgb_rng.r * rt->l_rgb.r * rt->l_bri) * normal,
 		sqrtf(obj->rgb_rng.g * rt->l_rgb.g * rt->l_bri) * normal,
 		sqrtf(obj->rgb_rng.b * rt->l_rgb.b * rt->l_bri) * normal};
