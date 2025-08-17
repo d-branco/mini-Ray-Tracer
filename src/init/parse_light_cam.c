@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/07/30 12:01:51 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	parse_camera(char *line, t_scene *rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (rt->a_ratio = -2, ft_putstr_fd("Error\ninvalid Camera "
 				"coordinates (float,float,float)\n", 2), EXIT_FAILURE);
-	parse_float_point(line, &(rt->c_coord));
+	parse_float_point(line, &(rt->c_coo));
 	line = skip_to_next_word(line);
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (rt->c_fov = -2, ft_putstr_fd("Error\ninvalid Camera "

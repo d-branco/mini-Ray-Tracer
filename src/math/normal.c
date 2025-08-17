@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 07:39:37 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/17 07:39:41 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 09:50:04 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ float	calculate_normal(t_scene *rt, t_lst_obj *obj)
 	if (obj->id == e_PLANE)
 		normal = fabsf(vec_inner_product(vec_norm(obj->vec_uni),
 					vec_norm(pnt_subtr_to_vec(rt->l_coo, obj->xs_pnt))));
+	if (obj->id == e_CYLINDER)
+		(void) rt;
 	if (normal <= EPSILON)
 		normal = 0;
 	return (normal);

@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/17 07:40:12 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define GRAY				"\033[30m"
 # define YELLOW				"\033[93m"
 # define BLUE				"\033[36m"
-# define RED				"\033[31m"
+# define RED				"\033[91m"
 
 # define KEY_ESC			65307
 
@@ -78,7 +78,7 @@ typedef struct s_scene
 	int						file_fd;
 	float					a_ratio;
 	struct s_rgb			a_rgb;
-	struct s_tuple			c_coord;
+	struct s_tuple			c_coo;
 	struct s_tuple			c_dir;
 	float					c_fov;
 	struct s_tuple			l_coo;
@@ -101,7 +101,7 @@ enum	e_obj
 {
 	e_SPHERE,
 	e_PLANE,
-	e_CYlINDER
+	e_CYLINDER
 };
 
 typedef struct s_lst_obj
@@ -158,6 +158,10 @@ t_tuple		pnt_subtr_to_vec(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);
+//src/math/intersection_cylinder.c
+int			cy_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *cy);
+int			smll_dst_to_cylinder(
+				t_scene *rt, t_tuple dir, t_lst_obj *cy, float *dst);
 //src/math/intersection_plane.c
 int			pl_intersect(
 				t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *pl);

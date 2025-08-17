@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:49:07 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/06 10:05:07 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	debug_print_s_scene(t_scene *rt)
 	ft_printf("s_scene: amb_rgb: %i,%i,%i\n", (int) rt->a_rgb.r,
 		(int) rt->a_rgb.g, (int) rt->a_rgb.b);
 	dbg_write("");
-	ft_printf("s_scene: c_coord: %i,%i,%i\n", (int) rt->c_coord.x,
-		(int) rt->c_coord.y, (int) rt->c_coord.z);
+	ft_printf("s_scene: c_coo: %i,%i,%i\n", (int) rt->c_coo.x,
+		(int) rt->c_coo.y, (int) rt->c_coo.z);
 	dbg_write("");
 	ft_printf("s_scene: c_dirent: %i,%i,%i\n", (int) rt->c_dir.x,
 		(int) rt->c_dir.y, (int) rt->c_dir.z);
@@ -80,18 +80,18 @@ void	print_obj_list(t_lst_obj **head)
 	while (o)
 	{
 		ft_printf("==DEBUG== obj_lst id: %s at: %p\n", str[o->id], o);
-		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
+		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYLINDER))
 			ft_printf("==DEBUG== obj_lst center: %i,%i,%i\n",
 				(int)o->center.x, (int)o->center.y, (int)o->center.z);
-		if ((o->id == e_SPHERE) || (o->id == e_CYlINDER))
+		if ((o->id == e_SPHERE) || (o->id == e_CYLINDER))
 			ft_printf("==DEBUG== obj_lst diameter: %i\n", (int)o->diameter);
-		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYlINDER))
+		if ((o->id == e_SPHERE) || (o->id == e_PLANE) || (o->id == e_CYLINDER))
 			ft_printf("==DEBUG== obj_lst rgb range: %i,%i,%i\n",
 				(int)o->rgb_rng.r, (int)o->rgb_rng.g, (int)o->rgb_rng.b);
-		if ((o->id == e_PLANE) || (o->id == e_CYlINDER))
+		if ((o->id == e_PLANE) || (o->id == e_CYLINDER))
 			ft_printf("==DEBUG== obj_lst vec_uni: %i,%i,%i\n",
 				(int)o->vec_uni.x, (int)o->vec_uni.y, (int)o->vec_uni.z);
-		if (o->id == e_CYlINDER)
+		if (o->id == e_CYLINDER)
 			ft_printf("==DEBUG== obj_lst height: %i\n", (int)o->height);
 		ft_printf("==DEBUG== obj_lst ======== next obj at: %p\n", o->next);
 		o = o->next;

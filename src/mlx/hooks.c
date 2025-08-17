@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:48:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 09:00:42 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	key_right_left(t_scene *rt, float translation)
 		dbg_write("key RIGHT pressed!\n");
 	else
 		dbg_write("key LEFT pressed!\n");
-	rt->c_coord.x += translation;
+	rt->c_coo.x += translation;
 	if (dbg_write("Camara: center: "))
-		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
-			(int) rt->c_coord.y, (int) rt->c_coord.z);
+		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coo.x,
+			(int) rt->c_coo.y, (int) rt->c_coo.z);
 	if (POINT_AFTER_POINT)
 		ghosting_map(rt);
 	else
@@ -84,10 +84,10 @@ static void	key_up_down(t_scene *rt, float translation)
 		dbg_write("key UP pressed!\n");
 	else
 		dbg_write("key DOWN pressed!\n");
-	rt->c_coord.y += translation;
+	rt->c_coo.y += translation;
 	if (dbg_write("Camara: center: "))
-		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
-			(int) rt->c_coord.y, (int) rt->c_coord.z);
+		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coo.x,
+			(int) rt->c_coo.y, (int) rt->c_coo.z);
 	if (POINT_AFTER_POINT)
 		ghosting_map(rt);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_plane.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abessa-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:41:18 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/07 13:41:19 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	smll_dst_to_plane(t_scene *rt, t_tuple dir, t_lst_obj *pl, float *dst)
 	if (fl_equal(vec_inner_product(dir, pl->vec_uni), 0))
 		return (FALSE);
 	ret = vec_inner_product(
-			pnt_subtr_to_vec(pl->center, rt->c_coord), pl->vec_uni)
+			pnt_subtr_to_vec(pl->center, rt->c_coo), pl->vec_uni)
 		/ vec_inner_product(dir, pl->vec_uni);
 	if ((ret < EPSILON) || (ret > *dst))
 		return (FALSE);
