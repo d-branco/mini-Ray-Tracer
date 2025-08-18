@@ -15,10 +15,10 @@ static void	key_right_left(t_scene *rt, float translation);
 static void	key_up_down(t_scene *rt, float translation);
 static void	move_selected_object(t_scene *rt, float dx, float dy, float dz);
 static void	move_light(t_scene *rt, float dx, float dy, float dz);
-static void	select_next_object(t_scene *rt);
-static int	s_selected = 0; // 0: camera, 1: light, >=2: objects
+static void	select_next_object();
+int	s_selected = 0; // 0: camera, 1: light, >=2: objects
 t_lst_obj *selected_obj = NULL;
-extern t_lst_obj *selected_obj;
+//extern t_lst_obj *selected_obj;
 void ghosting_map(t_scene *rt);
 
 static t_tuple rotate_vec(t_tuple v, char axis, float angle_deg)
@@ -63,8 +63,6 @@ static void rotate_selected_object(t_scene *rt, char axis, float angle)
 	if (selected_obj->id == e_SPHERE) return; // Não rotaciona esfera
 	selected_obj->vec_uni = rotate_vec(selected_obj->vec_uni, axis, angle);
 	selected_obj->vec_uni = vec_norm(selected_obj->vec_uni);
-	if (dbg_write("Object rotated: orientation: "))
-		ft_printf("(%d,%d,%d)\n", (int)selected_obj->vec_uni.x, (int)selected_obj->vec_uni.y, (int)selected_obj->vec_uni.z);
 	if (POINT_AFTER_POINT)
 		ghosting_map(rt);
 	else
@@ -78,6 +76,31 @@ int	close_win_button(t_scene *rt)
 	return (dbg_write_code("ERROR: return from close_win_button()\n", RED), 0);
 }
 
+int mouse_hook(int button, int x, int y, t_scene *rt)
+{
+	if (button != 1)// Left mouse button
+		return (0);
+	t_cnv coo = {x, y};
+	t_lst_obj *hit = get_xs(rt, coo);
+	if (hit)
+	{
+		selected_obj = hit;
+		s_selected = 2;
+		const char *obj_name = "UNKNOWN";
+		if (hit->id == e_SPHERE) obj_name = "SPHERE";
+		else if (hit->id == e_PLANE) obj_name = "PLANE";
+		else if (hit->id == e_CYlINDER) obj_name = "CYLINDER";
+		ft_printf("Selected: Object (%s)\n", obj_name);
+	}
+	else
+	{
+		selected_obj = NULL;
+		s_selected = 0;
+		ft_printf("Selected: Camera\n");
+	}
+	return (0);
+}
+
 int	key_hook(int keycode, t_scene *rt)
 {
 	if (keycode == KEY_ESC)
@@ -87,8 +110,7 @@ int	key_hook(int keycode, t_scene *rt)
 		select_next_object(rt);
 		return (EXIT_SUCCESS);
 	}
-	// Camera selecionada
-	if (s_selected == 0)
+	if (s_selected == 0)// Camera
 	{
 		if (keycode == KEY_RIGHT)
 			key_right_left(rt, 1.0f);
@@ -98,7 +120,6 @@ int	key_hook(int keycode, t_scene *rt)
 			key_up_down(rt, 1.0f);
 		else if (keycode == KEY_DOWN)
 			key_up_down(rt, -1.0f);
-		// Rotação da câmera
 		else if (keycode == KEY_R)
 			rotate_camera(rt, 'x', 10.0f);
 		else if (keycode == KEY_T)
@@ -112,8 +133,7 @@ int	key_hook(int keycode, t_scene *rt)
 		else if (keycode == KEY_B)
 			rotate_camera(rt, 'z', -10.0f);
 	}
-	// Luz selecionada (sem rotação)
-	else if (s_selected == 1)
+	else if (s_selected == 1)// Light
 	{
 		if (keycode == KEY_I)
 			move_light(rt, 0, 1, 0);
@@ -128,7 +148,6 @@ int	key_hook(int keycode, t_scene *rt)
 		else if (keycode == KEY_O)
 			move_light(rt, 0, 0, -1);
 	}
-	// Objeto selecionado
 	else if (s_selected >= 2 && selected_obj)
 	{
 		if (keycode == KEY_W)
@@ -136,14 +155,13 @@ int	key_hook(int keycode, t_scene *rt)
 		else if (keycode == KEY_S)
 			move_selected_object(rt, 0, -1, 0);
 		else if (keycode == KEY_A)
-			move_selected_object(rt, -1, 0, 0);
-		else if (keycode == KEY_D)
 			move_selected_object(rt, 1, 0, 0);
+		else if (keycode == KEY_D)
+			move_selected_object(rt, -1, 0, 0);
 		else if (keycode == KEY_Q)
 			move_selected_object(rt, 0, 0, 1);
 		else if (keycode == KEY_E)
 			move_selected_object(rt, 0, 0, -1);
-		// Rotação do objeto (exceto esfera)
 		else if (keycode == KEY_R)
 			rotate_selected_object(rt, 'x', 10.0f);
 		else if (keycode == KEY_T)
@@ -160,53 +178,19 @@ int	key_hook(int keycode, t_scene *rt)
 	return (EXIT_SUCCESS);
 }
 
-static void select_next_object(t_scene *rt)// Selects the next object/light/camera
+static void select_next_object()
 {
-	static int obj_index = 0;
-	t_lst_obj *obj = rt->lst_obj;
 	if (s_selected == 0)
 	{
 		s_selected = 1;
 		dbg_write("Selected: Light\n");
 		selected_obj = NULL;
 	}
-	else if (s_selected == 1)
-	{
-		if (obj)
-		{
-			s_selected = 2;
-			selected_obj = obj;
-			obj_index = 0;
-			const char *obj_name = "UNKNOWN";
-			if (selected_obj->id == e_SPHERE) obj_name = "SPHERE";
-			else if (selected_obj->id == e_PLANE) obj_name = "PLANE";
-			else if (selected_obj->id == e_CYlINDER) obj_name = "CYLINDER";
-			ft_printf("Selected: Object 1 (%s)\n", obj_name);
-		}
-		else
-		{
-			s_selected = 0;
-			dbg_write("Selected: Camera\n");
-		}
-	}
 	else
 	{
-		if (selected_obj && selected_obj->next)
-		{
-			selected_obj = selected_obj->next;
-			obj_index++;
-			const char *obj_name = "UNKNOWN";
-			if (selected_obj->id == e_SPHERE) obj_name = "SPHERE";
-			else if (selected_obj->id == e_PLANE) obj_name = "PLANE";
-			else if (selected_obj->id == e_CYlINDER) obj_name = "CYLINDER";
-			ft_printf("Selected: Object %d (%s)\n", obj_index + 1, obj_name);
-		}
-		else
-		{
-			s_selected = 0;
-			selected_obj = NULL;
-			dbg_write("Selected: Camera\n");
-		}
+		s_selected = 0;
+		selected_obj = NULL;
+		dbg_write("Selected: Camera\n");
 	}
 }
 
@@ -268,7 +252,7 @@ static void	key_right_left(t_scene *rt, float translation)
 	else
 		dbg_write("key LEFT pressed!\n");
 	rt->c_coord.x += translation;
-	if (dbg_write("Camara: center: "))
+	if (dbg_write("Camera: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	if (POINT_AFTER_POINT)
@@ -287,7 +271,7 @@ static void	key_up_down(t_scene *rt, float translation)
 	else
 		dbg_write("key DOWN pressed!\n");
 	rt->c_coord.y += translation;
-	if (dbg_write("Camara: center: "))
+	if (dbg_write("Camera: center: "))
 		ft_printf("(%3i),(%3i),(%3i)\n", (int) rt->c_coord.x,
 			(int) rt->c_coord.y, (int) rt->c_coord.z);
 	if (POINT_AFTER_POINT)

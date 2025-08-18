@@ -208,6 +208,7 @@ void		color_screen(t_scene *rt, int color);
 //src/mlx/hooks.c
 int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);
+int			mouse_hook(int button, int x, int y, t_scene *rt);
 //src/mlx/mlx_init.c
 int			mlx_initialize(t_scene *rt);
 
