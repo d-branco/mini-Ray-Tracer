@@ -62,6 +62,7 @@
 # define KEY_D 				100
 # define KEY_Q 				113
 # define KEY_E 				101
+
 # define KEY_I				105
 # define KEY_J				106
 # define KEY_K				107
@@ -69,6 +70,12 @@
 # define KEY_U				117
 # define KEY_O				111
 
+# define KEY_R				114
+# define KEY_T				116
+# define KEY_F				102
+# define KEY_G				103
+# define KEY_V				118
+# define KEY_B				98
 typedef struct s_rgb
 {
 	float					r;

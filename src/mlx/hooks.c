@@ -9,18 +9,68 @@
 /*   Updated: 2025/08/07 09:00:42 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../include/minirt.h"
 
-void ghosting_map(t_scene *rt);
 static void	key_right_left(t_scene *rt, float translation);
 static void	key_up_down(t_scene *rt, float translation);
 static void	move_selected_object(t_scene *rt, float dx, float dy, float dz);
 static void	move_light(t_scene *rt, float dx, float dy, float dz);
 static void	select_next_object(t_scene *rt);
 static int	s_selected = 0; // 0: camera, 1: light, >=2: objects
-static t_lst_obj *selected_obj = NULL;
-	
+t_lst_obj *selected_obj = NULL;
+extern t_lst_obj *selected_obj;
+void ghosting_map(t_scene *rt);
+
+static t_tuple rotate_vec(t_tuple v, char axis, float angle_deg)
+{
+	float angle = angle_deg * (PI / 180.0f);
+	t_tuple res = v;
+	float c = cosf(angle);
+	float s = sinf(angle);
+	if (axis == 'x')
+	{
+		res.y = v.y * c - v.z * s;
+		res.z = v.y * s + v.z * c;
+	}
+	else if (axis == 'y')
+	{
+		res.x = v.x * c + v.z * s;
+		res.z = -v.x * s + v.z * c;
+	}
+	else if (axis == 'z')
+	{
+		res.x = v.x * c - v.y * s;
+		res.y = v.x * s + v.y * c;
+	}
+	return res;
+}
+
+static void rotate_camera(t_scene *rt, char axis, float angle)
+{
+	rt->c_dir = rotate_vec(rt->c_dir, axis, angle);
+	rt->c_dir = vec_norm(rt->c_dir);
+	if (dbg_write("Camera rotated: direction: "))
+		ft_printf("(%d,%d,%d)\n", (int)rt->c_dir.x, (int)rt->c_dir.y, (int)rt->c_dir.z);
+	if (POINT_AFTER_POINT)
+		ghosting_map(rt);
+	else
+		initialize_map(rt);
+}
+
+static void rotate_selected_object(t_scene *rt, char axis, float angle)
+{
+	if (!selected_obj) return;
+	if (selected_obj->id == e_SPHERE) return; // Não rotaciona esfera
+	selected_obj->vec_uni = rotate_vec(selected_obj->vec_uni, axis, angle);
+	selected_obj->vec_uni = vec_norm(selected_obj->vec_uni);
+	if (dbg_write("Object rotated: orientation: "))
+		ft_printf("(%d,%d,%d)\n", (int)selected_obj->vec_uni.x, (int)selected_obj->vec_uni.y, (int)selected_obj->vec_uni.z);
+	if (POINT_AFTER_POINT)
+		ghosting_map(rt);
+	else
+		initialize_map(rt);
+}
+
 int	close_win_button(t_scene *rt)
 {
 	dbg_write("Closing by CLOSE button on the window\n");
@@ -37,7 +87,8 @@ int	key_hook(int keycode, t_scene *rt)
 		select_next_object(rt);
 		return (EXIT_SUCCESS);
 	}
-	if (s_selected == 0)// Camera translation
+	// Camera selecionada
+	if (s_selected == 0)
 	{
 		if (keycode == KEY_RIGHT)
 			key_right_left(rt, 1.0f);
@@ -47,8 +98,22 @@ int	key_hook(int keycode, t_scene *rt)
 			key_up_down(rt, 1.0f);
 		else if (keycode == KEY_DOWN)
 			key_up_down(rt, -1.0f);
+		// Rotação da câmera
+		else if (keycode == KEY_R)
+			rotate_camera(rt, 'x', 10.0f);
+		else if (keycode == KEY_T)
+			rotate_camera(rt, 'x', -10.0f);
+		else if (keycode == KEY_F)
+			rotate_camera(rt, 'y', 10.0f);
+		else if (keycode == KEY_G)
+			rotate_camera(rt, 'y', -10.0f);
+		else if (keycode == KEY_V)
+			rotate_camera(rt, 'z', 10.0f);
+		else if (keycode == KEY_B)
+			rotate_camera(rt, 'z', -10.0f);
 	}
-	else if (s_selected == 1)// Light translation
+	// Luz selecionada (sem rotação)
+	else if (s_selected == 1)
 	{
 		if (keycode == KEY_I)
 			move_light(rt, 0, 1, 0);
@@ -63,7 +128,8 @@ int	key_hook(int keycode, t_scene *rt)
 		else if (keycode == KEY_O)
 			move_light(rt, 0, 0, -1);
 	}
-	else if (s_selected >= 2 && selected_obj)// Object translation
+	// Objeto selecionado
+	else if (s_selected >= 2 && selected_obj)
 	{
 		if (keycode == KEY_W)
 			move_selected_object(rt, 0, 1, 0);
@@ -77,9 +143,23 @@ int	key_hook(int keycode, t_scene *rt)
 			move_selected_object(rt, 0, 0, 1);
 		else if (keycode == KEY_E)
 			move_selected_object(rt, 0, 0, -1);
+		// Rotação do objeto (exceto esfera)
+		else if (keycode == KEY_R)
+			rotate_selected_object(rt, 'x', 10.0f);
+		else if (keycode == KEY_T)
+			rotate_selected_object(rt, 'x', -10.0f);
+		else if (keycode == KEY_F)
+			rotate_selected_object(rt, 'y', 10.0f);
+		else if (keycode == KEY_G)
+			rotate_selected_object(rt, 'y', -10.0f);
+		else if (keycode == KEY_V)
+			rotate_selected_object(rt, 'z', 10.0f);
+		else if (keycode == KEY_B)
+			rotate_selected_object(rt, 'z', -10.0f);
 	}
 	return (EXIT_SUCCESS);
 }
+
 static void select_next_object(t_scene *rt)// Selects the next object/light/camera
 {
 	static int obj_index = 0;
@@ -133,8 +213,6 @@ static void select_next_object(t_scene *rt)// Selects the next object/light/came
 static void move_selected_object(t_scene *rt, float dx, float dy, float dz)// Translates the selected object
 {
 	if (!selected_obj) return;
-	if (selected_obj->id == e_SPHERE)
-		return;// Does not translate/rotate sphere
 	selected_obj->center.x += dx;
 	selected_obj->center.y += dy;
 	selected_obj->center.z += dz;
