@@ -51,11 +51,14 @@ SRCS			:=	\
 	src/math/intersection_plane.c											\
 	src/math/intersection_sphere.c											\
 	src/math/intersections.c												\
+	src/math/rotation.c														\
 	src/math/scalar_multiplication.c										\
+	src/math/translation_move.c												\
 	src/math/vector_math.c													\
 																			\
 	src/mlx/colors.c														\
 	src/mlx/hooks.c															\
+	src/mlx/hooks_utils.c													\
 	src/mlx/mlx_init.c														\
 																			\
 	src/utils/ft_append_chr.c												\

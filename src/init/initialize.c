@@ -23,6 +23,8 @@ int	initialize_scene(t_scene *rt, char **argv)
 	rt->mlx_win = NULL;
 	rt->mlx_img = NULL;
 	rt->mlx_addr = NULL;
+	rt->s_selected = 0;
+	rt->selected_obj = NULL;
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (dbg_write_code("ERROR:\n Parsing input\n", RED), 1);
 	rt->mlx = mlx_init();

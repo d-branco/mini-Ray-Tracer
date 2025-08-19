@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -76,6 +75,7 @@
 # define KEY_G				103
 # define KEY_V				118
 # define KEY_B				98
+
 typedef struct s_rgb
 {
 	float					r;
@@ -103,6 +103,8 @@ typedef struct s_scene
 	float					l_bri;
 	struct s_rgb			l_rgb;
 	struct s_lst_obj		*lst_obj;
+	int						s_selected; // 0: camera, 1: light, >=2: objects
+	struct s_lst_obj		*selected_obj;
 	void					*mlx;
 	void					*mlx_win;
 	void					*mlx_img;
@@ -140,7 +142,6 @@ typedef struct s_canvas
 	float						y;
 }							t_cnv;
 
-//src/init/finalize.c
 void		finalize(t_scene *rt);
 //src/init/initialize.c
 int			initialize_scene(t_scene *rt, char **argv);
@@ -190,9 +191,18 @@ int			check_obj_xs(t_scene *rt, t_tuple pnt, t_tuple dir);
 t_lst_obj	*get_xs(t_scene *rt, t_cnv coo);
 //src/math/rays.c
 t_tuple		get_ray_direction(t_scene *rt, t_cnv coo);
+//src/math/rotate.c
+t_tuple		rotate_vec(t_tuple v, char axis, float angle_deg);
+void		rotate_camera(t_scene *rt, char axis, float angle);
+void		rotate_selected_object(t_scene *rt, char axis, float angle);
 //src/math/scalar_multiplication.c
 t_tuple		vec_negation(t_tuple v);
 t_tuple		vec_scalar_multiplication(float s, t_tuple v);
+//src/math/translation_move.c
+void		move_selected_object(t_scene *rt, float dx, float dy, float dz);
+void		move_light(t_scene *rt, float dx, float dy, float dz);
+void		key_right_left(t_scene *rt, float translation);
+void		key_up_down(t_scene *rt, float translation);
 //src/math/vector_math.c
 float		vec_magnitude(t_tuple v);
 t_tuple		vec_norm(t_tuple v);
@@ -206,9 +216,13 @@ int			encode_rgb(
 				unsigned char red, unsigned char green, unsigned char blue);
 void		color_screen(t_scene *rt, int color);
 //src/mlx/hooks.c
-int			close_win_button(t_scene *rt);
 int			key_hook(int keycode, t_scene *rt);
 int			mouse_hook(int button, int x, int y, t_scene *rt);
+//src/mlx/hooks_utils.c
+int			close_win_button(t_scene *rt);
+void		ghosting_map(t_scene *rt);
+void		select_object(t_scene *rt, t_lst_obj *hit);
+void		select_next_object(t_scene *rt);
 //src/mlx/mlx_init.c
 int			mlx_initialize(t_scene *rt);
 
