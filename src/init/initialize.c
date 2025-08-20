@@ -12,17 +12,11 @@
 
 #include "minirt.h"
 
+static void	inititalize_unitialized(t_scene *rt);
+
 int	initialize_scene(t_scene *rt, char **argv)
 {
-	dbg_write("Initializing the struct scene\n");
-	rt->a_ratio = -1.0f;
-	rt->c_fov = -1.0f;
-	rt->l_bri = -1.0f;
-	rt->lst_obj = NULL;
-	rt->mlx = NULL;
-	rt->mlx_win = NULL;
-	rt->mlx_img = NULL;
-	rt->mlx_addr = NULL;
+	inititalize_unitialized(rt);
 	if (parse_input(rt, argv) != EXIT_SUCCESS)
 		return (dbg_write_code("ERROR:\n Parsing input\n", RED), 1);
 	rt->mlx = mlx_init();
@@ -38,6 +32,21 @@ int	initialize_scene(t_scene *rt, char **argv)
 		ft_printf("rad: s_scene: c_fov %i,%i rad\n",
 			(int)(rt->c_fov), (((int)(rt->c_fov * 100)) % 100));
 	return (EXIT_SUCCESS);
+}
+
+static void	inititalize_unitialized(t_scene *rt)
+{
+	dbg_write("Initializing the struct scene\n");
+	rt->a_ratio = -1.0f;
+	rt->c_fov = -1.0f;
+	rt->l_bri = -1.0f;
+	rt->lst_obj = NULL;
+	rt->mlx = NULL;
+	rt->mlx_win = NULL;
+	rt->mlx_img = NULL;
+	rt->mlx_addr = NULL;
+	rt->s_selected = 0;
+	rt->selected_obj = NULL;
 }
 
 void	debug_print_s_scene(t_scene *rt)

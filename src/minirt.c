@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 		return (finalize(&rt), dbg_write("Goodbye, friend\n"), 3);
 	mlx_hook(rt.mlx_win, 17, 0, close_win_button, &rt);
 	mlx_hook(rt.mlx_win, 2, 1L << 0, key_hook, &rt);
+	mlx_mouse_hook(rt.mlx_win, mouse_hook, &rt);
 	temp_testing(&rt);
 	mlx_loop_hook(rt.mlx, &looping_loop, &rt);
 	mlx_loop(rt.mlx);
