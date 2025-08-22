@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 07:56:37 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/21 22:17:58 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:20:37 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,20 @@ int	cy_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *cy)
 	t_tuple	abc;
 	float	result;
 	float	surface;
+	float	height;
 
 	(void) rt;
 	abc = cy_abcd(pnt, dir, cy);
 	if (abc.w < EPSILON)
 		return (FALSE);
+	height = cy->height / 2.0f;
 	result = (-abc.y - sqrtf(abc.w)) / (2 * abc.x);
 	surface = calc_surface(pnt, dir, result, cy);
-	result = (-abc.y + sqrtf(abc.w)) / (2 * abc.x);
-	if ((result > EPSILON) && (surface >= -(cy->height / 2.0f))
-		&& (surface <= (cy->height / 2.0f)))
+	if ((result > EPSILON) && (surface >= -height) && (surface <= height))
 		return (TRUE);
 	result = (-abc.y + sqrtf(abc.w)) / (2 * abc.x);
 	surface = calc_surface(pnt, dir, result, cy);
-	if ((result > EPSILON) && (surface >= -(cy->height / 2.0f))
-		&& (surface <= (cy->height / 2.0f)))
+	if ((result > EPSILON) && (surface >= -height) && (surface <= height))
 		return (TRUE);
 	return (FALSE);
 }
