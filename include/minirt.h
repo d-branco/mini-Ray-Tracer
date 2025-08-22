@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:24 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/17 08:50:17 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:37:50 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define MAP_RESOLUTION		128
 # define POINT_AFTER_POINT	FALSE
+# define DEBUG_MATH			FALSE
 
 # define TRUE				1
 # define FALSE				0
@@ -177,9 +178,16 @@ t_tuple		pnt_subtr_to_vec(t_tuple a, t_tuple b);
 //src/math/comparisson.c
 int			fl_equal(float a, float b);
 int			tuple_equal(t_tuple a, t_tuple b);
+//src/math/intersection_cylinder_surface.c
+int			cy_body_xs(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *cy);
+int			smll_dst_to_cy_body(
+				t_scene *rt, t_tuple dir, t_lst_obj *cy, float *dst);
 //src/math/intersection_cylinder.c
 int			cy_intersect(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *cy);
 int			smll_dst_to_cylinder(
+				t_scene *rt, t_tuple dir, t_lst_obj *cy, float *dst);
+int			cy_top_xs(t_scene *rt, t_tuple pnt, t_tuple dir, t_lst_obj *cy);
+int			smll_dst_to_cy_top(
 				t_scene *rt, t_tuple dir, t_lst_obj *cy, float *dst);
 //src/math/intersection_plane.c
 int			pl_intersect(
