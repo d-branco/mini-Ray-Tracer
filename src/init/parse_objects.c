@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:15:22 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/17 09:49:06 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:36:43 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	parse_cylinder(char *line, t_scene *rt)
 	if (!line || !ft_isprint(*line) || !is_float_triplet(line))
 		return (ft_printf("Error\nInvalid cy vector!\n"), free(obj), 1);
 	parse_float_vector(line, &(obj->vec_uni));
+	obj->vec_uni = vec_norm(obj->vec_uni);//for testing, ought to be caught by parser
 	line = skip_to_next_word(line);
 	if (!line || !ft_isfloat(line))
 		return (ft_printf("Error\nInvalid cy diameter!\n"), free(obj), 1);
