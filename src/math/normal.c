@@ -6,7 +6,7 @@
 /*   By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 07:39:37 by abessa-m          #+#    #+#             */
-/*   Updated: 2025/08/22 18:04:21 by abessa-m         ###   ########.fr       */
+/*   Updated: 2025/08/23 09:10:28 by abessa-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ float	calculate_normal(t_scene *rt, t_lst_obj *obj)
 	{
 		if (is_on_cylinder_cap(obj))
 			normal = fabsf(vec_inner_product(vec_norm(obj->vec_uni),
-					vec_norm(pnt_subtr_to_vec(rt->l_coo, obj->xs_pnt))));
+						vec_norm(pnt_subtr_to_vec(rt->l_coo, obj->xs_pnt))));
 		else
 			normal = cylinder_body_normal(rt, obj);
 	}

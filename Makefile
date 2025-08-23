@@ -6,7 +6,7 @@
 #    By: abessa-m <abessa-m@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 21:04:23 by abessa-m          #+#    #+#              #
-#    Updated: 2025/08/22 13:04:57 by abessa-m         ###   ########.fr        #
+#    Updated: 2025/08/23 09:07:14 by abessa-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,8 +113,6 @@ $(NAME-BONUS): $(LIBFT) $(OBJS-BONUS)
 
 clean:
 	@\
-	make --silent --no-print-directory -C $(LIBFT_DIR) clean			;	\
-	make --silent --no-print-directory -C $(MINILIBX_DIR) clean			;	\
 	$(RM) -r $(BUILD_DIR)												;	\
 	rm -fr *.o include/*.gch *.exe 				 						;	\
 	echo "$(GRAY)Files cleaned.$(COR)"
