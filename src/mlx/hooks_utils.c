@@ -60,13 +60,13 @@ void	select_next_object(t_scene *rt)
 	if (rt->s_selected == 0)
 	{
 		rt->s_selected = 1;
-		dbg_write("Selected: Light\n");
+		ft_printf("Selected: Light\n");
 		rt->selected_obj = NULL;
 	}
 	else
 	{
 		rt->s_selected = 0;
 		rt->selected_obj = NULL;
-		dbg_write("Selected: Camera\n");
+		ft_printf("Selected: Camera\n");
 	}
 }
